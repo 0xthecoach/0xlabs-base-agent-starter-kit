@@ -1,110 +1,87 @@
-"use client"
-
-import { useState, useEffect, useRef } from "react"
-import { useAgent } from "./hooks/useAgent"
-import ReactMarkdown from "react-markdown"
 import Link from "next/link"
+import Image from "next/image"
 
-/**
- * Home page for the AgentKit Quickstart
- *
- * @returns {React.ReactNode} The home page
- */
 export default function Home() {
-  const [input, setInput] = useState("")
-  const { messages, sendMessage, isThinking } = useAgent()
-
-  // Ref for the messages container
-  const messagesEndRef = useRef<HTMLDivElement>(null)
-
-  // Function to scroll to the bottom
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
-
-  // Auto-scroll whenever messages change
-  useEffect(() => {
-    scrollToBottom()
-  }, [messages])
-
-  const onSendMessage = async () => {
-    if (!input.trim() || isThinking) return
-    const message = input
-    setInput("")
-    await sendMessage(message)
-  }
-
   return (
-    <div className="flex flex-col flex-grow items-center justify-center text-black dark:text-white w-full h-full">
-      <div className="w-full max-w-2xl mb-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Main Agent</h1>
-        <Link href="/0xlabs" className="text-blue-500 hover:text-blue-700">
-          Try 0xLabsTheCoder Agent →
-        </Link>
-      </div>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="py-20 px-4 text-center relative overflow-hidden">
+        <div className="absolute inset-0 z-0 retro-grid opacity-20"></div>
+        <div className="container mx-auto relative z-10">
+          <h1 className="text-5xl md:text-6xl font-pixel mb-6 neon-text">MEMEWARS</h1>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-gray-200">
+            The ultimate battle arena where internet memes come to life
+          </p>
+          <div className="flex flex-col md:flex-row justify-center gap-4 mb-16">
+            <button className="arcade-btn text-white">Play Now</button>
+            <Link href="/features" className="arcade-btn bg-purple-700 text-white">
+              Learn More
+            </Link>
+          </div>
 
-      <div className="w-full max-w-2xl h-[70vh] bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 flex flex-col">
-        {/* Chat Messages */}
-        <div className="flex-grow overflow-y-auto space-y-3 p-2">
-          {messages.length === 0 ? (
-            <p className="text-center text-gray-500">Start chatting with Le Agent...</p>
-          ) : (
-            messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`p-3 rounded-2xl shadow ${
-                  msg.sender === "user" ? "bg-[#0052FF] text-white self-end" : "bg-gray-100 dark:bg-gray-700 self-start"
-                }`}
-              >
-                <ReactMarkdown
-                  components={{
-                    a: (props) => (
-                      <a
-                        {...props}
-                        className="text-blue-600 dark:text-blue-400 underline hover:text-blue-800 dark:hover:text-blue-300"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      />
-                    ),
-                  }}
-                >
-                  {msg.text}
-                </ReactMarkdown>
+          <div className="relative h-[300px] md:h-[400px] max-w-5xl mx-auto">
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-13%20at%2004.08.43-b5RnljweiVpLaIx65MnAq1jqq2tiTO.png"
+              alt="MemeWars Characters"
+              fill
+              style={{ objectFit: "contain" }}
+              className="float"
+              priority
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Features Preview */}
+      <section className="py-20 px-4 bg-black/30">
+        <div className="container mx-auto">
+          <h2 className="text-3xl md:text-4xl font-pixel mb-16 text-center neon-text">GAME FEATURES</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="arcade-card p-6 text-center">
+              <div className="w-20 h-20 mx-auto mb-4 bg-purple-600 rounded-full flex items-center justify-center">
+                <span className="text-3xl">🎮</span>
               </div>
-            ))
-          )}
+              <h3 className="text-xl font-pixel mb-3">Battle Arena</h3>
+              <p className="text-gray-300">Fight in epic battles with your favorite meme characters</p>
+            </div>
 
-          {/* Thinking Indicator */}
-          {isThinking && <div className="text-right mr-2 text-gray-500 italic">🤖 LeAgent is thinking...</div>}
+            <div className="arcade-card p-6 text-center">
+              <div className="w-20 h-20 mx-auto mb-4 bg-pink-600 rounded-full flex items-center justify-center">
+                <span className="text-3xl">🏆</span>
+              </div>
+              <h3 className="text-xl font-pixel mb-3">Tournaments</h3>
+              <p className="text-gray-300">Compete in tournaments to win exclusive rewards</p>
+            </div>
 
-          {/* Invisible div to track the bottom */}
-          <div ref={messagesEndRef} />
+            <div className="arcade-card p-6 text-center">
+              <div className="w-20 h-20 mx-auto mb-4 bg-cyan-600 rounded-full flex items-center justify-center">
+                <span className="text-3xl">💰</span>
+              </div>
+              <h3 className="text-xl font-pixel mb-3">Rewards</h3>
+              <p className="text-gray-300">Earn tokens and unique collectibles as you play</p>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <Link href="/features" className="arcade-btn text-white">
+              View All Features
+            </Link>
+          </div>
         </div>
+      </section>
 
-        {/* Input Box */}
-        <div className="flex items-center space-x-2 mt-2">
-          <input
-            type="text"
-            className="flex-grow p-2 rounded border dark:bg-gray-700 dark:border-gray-600"
-            placeholder={"Type a message..."}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && onSendMessage()}
-            disabled={isThinking}
-          />
-          <button
-            onClick={onSendMessage}
-            className={`px-6 py-2 rounded-full font-semibold transition-all ${
-              isThinking
-                ? "bg-gray-300 cursor-not-allowed text-gray-500"
-                : "bg-[#0052FF] hover:bg-[#003ECF] text-white shadow-md"
-            }`}
-            disabled={isThinking}
-          >
-            Send
-          </button>
+      {/* Call to Action */}
+      <section className="py-20 px-4 text-center relative">
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-purple-900/50 to-pink-900/50"></div>
+        <div className="container mx-auto relative z-10">
+          <h2 className="text-3xl md:text-4xl font-pixel mb-6 neon-text">JOIN THE BATTLE</h2>
+          <p className="text-xl max-w-3xl mx-auto mb-10 text-gray-200">
+            Ready to enter the arena? Join thousands of players in the ultimate meme battle experience!
+          </p>
+          <button className="arcade-btn text-white text-lg px-8 py-4">Play Now</button>
         </div>
-      </div>
+      </section>
     </div>
   )
 }

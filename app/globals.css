@@ -2,7 +2,169 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+:root {
+  --primary: #ff00ff;
+  --primary-dark: #cc00cc;
+  --secondary: #00ffff;
+  --secondary-dark: #00cccc;
+  --accent: #ffff00;
+  --background-start: #4a0072;
+  --background-mid: #6a0099;
+  --background-end: #990066;
+}
+
+@layer base {
+  body {
+    background: linear-gradient(to bottom right, var(--background-start), var(--background-mid), var(--background-end));
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-pixel text-white;
+  }
+
+  h1 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl lg:text-3xl;
+  }
+
+  p {
+    @apply text-gray-100 font-sans;
+  }
+}
+
+@layer components {
+  .neon-text {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--primary), 0 0 20px var(--primary), 0 0 25px var(--primary);
+  }
+
+  .neon-border {
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--primary), 0 0 20px var(--primary);
+  }
+
+  .arcade-btn {
+    @apply font-pixel px-6 py-3 rounded-md transition-all duration-300 transform hover:scale-105 hover:brightness-110 shadow-lg;
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    box-shadow: 0 0 10px var(--primary), 0 0 20px rgba(255, 0, 255, 0.5);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+
+  .arcade-card {
+    @apply rounded-lg overflow-hidden shadow-xl backdrop-blur-sm;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 0, 255, 0.5);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+  }
+
+  .pixel-corners {
+    clip-path: polygon(
+      0% 8px,
+      4px 8px,
+      4px 4px,
+      8px 4px,
+      8px 0%,
+      calc(100% - 8px) 0%,
+      calc(100% - 8px) 4px,
+      calc(100% - 4px) 4px,
+      calc(100% - 4px) 8px,
+      100% 8px,
+      100% calc(100% - 8px),
+      calc(100% - 4px) calc(100% - 8px),
+      calc(100% - 4px) calc(100% - 4px),
+      calc(100% - 8px) calc(100% - 4px),
+      calc(100% - 8px) 100%,
+      8px 100%,
+      8px calc(100% - 4px),
+      4px calc(100% - 4px),
+      4px calc(100% - 8px),
+      0% calc(100% - 8px)
+    );
+  }
+
+  .glow-effect {
+    position: relative;
+  }
+
+  .glow-effect::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary), var(--primary));
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0.7;
+    border-radius: inherit;
+  }
+
+  .retro-grid {
+    background-image: linear-gradient(rgba(255, 0, 255, 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 0, 255, 0.3) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary);
+  }
+  50% {
+    box-shadow: 0 0 15px var(--primary), 0 0 20px var(--primary);
+  }
+  100% {
+    box-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--primary), var(--secondary));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--secondary), var(--primary));
 }
