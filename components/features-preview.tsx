@@ -8,28 +8,25 @@ import { ArrowRight } from "lucide-react"
 
 const features = [
   {
-    title: "COLLECT WARRIORS",
-    description: "Collect and upgrade your favorite meme characters",
-    icon: "/images/features/collect.png",
-    color: "from-pink-500 to-purple-500",
-  },
-  {
-    title: "BATTLE ARENA",
-    description: "Compete in real-time battles against other players",
+    title: "Battle Arena",
+    description: "Fight in epic battles with your favorite meme characters",
     icon: "/images/features/battle.png",
-    color: "from-cyan-500 to-blue-500",
+    color: "from-purple-500 to-purple-700",
+    bgColor: "bg-purple-600",
   },
   {
-    title: "EARN REWARDS",
-    description: "Complete quests and climb the leaderboard for prizes",
-    icon: "/images/features/rewards.png",
-    color: "from-yellow-500 to-orange-500",
-  },
-  {
-    title: "JOIN TOURNAMENTS",
-    description: "Participate in weekly tournaments with massive prizes",
+    title: "Tournaments",
+    description: "Compete in tournaments to win exclusive rewards",
     icon: "/images/features/tournament.png",
-    color: "from-green-500 to-emerald-500",
+    color: "from-pink-500 to-pink-700",
+    bgColor: "bg-pink-600",
+  },
+  {
+    title: "Rewards",
+    description: "Earn tokens and unique collectibles as you play",
+    icon: "/images/features/rewards.png",
+    color: "from-cyan-500 to-cyan-700",
+    bgColor: "bg-cyan-600",
   },
 ]
 
@@ -52,7 +49,7 @@ export default function FeaturesPreview() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -61,19 +58,18 @@ export default function FeaturesPreview() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="arcade-card overflow-hidden group"
             >
-              <div className={`h-2 bg-gradient-to-r ${feature.color}`}></div>
-              <div className="p-6">
-                <div className="w-16 h-16 mb-4 relative">
+              <div className="p-6 flex flex-col items-center text-center">
+                <div className="w-20 h-20 mb-6 relative">
                   <Image
                     src={feature.icon || "/placeholder.svg"}
                     alt={feature.title}
-                    width={64}
-                    height={64}
+                    width={80}
+                    height={80}
                     className="object-contain"
                   />
                 </div>
-                <h3 className="font-pixel text-white text-xl mb-2">{feature.title}</h3>
-                <p className="text-gray-300 mb-4">{feature.description}</p>
+                <h3 className="font-pixel text-2xl mb-3 text-white">{feature.title}</h3>
+                <p className="text-gray-300">{feature.description}</p>
               </div>
             </motion.div>
           ))}
@@ -82,9 +78,9 @@ export default function FeaturesPreview() {
         <div className="text-center mt-12">
           <Link
             href="/features"
-            className="inline-flex items-center font-pixel text-cyan-400 hover:text-cyan-300 transition-colors"
+            className="inline-flex items-center font-pixel text-pink-400 hover:text-pink-300 transition-colors bg-purple-900/50 px-6 py-3 rounded-lg border border-pink-500/30"
           >
-            <span>EXPLORE ALL FEATURES</span>
+            <span>View All Features</span>
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </div>
