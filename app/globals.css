@@ -12,6 +12,8 @@
   --background-mid: #6a0099;
   --background-end: #990066;
   --font-press-start: "Press Start 2P", cursive; /* Added for font-family */
+  --neon-pink-glow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+  --neon-button-glow: 0 0 5px #ff1177, 0 0 10px #ff1177, 0 0 15px #ff1177;
 }
 
 @layer base {
@@ -48,7 +50,13 @@
 
 @layer components {
   .neon-text {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--primary), 0 0 20px var(--primary), 0 0 25px var(--primary);
+    text-shadow: var(--neon-pink-glow);
+    color: white;
+  }
+
+  .neon-text-cyan {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+    color: white;
   }
 
   .neon-border {
@@ -57,27 +65,28 @@
 
   .arcade-btn {
     @apply font-pixel px-6 py-3 rounded-md transition-all duration-300 transform hover:scale-105 hover:brightness-110 shadow-lg;
-    background: linear-gradient(to bottom, #ff4d4d, #ff0080); /* Updated gradient */
-    border: 2px solid #fff; /* Added border */
-    border-radius: 4px; /* Updated border-radius */
-    box-shadow: 0 0 10px rgba(255, 0, 128, 0.7), 0 0 20px rgba(255, 0, 128, 0.5), 0 0 30px rgba(255, 0, 128, 0.3); /* Updated box-shadow */
-    padding: 0.5rem 1.5rem; /* Updated padding */
-    font-family: var(--font-press-start); /* Added font-family */
-    text-transform: uppercase; /* Added text-transform */
-    letter-spacing: 1px; /* Added letter-spacing */
-    transition: all 0.2s ease; /* Updated transition */
-    position: relative; /* Added position */
-    overflow: hidden; /* Added overflow */
+    background: #ff1177; /* Hot pink background */
+    border: 2px solid #fff; /* White border */
+    border-radius: 4px;
+    box-shadow: var(--neon-button-glow);
+    padding: 0.5rem 1.5rem;
+    font-family: var(--font-press-start);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    color: white;
   }
 
   .arcade-btn:hover {
-    transform: translateY(-2px); /* Updated transform */
-    box-shadow: 0 0 15px rgba(255, 0, 128, 0.8), 0 0 25px rgba(255, 0, 128, 0.6), 0 0 35px rgba(255, 0, 128, 0.4); /* Updated box-shadow */
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px #ff1177, 0 0 20px #ff1177, 0 0 30px #ff1177;
   }
 
   .arcade-btn:active {
-    transform: translateY(1px); /* Updated transform */
-    box-shadow: 0 0 8px rgba(255, 0, 128, 0.6), 0 0 16px rgba(255, 0, 128, 0.4), 0 0 24px rgba(255, 0, 128, 0.2); /* Updated box-shadow */
+    transform: translateY(1px);
+    box-shadow: 0 0 5px #ff1177, 0 0 10px #ff1177, 0 0 15px #ff1177;
   }
 
   .arcade-card {
@@ -134,6 +143,27 @@
     background-image: linear-gradient(rgba(255, 0, 255, 0.3) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 0, 255, 0.3) 1px, transparent 1px);
     background-size: 20px 20px;
+  }
+
+  /* Section title styling to match the screenshot */
+  .section-title {
+    @apply font-pixel text-center text-white uppercase tracking-wider;
+    text-shadow: var(--neon-pink-glow);
+    letter-spacing: 2px;
+  }
+
+  /* Pink button styling to match the screenshot */
+  .pink-button {
+    @apply font-pixel px-6 py-3 text-white uppercase tracking-wider;
+    background: #ff1177;
+    border: 2px solid white;
+    box-shadow: var(--neon-button-glow);
+    transition: all 0.2s ease;
+  }
+
+  .pink-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px #ff1177, 0 0 20px #ff1177, 0 0 30px #ff1177;
   }
 
   /* Override Thirdweb ConnectButton styles to match our arcade theme */

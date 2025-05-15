@@ -2,33 +2,32 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Sparkles, Gamepad2, Zap, Trophy } from "lucide-react"
 
 const features = [
   {
     title: "COLLECT WARRIORS",
     description: "Collect and upgrade your favorite meme characters",
-    icon: "/placeholder-a7lki.png",
+    icon: <Sparkles className="w-8 h-8 text-pink-400" />,
     color: "from-pink-500 to-purple-500",
   },
   {
     title: "BATTLE ARENA",
     description: "Compete in real-time battles against other players",
-    icon: "/placeholder.svg?height=64&width=64&query=battle arena icon",
+    icon: <Gamepad2 className="w-8 h-8 text-cyan-400" />,
     color: "from-cyan-500 to-blue-500",
   },
   {
     title: "EARN REWARDS",
     description: "Complete quests and climb the leaderboard for prizes",
-    icon: "/placeholder.svg?height=64&width=64&query=rewards icon",
+    icon: <Zap className="w-8 h-8 text-yellow-400" />,
     color: "from-yellow-500 to-orange-500",
   },
   {
     title: "JOIN TOURNAMENTS",
     description: "Participate in weekly tournaments with massive prizes",
-    icon: "/placeholder.svg?height=64&width=64&query=tournament icon",
+    icon: <Trophy className="w-8 h-8 text-green-400" />,
     color: "from-green-500 to-emerald-500",
   },
 ]
@@ -59,19 +58,11 @@ export default function FeaturesPreview() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="arcade-card overflow-hidden group"
+              className="arcade-card overflow-hidden group hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300"
             >
               <div className={`h-2 bg-gradient-to-r ${feature.color}`}></div>
               <div className="p-6">
-                <div className="w-16 h-16 mb-4 relative">
-                  <Image
-                    src={feature.icon || "/placeholder.svg"}
-                    alt={feature.title}
-                    width={64}
-                    height={64}
-                    className="object-contain"
-                  />
-                </div>
+                <div className="w-16 h-16 mb-4 flex items-center justify-center">{feature.icon}</div>
                 <h3 className="font-pixel text-white text-xl mb-2">{feature.title}</h3>
                 <p className="text-gray-300 mb-4">{feature.description}</p>
               </div>
@@ -82,10 +73,10 @@ export default function FeaturesPreview() {
         <div className="text-center mt-12">
           <Link
             href="/features"
-            className="inline-flex items-center font-pixel text-cyan-400 hover:text-cyan-300 transition-colors"
+            className="inline-flex items-center font-pixel text-cyan-400 hover:text-cyan-300 transition-colors group"
           >
             <span>EXPLORE ALL FEATURES</span>
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>
