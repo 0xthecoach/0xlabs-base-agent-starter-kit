@@ -1,9 +1,9 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
 import Image from "next/image"
 import { useRef } from "react"
+import { useEffect, useState } from "react"
 
 const features = [
   {
@@ -88,14 +88,37 @@ const features = [
 
 export default function Features() {
   const refs = features.map(() => useRef(null))
-  const inView = features.map((_, index) => {
-    const [inView, ref] = useInView({
-      triggerOnce: true,
-      threshold: 0.1,
+  const [inViewStates, setInViewStates] = useState(features.map(() => false))
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setInViewStates((prev) => {
+              const newState = [...prev]
+              newState[index] = true
+              return newState
+            })
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+      },
+    )
+
+    refs.forEach((ref) => {
+      if (ref.current) {
+        observer.observe(ref.current)
+      }
     })
-    refs[index].current = ref
-    return inView
-  })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [refs])
 
   return (
     <div className="pt-20">
@@ -130,7 +153,7 @@ export default function Features() {
               >
                 <motion.div
                   initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  animate={inView[index] ? { opacity: 1, x: 0 } : {}}
+                  animate={inViewStates[index] ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5 }}
                   className="md:w-1/2"
                 >
@@ -146,7 +169,7 @@ export default function Features() {
 
                 <motion.div
                   initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-                  animate={inView[index] ? { opacity: 1, x: 0 } : {}}
+                  animate={inViewStates[index] ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5 }}
                   className="md:w-1/2"
                 >
