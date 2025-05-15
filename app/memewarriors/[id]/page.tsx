@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { notFound } from "next/navigation"
 import { memeWarriors } from "@/lib/data"
 import MemeWarriorDetailPageClient from "./MemeWarriorDetailPageClient"
 
@@ -28,6 +29,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default function MemeWarriorDetailPage({ params }: Props) {
-  return <MemeWarriorDetailPageClient params={params} />
+// Function to get warrior data
+async function getWarriorData(id: string) {
+  // In a real app, this might be an API call
+  // For now, we're using the static data
+  const warrior = memeWarriors.find((w) => w.id === id)
+
+  if (!warrior) {
+    return null
+  }
+
+  return warrior
+}
+
+export default async function MemeWarriorDetailPage({ params }: Props) {
+  const warrior = await getWarriorData(params.id)
+
+  // If warrior not found, show 404
+  if (!warrior) {
+    notFound()
+  }
+
+  return <MemeWarriorDetailPageClient params={params} warriorData={warrior} />
 }

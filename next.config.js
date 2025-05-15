@@ -16,6 +16,10 @@ const nextConfig = {
     ],
     unoptimized: true,
   },
+  // Add this to ensure proper handling of dynamic routes
+  trailingSlash: false,
+  // Ensure we're using the correct output mode
+  output: "standalone",
 }
 
 module.exports = nextConfig

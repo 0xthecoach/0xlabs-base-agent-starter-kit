@@ -23,11 +23,14 @@ import {
 
 type Props = {
   params: { id: string }
+  warriorData?: any // Optional pre-fetched data
 }
 
-export default function MemeWarriorDetailPageClient({ params }: Props) {
+export default function MemeWarriorDetailPageClient({ params, warriorData }: Props) {
   const [isFollowing, setIsFollowing] = useState(false)
-  const warrior = memeWarriors.find((w) => w.id === params.id)
+
+  // Use pre-fetched data if available, otherwise find from the local data
+  const warrior = warriorData || memeWarriors.find((w) => w.id === params.id)
 
   if (!warrior) {
     return (
@@ -295,7 +298,7 @@ export default function MemeWarriorDetailPageClient({ params }: Props) {
                   <div key={item} className="arcade-card overflow-hidden">
                     <div className="aspect-square bg-purple-900/30">
                       <Image
-                        src={`/abstract-geometric-shapes.png?height=300&width=300&query=${warrior.name} meme ${item}`}
+                        src={`/abstract-geometric-shapes.png`}
                         alt={`${warrior.name} gallery image ${item}`}
                         width={300}
                         height={300}

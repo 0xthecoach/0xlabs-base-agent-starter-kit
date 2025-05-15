@@ -173,7 +173,7 @@ export default function MemeWarriorsPage() {
                 <div className="p-6 flex flex-col flex-1">
                   <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-2 border-pink-500">
                     <Image
-                      src={`/abstract-geometric-shapes.png?height=128&width=128&query=${warrior.name} meme character`}
+                      src="/abstract-geometric-shapes.png"
                       alt={warrior.name}
                       width={128}
                       height={128}
@@ -211,7 +211,11 @@ export default function MemeWarriorsPage() {
                   <p className="text-gray-300 text-sm mb-4 flex-grow line-clamp-3">{warrior.description}</p>
 
                   <div className="text-center mt-auto">
-                    <Link href={`/memewarriors/${warrior.id}`} className="arcade-btn text-white text-sm inline-block">
+                    <Link
+                      href={`/memewarriors/${warrior.id}`}
+                      className="arcade-btn text-white text-sm inline-block"
+                      prefetch={true}
+                    >
                       VIEW DETAILS
                     </Link>
                   </div>
