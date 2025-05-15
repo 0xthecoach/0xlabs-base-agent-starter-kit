@@ -6,6 +6,13 @@ type Props = {
   params: { id: string }
 }
 
+// Generate static paths for all warriors
+export async function generateStaticParams() {
+  return memeWarriors.map((warrior) => ({
+    id: warrior.id,
+  }))
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const warrior = memeWarriors.find((w) => w.id === params.id)
 
