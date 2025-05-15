@@ -65,8 +65,8 @@
 
   .arcade-btn {
     @apply font-pixel px-6 py-3 rounded-md transition-all duration-300 transform hover:scale-105 hover:brightness-110 shadow-lg;
-    background: #ff1177; /* Hot pink background */
-    border: 2px solid #fff; /* White border */
+    background: linear-gradient(to right, #ff1177, #ff0066);
+    border: 2px solid #fff;
     border-radius: 4px;
     box-shadow: var(--neon-button-glow);
     padding: 0.5rem 1.5rem;
@@ -82,6 +82,7 @@
   .arcade-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 0 10px #ff1177, 0 0 20px #ff1177, 0 0 30px #ff1177;
+    background: linear-gradient(to right, #ff0066, #ff1177);
   }
 
   .arcade-btn:active {
@@ -155,7 +156,7 @@
   /* Pink button styling to match the screenshot */
   .pink-button {
     @apply font-pixel px-6 py-3 text-white uppercase tracking-wider;
-    background: #ff1177;
+    background: linear-gradient(to right, #ff1177, #ff0066);
     border: 2px solid white;
     box-shadow: var(--neon-button-glow);
     transition: all 0.2s ease;
@@ -164,6 +165,7 @@
   .pink-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 0 10px #ff1177, 0 0 20px #ff1177, 0 0 30px #ff1177;
+    background: linear-gradient(to right, #ff0066, #ff1177);
   }
 
   /* Override Thirdweb ConnectButton styles to match our arcade theme */
@@ -173,7 +175,15 @@
   }
 
   .neon-button {
-    @apply bg-pink-600 text-white font-pixel px-6 py-3 rounded-md inline-block shadow-[0_0_15px_rgba(236,72,153,0.7)] border border-pink-500 hover:bg-pink-700 transition-colors;
+    @apply bg-pink-600 text-white font-pixel px-6 py-3 rounded-md inline-block border border-pink-500 hover:bg-pink-700 transition-colors;
+    background: linear-gradient(to right, #ff1177, #ff0066);
+    border: 2px solid white;
+    box-shadow: 0 0 5px #ff1177, 0 0 10px #ff1177, 0 0 15px #ff1177;
+  }
+
+  .neon-button:hover {
+    background: linear-gradient(to right, #ff0066, #ff1177);
+    box-shadow: 0 0 10px #ff1177, 0 0 20px #ff1177, 0 0 30px #ff1177;
   }
 
   .outline-button {

@@ -137,9 +137,8 @@ export default function MemeWarriorDetailPageClient({ params }: Props) {
         {/* Avatar */}
         <div className="relative">
           <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-purple-600 glow-effect">
-            {/* Use a reliable placeholder for the warrior image */}
             <Image
-              src={"/placeholder.svg?height=160&width=160&query=meme character avatar"}
+              src="/placeholder-5fxsx.png"
               alt={warrior.name}
               width={160}
               height={160}
@@ -273,7 +272,6 @@ export default function MemeWarriorDetailPageClient({ params }: Props) {
                 {[1, 2, 3, 4, 5, 6].map((item) => (
                   <div key={item} className="arcade-card overflow-hidden">
                     <div className="aspect-square bg-purple-900/30">
-                      {/* Use placeholder.svg with unique keys for each gallery image */}
                       <Image
                         src={`/abstract-geometric-shapes.png?height=300&width=300&query=${warrior.name} meme ${item}`}
                         alt={`${warrior.name} gallery image ${item}`}

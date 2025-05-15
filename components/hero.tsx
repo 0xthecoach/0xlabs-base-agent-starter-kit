@@ -45,7 +45,8 @@ export default function Hero() {
               </Link>
               <Link
                 href="/memewarriors"
-                className="font-pixel px-6 py-3 rounded-md border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/20 transition-colors text-lg">
+                className="font-pixel px-6 py-3 rounded-md border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/20 transition-colors text-lg"
+              >
                 MEET THE WARRIORS
               </Link>
             </div>
@@ -59,7 +60,7 @@ export default function Hero() {
           >
             <div className="relative w-full h-[400px] md:h-[500px]">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-13%20at%2004.08.43-b5RnljweiVpLaIx65MnAq1jqq2tiTO.png"
+                src="/placeholder-0wn3n.png"
                 alt="MemeWars Characters"
                 fill
                 className="object-contain"
