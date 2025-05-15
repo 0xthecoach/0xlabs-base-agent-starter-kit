@@ -8,6 +8,40 @@ export const metadata: Metadata = {
 }
 
 export default function LeaderboardPage() {
+  // Ensure leaderboardData exists and has items
+  const safeLeaderboardData = leaderboardData || []
+
+  // Make sure we have at least 3 items for the top players section
+  const topPlayers = [
+    safeLeaderboardData[0] || {
+      rank: 1,
+      username: "Player1",
+      level: 99,
+      seasonPoints: 10000,
+      wins: 500,
+      winRate: 85,
+      avatar: "/diverse-avatars.png",
+    },
+    safeLeaderboardData[1] || {
+      rank: 2,
+      username: "Player2",
+      level: 95,
+      seasonPoints: 9500,
+      wins: 480,
+      winRate: 82,
+      avatar: "/diverse-avatars.png",
+    },
+    safeLeaderboardData[2] || {
+      rank: 3,
+      username: "Player3",
+      level: 92,
+      seasonPoints: 9000,
+      wins: 460,
+      winRate: 80,
+      avatar: "/diverse-avatars.png",
+    },
+  ]
+
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="text-center mb-12">
@@ -75,8 +109,8 @@ export default function LeaderboardPage() {
             <div className="absolute inset-0 rounded-full border-2 border-gray-300 animate-pulse-slow"></div>
             <div className="w-full h-full rounded-full overflow-hidden border-2 border-white">
               <Image
-                src={leaderboardData[1].avatar || "/placeholder.svg?height=96&width=96&query=avatar"}
-                alt={leaderboardData[1].username}
+                src={topPlayers[1].avatar || "/placeholder.svg?height=96&width=96&query=avatar"}
+                alt={topPlayers[1].username}
                 width={96}
                 height={96}
                 className="object-cover"
@@ -86,19 +120,19 @@ export default function LeaderboardPage() {
               <span className="font-pixel text-black">2</span>
             </div>
           </div>
-          <h3 className="font-pixel text-xl text-white mb-1">{leaderboardData[1].username}</h3>
-          <div className="text-gray-300 mb-2">Level {leaderboardData[1].level}</div>
+          <h3 className="font-pixel text-xl text-white mb-1">{topPlayers[1].username}</h3>
+          <div className="text-gray-300 mb-2">Level {topPlayers[1].level}</div>
           <div className="font-pixel text-xl text-yellow-400 mb-3">
-            {leaderboardData[1].seasonPoints.toLocaleString()} pts
+            {topPlayers[1].seasonPoints?.toLocaleString() || "0"} pts
           </div>
           <div className="grid grid-cols-2 gap-2 text-sm">
             <div className="bg-black/30 p-2 rounded">
               <span className="text-green-300">Wins</span>
-              <div className="font-pixel text-white">{leaderboardData[1].wins}</div>
+              <div className="font-pixel text-white">{topPlayers[1].wins}</div>
             </div>
             <div className="bg-black/30 p-2 rounded">
               <span className="text-cyan-300">Win Rate</span>
-              <div className="font-pixel text-white">{leaderboardData[1].winRate}%</div>
+              <div className="font-pixel text-white">{topPlayers[1].winRate}%</div>
             </div>
           </div>
         </div>
@@ -110,8 +144,8 @@ export default function LeaderboardPage() {
             <div className="absolute inset-2 rounded-full border-2 border-yellow-300 animate-pulse-slow animation-delay-500"></div>
             <div className="w-full h-full rounded-full overflow-hidden border-2 border-white">
               <Image
-                src={leaderboardData[0].avatar || "/placeholder.svg?height=128&width=128&query=avatar"}
-                alt={leaderboardData[0].username}
+                src={topPlayers[0].avatar || "/placeholder.svg?height=128&width=128&query=avatar"}
+                alt={topPlayers[0].username}
                 width={128}
                 height={128}
                 className="object-cover"
@@ -121,19 +155,19 @@ export default function LeaderboardPage() {
               <span className="font-pixel text-black">1</span>
             </div>
           </div>
-          <h3 className="font-pixel text-2xl text-white mb-1">{leaderboardData[0].username}</h3>
-          <div className="text-gray-300 mb-2">Level {leaderboardData[0].level}</div>
+          <h3 className="font-pixel text-2xl text-white mb-1">{topPlayers[0].username}</h3>
+          <div className="text-gray-300 mb-2">Level {topPlayers[0].level}</div>
           <div className="font-pixel text-2xl text-yellow-400 mb-3">
-            {leaderboardData[0].seasonPoints.toLocaleString()} pts
+            {topPlayers[0].seasonPoints?.toLocaleString() || "0"} pts
           </div>
           <div className="grid grid-cols-2 gap-2 text-sm">
             <div className="bg-black/30 p-2 rounded">
               <span className="text-green-300">Wins</span>
-              <div className="font-pixel text-white">{leaderboardData[0].wins}</div>
+              <div className="font-pixel text-white">{topPlayers[0].wins}</div>
             </div>
             <div className="bg-black/30 p-2 rounded">
               <span className="text-cyan-300">Win Rate</span>
-              <div className="font-pixel text-white">{leaderboardData[0].winRate}%</div>
+              <div className="font-pixel text-white">{topPlayers[0].winRate}%</div>
             </div>
           </div>
         </div>
@@ -144,8 +178,8 @@ export default function LeaderboardPage() {
             <div className="absolute inset-0 rounded-full border-2 border-amber-700 animate-pulse-slow"></div>
             <div className="w-full h-full rounded-full overflow-hidden border-2 border-white">
               <Image
-                src={leaderboardData[2].avatar || "/placeholder.svg?height=96&width=96&query=avatar"}
-                alt={leaderboardData[2].username}
+                src={topPlayers[2].avatar || "/placeholder.svg?height=96&width=96&query=avatar"}
+                alt={topPlayers[2].username}
                 width={96}
                 height={96}
                 className="object-cover"
@@ -155,19 +189,19 @@ export default function LeaderboardPage() {
               <span className="font-pixel text-black">3</span>
             </div>
           </div>
-          <h3 className="font-pixel text-xl text-white mb-1">{leaderboardData[2].username}</h3>
-          <div className="text-gray-300 mb-2">Level {leaderboardData[2].level}</div>
+          <h3 className="font-pixel text-xl text-white mb-1">{topPlayers[2].username}</h3>
+          <div className="text-gray-300 mb-2">Level {topPlayers[2].level}</div>
           <div className="font-pixel text-xl text-yellow-400 mb-3">
-            {leaderboardData[2].seasonPoints.toLocaleString()} pts
+            {topPlayers[2].seasonPoints?.toLocaleString() || "0"} pts
           </div>
           <div className="grid grid-cols-2 gap-2 text-sm">
             <div className="bg-black/30 p-2 rounded">
               <span className="text-green-300">Wins</span>
-              <div className="font-pixel text-white">{leaderboardData[2].wins}</div>
+              <div className="font-pixel text-white">{topPlayers[2].wins}</div>
             </div>
             <div className="bg-black/30 p-2 rounded">
               <span className="text-cyan-300">Win Rate</span>
-              <div className="font-pixel text-white">{leaderboardData[2].winRate}%</div>
+              <div className="font-pixel text-white">{topPlayers[2].winRate}%</div>
             </div>
           </div>
         </div>
@@ -188,7 +222,7 @@ export default function LeaderboardPage() {
               </tr>
             </thead>
             <tbody>
-              {leaderboardData.map((player) => (
+              {safeLeaderboardData.map((player) => (
                 <tr
                   key={player.rank}
                   className={`border-b border-pink-500/20 hover:bg-purple-900/30 transition-colors ${
@@ -234,7 +268,7 @@ export default function LeaderboardPage() {
                     <span className="text-cyan-400">{player.winRate}%</span>
                   </td>
                   <td className="p-4 text-center">
-                    <span className="font-pixel text-yellow-400">{player.seasonPoints.toLocaleString()}</span>
+                    <span className="font-pixel text-yellow-400">{player.seasonPoints?.toLocaleString() || "0"}</span>
                   </td>
                 </tr>
               ))}
@@ -270,7 +304,7 @@ export default function LeaderboardPage() {
             <h3 className="font-pixel text-xl mb-4 text-yellow-400">TOP 10</h3>
             <div className="bg-gradient-to-b from-yellow-900/30 to-yellow-600/30 p-4 rounded-lg mb-4">
               <Image
-                src="/placeholder.svg?key=cvhvx"
+                src="/placeholder-orm50.png"
                 alt="Legendary Reward"
                 width={100}
                 height={100}
@@ -300,7 +334,7 @@ export default function LeaderboardPage() {
             <h3 className="font-pixel text-xl mb-4 text-purple-400">TOP 100</h3>
             <div className="bg-gradient-to-b from-purple-900/30 to-purple-600/30 p-4 rounded-lg mb-4">
               <Image
-                src="/placeholder.svg?key=a20kh"
+                src="/placeholder-sy0i3.png"
                 alt="Epic Reward"
                 width={100}
                 height={100}
@@ -330,7 +364,7 @@ export default function LeaderboardPage() {
             <h3 className="font-pixel text-xl mb-4 text-blue-400">TOP 1000</h3>
             <div className="bg-gradient-to-b from-blue-900/30 to-blue-600/30 p-4 rounded-lg mb-4">
               <Image
-                src="/placeholder.svg?key=l3peh"
+                src="/placeholder-dnxgt.png"
                 alt="Rare Reward"
                 width={100}
                 height={100}
@@ -360,7 +394,7 @@ export default function LeaderboardPage() {
             <h3 className="font-pixel text-xl mb-4 text-gray-400">ALL PARTICIPANTS</h3>
             <div className="bg-gradient-to-b from-gray-900/30 to-gray-600/30 p-4 rounded-lg mb-4">
               <Image
-                src="/placeholder.svg?key=1zue9"
+                src="/placeholder-vinf8.png"
                 alt="Common Reward"
                 width={100}
                 height={100}
