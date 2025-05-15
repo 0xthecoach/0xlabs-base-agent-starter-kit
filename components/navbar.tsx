@@ -24,6 +24,15 @@ export default function Navbar() {
           <Link href="/profile" className="text-white hover:text-pink-400 transition-colors font-medium">
             Profile
           </Link>
+          <Link href="/features" className="text-white hover:text-pink-400 transition-colors font-medium">
+            Features
+          </Link>
+          <Link href="/roadmap" className="text-white hover:text-pink-400 transition-colors font-medium">
+            Roadmap
+          </Link>
+          <Link href="/team" className="text-white hover:text-pink-400 transition-colors font-medium">
+            Team
+          </Link>
         </nav>
 
         <div className="flex items-center space-x-4">

@@ -13,10 +13,10 @@ importers:
         version: 1.3.22(zod@3.24.4)
       '@coinbase/agentkit':
         specifier: latest
-        version: 0.7.1(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)
+        version: 0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)
       '@coinbase/agentkit-vercel-ai-sdk':
         specifier: latest
-        version: 0.1.0(@coinbase/agentkit@0.7.1(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10))(ai@4.3.15(react@19.0.0)(zod@3.24.4))
+        version: 0.1.0(@coinbase/agentkit@0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10))(ai@4.3.15(react@19.0.0)(zod@3.24.4))
       '@emotion/is-prop-valid':
         specifier: latest
         version: 1.3.1
@@ -127,7 +127,7 @@ importers:
         version: 8.6.0(react@19.0.0)
       framer-motion:
         specifier: latest
-        version: 12.11.1(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 12.11.3(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       fs:
         specifier: latest
         version: 0.0.1-security
@@ -148,7 +148,7 @@ importers:
         version: 19.0.0
       react-day-picker:
         specifier: latest
-        version: 9.6.7(react@19.0.0)
+        version: 9.7.0(react@19.0.0)
       react-dom:
         specifier: ^19
         version: 19.0.0(react@19.0.0)
@@ -269,11 +269,11 @@ packages:
       '@coinbase/agentkit': '>=0.1.0'
       ai: ^4.1.16
 
-  '@coinbase/agentkit@0.7.1':
-    resolution: {integrity: sha512-emqadnojecAk1qsmAIqqUbvvHk7YQqonkT7k7AyK6jF4zE9id+FC2kDSmzwTTgoA7pe3tvMufTEKGKVd6IiHGw==}
+  '@coinbase/agentkit@0.7.2':
+    resolution: {integrity: sha512-Tsu0hfg1VlUO/Std3V7WUzRaohMMUDrv+hE/5f8LidOuSWXgL45ZWal/pBx9pUT5TVL8eDunLS2waDoQ9Th1wg==}
 
-  '@coinbase/cdp-sdk@1.8.0':
-    resolution: {integrity: sha512-skU3yTYB4BKqBIPuNkYOGPVpIr9WvhFN+F7WdVLuLnyNDYgnxYc3tjpRIITn5K4KYnD5EEay4feY9NeeXiPEjA==}
+  '@coinbase/cdp-sdk@1.9.0':
+    resolution: {integrity: sha512-Lkx8sRDSi9U+9BPi1faPaswsQoMv6yu8Ng6nLNG4KMA05wIGnj9bBnIYXX7rVvW088Zn1VcNm6GnzJnoUeXVMQ==}
 
   '@coinbase/coinbase-sdk@0.20.0':
     resolution: {integrity: sha512-OoMMktKbjmeEwtwQCK3kIIoX5M+hNelxAGX5Llymvw6bmyrMDaEBZ/Myga9kaLJ+7Hi5Y4jPDy4Cy2MGxxXg6w==}
@@ -1862,8 +1862,8 @@ packages:
   ed2curve@0.3.0:
     resolution: {integrity: sha512-8w2fmmq3hv9rCrcI7g9hms2pMunQr1JINfcjwR9tAyZqhtyaMN991lF/ZfHfr5tzZQ8c7y7aBgZbjfbd0fjFwQ==}
 
-  electron-to-chromium@1.5.152:
-    resolution: {integrity: sha512-xBOfg/EBaIlVsHipHl2VdTPJRSvErNUaqW8ejTq5OlOlIYx1wOllCHsAvAIrr55jD1IYEfdR86miUEt8H5IeJg==}
+  electron-to-chromium@1.5.154:
+    resolution: {integrity: sha512-G4VCFAyKbp1QJ+sWdXYIRYsPGvlV5sDACfCmoMFog3rjm1syLhI41WXm/swZypwCIWIm4IFLWzHY14joWMQ5Fw==}
 
   elliptic@6.6.1:
     resolution: {integrity: sha512-RaddvvMatK2LJHqFJ+YA4WysVN5Ita9E35botqIYspQ4TkRAlCicdzKOjlyv/1Za5RyTNn7di//eEV0uTAfe3g==}
@@ -1993,8 +1993,8 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
-  framer-motion@12.11.1:
-    resolution: {integrity: sha512-k8SlrjoDesLTBklizQ2BSW7Pb99cHDoZe51Tff9ZjmWHQ/N5DLly949veBnwNfeH4d0E/h02RKuul/6D+5u9Bg==}
+  framer-motion@12.11.3:
+    resolution: {integrity: sha512-ksUtDFBZtrbQFt4bEMFrFgo7camhmXcLeuylKQxEYSd9czkZ4tZmFROxWczWeu51WqC2m91ifpvgGCBLd0uviQ==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -2381,8 +2381,8 @@ packages:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  motion-dom@12.11.0:
-    resolution: {integrity: sha512-CItkGYJenn5ZsbzTX0D9mE0UWdjdd9r535FrxEXhzR8Kwa9I2dLr1uhEJgQPWbgaIJ6i0sNFnf2T9NvVDWQVBw==}
+  motion-dom@12.11.2:
+    resolution: {integrity: sha512-wZ396XNNTI9GOkyrr80wFSbZc1JbIHSHTbLdririSbkEgahWWKmsHzsxyxqBBvuBU/iaQWVu1YCjdpXYNfo2yQ==}
 
   motion-utils@12.9.4:
     resolution: {integrity: sha512-BW3I65zeM76CMsfh3kHid9ansEJk9Qvl+K5cu4DVHKGsI52n76OJ4z2CUJUV+Mn3uEP9k1JJA3tClG0ggSrRcg==}
@@ -2578,8 +2578,8 @@ packages:
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
 
-  react-day-picker@9.6.7:
-    resolution: {integrity: sha512-rCSt6X8FXQWpjykns/azRXjJk3cMSzkzGbDEXuEveFGNZgOjZULdJQ5wsu8Zfyo8ZgPBoYCBKQ5wRrgJfhJGbg==}
+  react-day-picker@9.7.0:
+    resolution: {integrity: sha512-urlK4C9XJZVpQ81tmVgd2O7lZ0VQldZeHzNejbwLWZSkzHH498KnArT0EHNfKBOWwKc935iMLGZdxXPRISzUxQ==}
     engines: {node: '>=18'}
     peerDependencies:
       react: '>=16.8.0'
@@ -3185,17 +3185,17 @@ snapshots:
 
   '@babel/runtime@7.27.1': {}
 
-  '@coinbase/agentkit-vercel-ai-sdk@0.1.0(@coinbase/agentkit@0.7.1(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10))(ai@4.3.15(react@19.0.0)(zod@3.24.4))':
+  '@coinbase/agentkit-vercel-ai-sdk@0.1.0(@coinbase/agentkit@0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10))(ai@4.3.15(react@19.0.0)(zod@3.24.4))':
     dependencies:
-      '@coinbase/agentkit': 0.7.1(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)
+      '@coinbase/agentkit': 0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)
       ai: 4.3.15(react@19.0.0)(zod@3.24.4)
       zod: 3.24.4
 
-  '@coinbase/agentkit@0.7.1(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)':
+  '@coinbase/agentkit@0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)':
     dependencies:
       '@across-protocol/app-sdk': 0.2.2(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
       '@alloralabs/allora-sdk': 0.1.1
-      '@coinbase/cdp-sdk': 1.8.0(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)
+      '@coinbase/cdp-sdk': 1.9.0(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)
       '@coinbase/coinbase-sdk': 0.20.0(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
       '@jup-ag/api': 6.0.41
       '@privy-io/public-api': 2.25.0(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)
@@ -3224,8 +3224,9 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@coinbase/cdp-sdk@1.8.0(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)':
+  '@coinbase/cdp-sdk@1.9.0(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)':
     dependencies:
+      '@solana/spl-token': 0.4.13(@solana/web3.js@1.98.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)
       '@solana/web3.js': 1.98.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)
       abitype: 1.0.6(typescript@5.0.2)(zod@3.24.4)
       axios: 1.9.0
@@ -3237,6 +3238,7 @@ snapshots:
       - bufferutil
       - debug
       - encoding
+      - fastestsmallesttextencoderdecoder
       - typescript
       - utf-8-validate
 
@@ -4659,7 +4661,7 @@ snapshots:
   browserslist@4.24.5:
     dependencies:
       caniuse-lite: 1.0.30001718
-      electron-to-chromium: 1.5.152
+      electron-to-chromium: 1.5.154
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.24.5)
 
@@ -4905,7 +4907,7 @@ snapshots:
     dependencies:
       tweetnacl: 1.0.3
 
-  electron-to-chromium@1.5.152: {}
+  electron-to-chromium@1.5.154: {}
 
   elliptic@6.6.1:
     dependencies:
@@ -5039,9 +5041,9 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
-  framer-motion@12.11.1(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  framer-motion@12.11.3(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
-      motion-dom: 12.11.0
+      motion-dom: 12.11.2
       motion-utils: 12.9.4
       tslib: 2.8.1
     optionalDependencies:
@@ -5567,7 +5569,7 @@ snapshots:
 
   minipass@7.1.2: {}
 
-  motion-dom@12.11.0:
+  motion-dom@12.11.2:
     dependencies:
       motion-utils: 12.9.4
 
@@ -5758,7 +5760,7 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
-  react-day-picker@9.6.7(react@19.0.0):
+  react-day-picker@9.7.0(react@19.0.0):
     dependencies:
       '@date-fns/tz': 1.2.0
       date-fns: 4.1.0
