@@ -52,7 +52,7 @@ export default function FeaturedWarriors() {
                 <span className="font-pixel text-black">2</span>
               </div>
             </div>
-            <h3 className="font-pixel text-xl text-white mb-1">{featuredWarriors[1].name}</h3>
+            <h3 className="font-pixel text-xl text-white mb-1">DEGEN TOSHILL</h3>
             <div className="text-gray-300 mb-2">{featuredWarriors[1].class}</div>
             <div className="font-pixel text-xl text-yellow-400 mb-3">Power: {featuredWarriors[1].power}</div>
             <div className="grid grid-cols-2 gap-2 text-sm">
@@ -102,7 +102,7 @@ export default function FeaturedWarriors() {
                 <span className="font-pixel text-black">1</span>
               </div>
             </div>
-            <h3 className="font-pixel text-2xl text-white mb-1">{featuredWarriors[0].name}</h3>
+            <h3 className="font-pixel text-2xl text-white mb-1">MuthaFWOGA</h3>
             <div className="text-gray-300 mb-2">{featuredWarriors[0].class}</div>
             <div className="font-pixel text-2xl text-yellow-400 mb-3">Power: {featuredWarriors[0].power}</div>
             <div className="grid grid-cols-2 gap-2 text-sm">
@@ -151,7 +151,7 @@ export default function FeaturedWarriors() {
                 <span className="font-pixel text-black">3</span>
               </div>
             </div>
-            <h3 className="font-pixel text-xl text-white mb-1">{featuredWarriors[2].name}</h3>
+            <h3 className="font-pixel text-xl text-white mb-1">Ski Mask Bratt</h3>
             <div className="text-gray-300 mb-2">{featuredWarriors[2].class}</div>
             <div className="font-pixel text-xl text-yellow-400 mb-3">Power: {featuredWarriors[2].power}</div>
             <div className="grid grid-cols-2 gap-2 text-sm">

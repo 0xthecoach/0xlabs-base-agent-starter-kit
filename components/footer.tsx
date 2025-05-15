@@ -12,16 +12,21 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="text-lg font-pixel mb-4 text-white">Links</h4>
+          <h4 className="text-lg font-pixel mb-4 text-white">MemeWars</h4>
           <ul className="space-y-2">
             <li>
               <Link href="/" className="text-gray-300 hover:text-pink-400 transition-colors text-sm">
-                Home
+                Base
               </Link>
             </li>
             <li>
               <Link href="/features" className="text-gray-300 hover:text-pink-400 transition-colors text-sm">
                 Features
+              </Link>
+            </li>
+            <li>
+              <Link href="/marketplace" className="text-gray-300 hover:text-pink-400 transition-colors text-sm">
+                Marketplace
               </Link>
             </li>
             <li>
