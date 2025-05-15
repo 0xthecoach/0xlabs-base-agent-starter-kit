@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { CheckCircle, Clock, Calendar } from "lucide-react"
 import { useRef } from "react"
+import { useMemo } from "react"
 
 const roadmapItems = [
   {
@@ -93,17 +94,40 @@ const roadmapItems = [
   },
 ]
 
+// Custom scrollbar styles for webkit browsers
+const scrollbarStyles = `
+  .overflow-x-auto::-webkit-scrollbar {
+    height: 6px;
+  }
+  .overflow-x-auto::-webkit-scrollbar-track {
+    background: #2d1b69;
+    border-radius: 3px;
+  }
+  .overflow-x-auto::-webkit-scrollbar-thumb {
+    background: #a855f7;
+    border-radius: 3px;
+  }
+  .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background: #9333ea;
+  }
+`
+
 export default function Roadmap() {
-  const refs = roadmapItems.map(() => useRef(null))
-  const inViewStates = roadmapItems.map(() =>
-    useInView({
-      triggerOnce: true,
-      threshold: 0.1,
-    }),
+  const refs = useMemo(() => roadmapItems.map(() => useRef(null)), [])
+  const inViewStates = useMemo(
+    () =>
+      roadmapItems.map(() =>
+        useInView({
+          triggerOnce: true,
+          threshold: 0.1,
+        }),
+      ),
+    [],
   )
 
   return (
     <div className="pt-20">
+      <style jsx>{scrollbarStyles}</style>
       {/* Hero section */}
       <section className="py-20 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-purple-900 to-purple-800 z-0"></div>
@@ -119,92 +143,102 @@ export default function Roadmap() {
         </div>
       </section>
 
-      {/* Roadmap timeline */}
+      {/* Roadmap timeline - Horizontal Scrollable */}
       <section className="py-20 relative">
         <div className="absolute inset-0 bg-purple-900/30 z-0"></div>
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto">
-            <div className="relative">
-              {/* Vertical line */}
-              <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-pink-500 to-purple-500"></div>
+            {/* Horizontal scrollable container */}
+            <div
+              className="relative overflow-x-auto pb-8"
+              style={{ scrollbarWidth: "thin", scrollbarColor: "#a855f7 #2d1b69" }}
+            >
+              {/* Horizontal line */}
+              <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 to-purple-500"></div>
 
-              {roadmapItems.map((item, index) => {
-                const inView = inViewStates[index][0]
-                const ref = refs[index]
+              {/* Timeline items container */}
+              <div className="flex space-x-8 py-10 px-4" style={{ minWidth: "max-content" }}>
+                {roadmapItems.map((item, index) => {
+                  const inView = inViewStates[index][0]
+                  const ref = refs[index]
 
-                return (
-                  <motion.div
-                    key={index}
-                    ref={ref.current}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5 }}
-                    className={`relative flex flex-col md:flex-row items-start md:items-center gap-8 mb-16 ${
-                      index % 2 === 0 ? "md:flex-row-reverse" : ""
-                    }`}
-                  >
-                    {/* Circle on timeline */}
-                    <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-6 h-6 rounded-full border-2 border-pink-500 z-10">
-                      <div
-                        className={`w-full h-full rounded-full ${
-                          item.completed ? "bg-green-500" : item.current ? "bg-yellow-500" : "bg-purple-700"
-                        }`}
-                      ></div>
-                    </div>
-
-                    {/* Content */}
-                    <div
-                      className={`ml-10 md:ml-0 md:w-1/2 ${
-                        index % 2 === 0 ? "md:pr-12 text-right" : "md:pl-12 text-left"
-                      }`}
+                  return (
+                    <motion.div
+                      key={index}
+                      ref={ref.current}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={inView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.5 }}
+                      className="relative flex flex-col items-center w-80"
                     >
-                      <div
-                        className={`arcade-card p-6 ${
-                          item.completed ? "border-green-500" : item.current ? "border-yellow-500" : ""
-                        }`}
-                      >
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center">
-                            <Calendar className="h-4 w-4 mr-2 text-cyan-400" />
-                            <span className="font-pixel text-cyan-400">{item.quarter}</span>
-                          </div>
-                          {item.completed ? (
-                            <span className="flex items-center text-xs text-green-500">
-                              <CheckCircle className="h-4 w-4 mr-1" />
-                              Completed
-                            </span>
-                          ) : item.current ? (
-                            <span className="flex items-center text-xs text-yellow-500">
-                              <Clock className="h-4 w-4 mr-1" />
-                              In Progress
-                            </span>
-                          ) : (
-                            <span className="flex items-center text-xs text-gray-400">
-                              <Clock className="h-4 w-4 mr-1" />
-                              Upcoming
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="font-pixel text-white text-xl mb-3">{item.title}</h3>
-                        <p className="text-gray-300 mb-4">{item.description}</p>
+                      {/* Circle on timeline */}
+                      <div className="absolute top-0 transform -translate-y-1/2 w-6 h-6 rounded-full border-2 border-pink-500 z-10">
+                        <div
+                          className={`w-full h-full rounded-full ${
+                            item.completed ? "bg-green-500" : item.current ? "bg-yellow-500" : "bg-purple-700"
+                          }`}
+                        ></div>
+                      </div>
 
-                        <div className="bg-purple-900/50 p-4 rounded">
-                          <h4 className="font-pixel text-white text-sm mb-2">Key Deliverables:</h4>
-                          <ul className="space-y-1">
-                            {item.details.map((detail, i) => (
-                              <li key={i} className="flex items-start">
-                                <span className="text-pink-500 mr-2">•</span>
-                                <span className="text-gray-300 text-sm">{detail}</span>
-                              </li>
-                            ))}
-                          </ul>
+                      {/* Content - alternating above/below the line */}
+                      <div className={`mt-8 w-full`}>
+                        <div
+                          className={`arcade-card p-6 ${
+                            item.completed ? "border-green-500" : item.current ? "border-yellow-500" : ""
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center">
+                              <Calendar className="h-4 w-4 mr-2 text-cyan-400" />
+                              <span className="font-pixel text-cyan-400">{item.quarter}</span>
+                            </div>
+                            {item.completed ? (
+                              <span className="flex items-center text-xs text-green-500">
+                                <CheckCircle className="h-4 w-4 mr-1" />
+                                Completed
+                              </span>
+                            ) : item.current ? (
+                              <span className="flex items-center text-xs text-yellow-500">
+                                <Clock className="h-4 w-4 mr-1" />
+                                In Progress
+                              </span>
+                            ) : (
+                              <span className="flex items-center text-xs text-gray-400">
+                                <Clock className="h-4 w-4 mr-1" />
+                                Upcoming
+                              </span>
+                            )}
+                          </div>
+                          <h3 className="font-pixel text-white text-xl mb-3">{item.title}</h3>
+                          <p className="text-gray-300 mb-4">{item.description}</p>
+
+                          <div className="bg-purple-900/50 p-4 rounded">
+                            <h4 className="font-pixel text-white text-sm mb-2">Key Deliverables:</h4>
+                            <ul className="space-y-1">
+                              {item.details.map((detail, i) => (
+                                <li key={i} className="flex items-start">
+                                  <span className="text-pink-500 mr-2">•</span>
+                                  <span className="text-gray-300 text-sm">{detail}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </motion.div>
-                )
-              })}
+                    </motion.div>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* Scroll indicator */}
+            <div className="flex justify-center mt-4">
+              <div className="flex items-center space-x-2 text-gray-300 text-sm">
+                <span className="animate-pulse">←</span>
+                <span>Scroll to see more</span>
+                <span className="animate-pulse">→</span>
+              </div>
             </div>
           </div>
         </div>
