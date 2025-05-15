@@ -10,13 +10,13 @@ const features = [
   {
     title: "COLLECT WARRIORS",
     description: "Collect and upgrade your favorite meme characters",
-    icon: "/placeholder-dwcha.png",
+    icon: "/placeholder-a7lki.png",
     color: "from-pink-500 to-purple-500",
   },
   {
     title: "BATTLE ARENA",
     description: "Compete in real-time battles against other players",
-    icon: "/placeholder-pdh3p.png",
+    icon: "/placeholder.svg?height=64&width=64&query=battle arena icon",
     color: "from-cyan-500 to-blue-500",
   },
   {
