@@ -11,10 +11,16 @@ export default function Navbar() {
 
         <nav className="hidden md:flex space-x-6">
           <Link href="/" className="text-white hover:text-pink-400 transition-colors font-medium">
-            Home
+            Base
           </Link>
           <Link href="/memewarriors" className="text-white hover:text-pink-400 transition-colors font-medium">
-            MemeWarriors
+            Warriors
+          </Link>
+          <Link href="/battle" className="text-white hover:text-pink-400 transition-colors font-medium">
+            Battle
+          </Link>
+          <Link href="/tournaments" className="text-white hover:text-pink-400 transition-colors font-medium">
+            Tournaments
           </Link>
           <Link href="/leaderboard" className="text-white hover:text-pink-400 transition-colors font-medium">
             Leaderboard

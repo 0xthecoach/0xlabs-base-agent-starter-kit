@@ -174,13 +174,13 @@ export default function MemeWarriorsPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="arcade-card overflow-hidden"
+                  className="arcade-card overflow-hidden h-full flex flex-col"
                 >
                   <div className="h-2 bg-gradient-to-r from-pink-500 to-purple-500"></div>
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-1">
                     <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-2 border-pink-500">
                       <Image
-                        src={`/placeholder.svg?height=128&width=128&query=${warrior.name} meme character`}
+                        src={`/abstract-geometric-shapes.png?height=128&width=128&query=${warrior.name} meme character`}
                         alt={warrior.name}
                         width={128}
                         height={128}
@@ -215,9 +215,9 @@ export default function MemeWarriorsPage() {
                       </div>
                     </div>
 
-                    <p className="text-gray-300 text-sm mb-4 line-clamp-3">{warrior.description}</p>
+                    <p className="text-gray-300 text-sm mb-4 flex-grow line-clamp-3">{warrior.description}</p>
 
-                    <div className="text-center">
+                    <div className="text-center mt-auto">
                       <Link href={`/memewarriors/${warrior.id}`} className="arcade-btn text-white text-sm inline-block">
                         VIEW DETAILS
                       </Link>

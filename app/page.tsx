@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button"
 import FeaturedWarriors from "@/components/featured-warriors"
 import LeaderboardPreview from "@/components/leaderboard-preview"
 import QuestsPreview from "@/components/quests-preview"
-import RoadmapPreview from "@/components/roadmap-preview"
 import FeaturesPreview from "@/components/features-preview"
 import CTA from "@/components/cta"
 
@@ -11,13 +10,22 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="py-32 px-4 relative overflow-hidden min-h-[80vh]">
-        <div
-          className="absolute inset-0 z-0 bg-cover bg-center min-h-[80vh]"
-          style={{
-            backgroundImage: 'url("/images/banner-website-mw3.png")',
-            opacity: 0.9,
-          }}
-        ></div>
+        <div className="absolute inset-0 z-0 min-h-[80vh] overflow-hidden">
+          <video
+            className="absolute w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{ opacity: 0.9 }}
+          >
+            <source
+              src="https://xsjm-zu7p-vaky.n7.xano.io/vault/lu0MXA_0/RgaypqVreYz__yvyXo7VBq5M4hY/QUsIfA../1747129235841971.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
         <div className="container mx-auto relative z-10">
           <h1 className="text-5xl md:text-6xl font-pixel mb-6 neon-text">MEMEWARS</h1>
           <p className="text-xl md:text-2xl max-w-3xl mb-10 text-gray-200">
@@ -45,9 +53,6 @@ export default function Home() {
 
       {/* Quests Preview */}
       <QuestsPreview />
-
-      {/* Roadmap Preview */}
-      <RoadmapPreview />
 
       {/* CTA Section */}
       <CTA />

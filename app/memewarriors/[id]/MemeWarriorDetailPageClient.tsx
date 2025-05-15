@@ -86,6 +86,28 @@ export default function MemeWarriorDetailPageClient({ params }: Props) {
         icon: <BarChart3 className="w-6 h-6 text-cyan-400" />,
       },
     ],
+    freeAbilities: [
+      {
+        name: "Market Insight",
+        description: "Provides daily market analysis with 75% accuracy, giving a strategic advantage in trading",
+        icon: <BarChart3 className="w-6 h-6 text-green-400" />,
+      },
+      {
+        name: "Community Shield",
+        description: "Rallies community support during attacks, reducing damage by 30% and boosting morale",
+        icon: <Shield className="w-6 h-6 text-green-400" />,
+      },
+      {
+        name: "Viral Spread",
+        description: "Content has a 25% chance to go viral, increasing visibility and attracting new allies",
+        icon: <Globe className="w-6 h-6 text-green-400" />,
+      },
+      {
+        name: "Meme Magic",
+        description: "Creates powerful memes that confuse opponents, reducing their accuracy by 20%",
+        icon: <Zap className="w-6 h-6 text-green-400" />,
+      },
+    ],
     battleStats: {
       strength: 93,
       defense: 85,
@@ -203,7 +225,7 @@ export default function MemeWarriorDetailPageClient({ params }: Props) {
 
       {/* Activation Progress */}
       <div className="arcade-card p-6 mb-8">
-        <h2 className="section-title mb-6">ACTIVATION PROGRESS</h2>
+        <h2 className="section-title text-lg mb-6">ACTIVATION PROGRESS</h2>
         <div className="relative">
           <div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-700 transform -translate-y-1/2"></div>
           <div className="flex justify-between relative">
@@ -341,13 +363,29 @@ export default function MemeWarriorDetailPageClient({ params }: Props) {
 
           {/* Special Abilities */}
           <div className="arcade-card p-6 mb-8">
-            <h2 className="section-title mb-6">SPECIAL ABILITIES</h2>
+            <h2 className="section-title text-lg mb-6">SPECIAL ABILITIES</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {profileData.specialAbilities.map((ability, index) => (
                 <div key={index} className="bg-black/30 p-4 rounded-lg">
                   <div className="flex items-center mb-2">
                     <div className="mr-2 bg-cyan-900/30 p-2 rounded-full">{ability.icon}</div>
-                    <h3 className="font-pixel text-cyan-400">{ability.name}</h3>
+                    <h3 className="font-pixel text-cyan-400 text-sm">{ability.name}</h3>
+                  </div>
+                  <p className="text-sm text-gray-300">{ability.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Free Abilities */}
+          <div className="arcade-card p-6 mb-8">
+            <h2 className="section-title text-lg mb-6">FREE ABILITIES</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {profileData.freeAbilities.map((ability, index) => (
+                <div key={index} className="bg-black/30 p-4 rounded-lg">
+                  <div className="flex items-center mb-2">
+                    <div className="mr-2 bg-green-900/30 p-2 rounded-full">{ability.icon}</div>
+                    <h3 className="font-pixel text-green-400 text-sm">{ability.name}</h3>
                   </div>
                   <p className="text-sm text-gray-300">{ability.description}</p>
                 </div>
@@ -359,7 +397,7 @@ export default function MemeWarriorDetailPageClient({ params }: Props) {
         <div className="lg:col-span-1 space-y-8">
           {/* Token Economics */}
           <div className="arcade-card p-6">
-            <h2 className="section-title mb-4">Token Economics</h2>
+            <h2 className="section-title text-lg mb-4">Token Economics</h2>
 
             <div className="flex justify-between items-center mb-4">
               <div>
@@ -407,7 +445,7 @@ export default function MemeWarriorDetailPageClient({ params }: Props) {
 
           {/* Battle Stats */}
           <div className="arcade-card p-6">
-            <h2 className="section-title mb-4">BATTLE STATS</h2>
+            <h2 className="section-title text-lg mb-4">BATTLE STATS</h2>
             <div className="space-y-4">
               <div>
                 <div className="flex justify-between mb-1">
@@ -462,7 +500,7 @@ export default function MemeWarriorDetailPageClient({ params }: Props) {
 
           {/* Achievements */}
           <div className="arcade-card p-6">
-            <h2 className="section-title mb-4">ACHIEVEMENTS</h2>
+            <h2 className="section-title text-lg mb-4">ACHIEVEMENTS</h2>
             <div className="space-y-4">
               {profileData.achievements.map((achievement, index) => (
                 <div key={index} className="flex items-center p-3 bg-black/30 rounded-lg">
@@ -478,7 +516,7 @@ export default function MemeWarriorDetailPageClient({ params }: Props) {
 
           {/* Connect */}
           <div className="arcade-card p-6">
-            <h2 className="section-title mb-4">CONNECT</h2>
+            <h2 className="section-title text-lg mb-4">CONNECT</h2>
             <div className="flex justify-center gap-4">
               <button className="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center">
                 <Twitter className="w-6 h-6 text-white" />
@@ -496,7 +534,7 @@ export default function MemeWarriorDetailPageClient({ params }: Props) {
 
       {/* CTA Section */}
       <div className="mt-16 mb-8 text-center">
-        <h2 className="section-title mb-4">JOIN THE BATTLE</h2>
+        <h2 className="section-title text-lg mb-4">JOIN THE BATTLE</h2>
         <p className="text-gray-300 max-w-2xl mx-auto mb-8">
           Ready to enter the arena? Join thousands of players in the ultimate meme battle experience!
         </p>

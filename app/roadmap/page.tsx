@@ -2,9 +2,8 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { CheckCircle, Clock, Calendar } from "lucide-react"
-import { useRef } from "react"
-import { useMemo } from "react"
+import { useRef, useMemo } from "react"
+import Link from "next/link"
 
 const roadmapItems = [
   {
@@ -94,8 +93,22 @@ const roadmapItems = [
   },
 ]
 
-// Custom scrollbar styles for webkit browsers
-const scrollbarStyles = `
+// Create refs for each roadmap item
+const refs = roadmapItems.map(() => useRef(null))
+
+export default function Roadmap() {
+  // Create inView states for each roadmap item
+  const inViewStates = useMemo(() => {
+    return roadmapItems.map(() => {
+      return useInView({
+        triggerOnce: true,
+        threshold: 0.1,
+      })
+    })
+  }, [])
+
+  // Custom scrollbar styles for webkit browsers
+  const scrollbarStyles = `
   .overflow-x-auto::-webkit-scrollbar {
     height: 6px;
   }
@@ -111,19 +124,6 @@ const scrollbarStyles = `
     background: #9333ea;
   }
 `
-
-export default function Roadmap() {
-  const refs = useMemo(() => roadmapItems.map(() => useRef(null)), [])
-  const inViewStates = useMemo(
-    () =>
-      roadmapItems.map(() =>
-        useInView({
-          triggerOnce: true,
-          threshold: 0.1,
-        }),
-      ),
-    [],
-  )
 
   return (
     <div className="pt-20">
@@ -159,76 +159,35 @@ export default function Roadmap() {
 
               {/* Timeline items container */}
               <div className="flex space-x-8 py-10 px-4" style={{ minWidth: "max-content" }}>
-                {roadmapItems.map((item, index) => {
-                  const inView = inViewStates[index][0]
-                  const ref = refs[index]
-
-                  return (
-                    <motion.div
-                      key={index}
-                      ref={ref.current}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={inView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.5 }}
-                      className="relative flex flex-col items-center w-80"
-                    >
-                      {/* Circle on timeline */}
-                      <div className="absolute top-0 transform -translate-y-1/2 w-6 h-6 rounded-full border-2 border-pink-500 z-10">
-                        <div
-                          className={`w-full h-full rounded-full ${
-                            item.completed ? "bg-green-500" : item.current ? "bg-yellow-500" : "bg-purple-700"
-                          }`}
-                        ></div>
-                      </div>
-
-                      {/* Content - alternating above/below the line */}
-                      <div className={`mt-8 w-full`}>
-                        <div
-                          className={`arcade-card p-6 ${
-                            item.completed ? "border-green-500" : item.current ? "border-yellow-500" : ""
-                          }`}
+                {roadmapItems.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    ref={inViewStates[index][0]}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={inViewStates[index][1] ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="arcade-card overflow-hidden flex flex-col h-full"
+                  >
+                    <div className="p-6 flex-1 flex flex-col">
+                      <div className="mb-4">
+                        <span
+                          className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(item.status)}`}
                         >
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center">
-                              <Calendar className="h-4 w-4 mr-2 text-cyan-400" />
-                              <span className="font-pixel text-cyan-400">{item.quarter}</span>
-                            </div>
-                            {item.completed ? (
-                              <span className="flex items-center text-xs text-green-500">
-                                <CheckCircle className="h-4 w-4 mr-1" />
-                                Completed
-                              </span>
-                            ) : item.current ? (
-                              <span className="flex items-center text-xs text-yellow-500">
-                                <Clock className="h-4 w-4 mr-1" />
-                                In Progress
-                              </span>
-                            ) : (
-                              <span className="flex items-center text-xs text-gray-400">
-                                <Clock className="h-4 w-4 mr-1" />
-                                Upcoming
-                              </span>
-                            )}
-                          </div>
-                          <h3 className="font-pixel text-white text-xl mb-3">{item.title}</h3>
-                          <p className="text-gray-300 mb-4">{item.description}</p>
-
-                          <div className="bg-purple-900/50 p-4 rounded">
-                            <h4 className="font-pixel text-white text-sm mb-2">Key Deliverables:</h4>
-                            <ul className="space-y-1">
-                              {item.details.map((detail, i) => (
-                                <li key={i} className="flex items-start">
-                                  <span className="text-pink-500 mr-2">•</span>
-                                  <span className="text-gray-300 text-sm">{detail}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
+                          {item.status}
+                        </span>
                       </div>
-                    </motion.div>
-                  )
-                })}
+                      <h3 className="text-xl font-pixel text-white mb-2">{item.title}</h3>
+                      <p className="text-gray-300 mb-4 flex-grow">{item.description}</p>
+                      <div className="mt-auto">
+                        {item.link && (
+                          <Link href={item.link} className="pink-button inline-block text-sm">
+                            Learn More
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
 
@@ -282,4 +241,15 @@ export default function Roadmap() {
       </section>
     </div>
   )
+}
+
+function getStatusColor(status: string | undefined) {
+  switch (status) {
+    case "Completed":
+      return "bg-green-200 text-green-800"
+    case "In Progress":
+      return "bg-yellow-200 text-yellow-800"
+    default:
+      return "bg-gray-200 text-gray-800"
+  }
 }

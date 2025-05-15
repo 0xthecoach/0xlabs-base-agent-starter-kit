@@ -10,7 +10,7 @@ const teamMembers = [
     name: "Alex Johnson",
     role: "Founder & CEO",
     bio: "Former game developer at Epic Games with 10+ years of experience in the gaming industry. Meme enthusiast and blockchain advocate.",
-    image: "/team-member-one.png",
+    image: "/placeholder-o6pxl.png",
     social: {
       twitter: "https://twitter.com/alexjohnson",
       linkedin: "https://linkedin.com/in/alexjohnson",
@@ -21,7 +21,7 @@ const teamMembers = [
     name: "Sarah Chen",
     role: "Chief Creative Officer",
     bio: "Award-winning digital artist with a background in character design. Previously worked at Pixar and Blizzard Entertainment.",
-    image: "/team-member-2.png",
+    image: "/placeholder-cjfv5.png",
     social: {
       twitter: "https://twitter.com/sarahchen",
       linkedin: "https://linkedin.com/in/sarahchen",
@@ -31,7 +31,7 @@ const teamMembers = [
     name: "Michael Rodriguez",
     role: "CTO",
     bio: "Full-stack developer with expertise in game engines and blockchain technology. Led development teams at Ubisoft and EA.",
-    image: "/placeholder-3lomi.png",
+    image: "/placeholder-z8jzv.png",
     social: {
       twitter: "https://twitter.com/michaelrodriguez",
       github: "https://github.com/michaelrodriguez",
@@ -41,7 +41,7 @@ const teamMembers = [
     name: "Emma Wilson",
     role: "Head of Marketing",
     bio: "Digital marketing specialist with experience in gaming and entertainment. Previously led marketing campaigns for major game launches.",
-    image: "/placeholder-yfr28.png",
+    image: "/placeholder-qhqdi.png",
     social: {
       twitter: "https://twitter.com/emmawilson",
       linkedin: "https://linkedin.com/in/emmawilson",
@@ -51,7 +51,7 @@ const teamMembers = [
     name: "David Kim",
     role: "Lead Game Designer",
     bio: "Game design veteran with a passion for competitive gameplay. Worked on several top-grossing mobile and PC games.",
-    image: "/placeholder-zro0j.png",
+    image: "/placeholder-k0w2i.png",
     social: {
       twitter: "https://twitter.com/davidkim",
       github: "https://github.com/davidkim",
@@ -61,7 +61,7 @@ const teamMembers = [
     name: "Olivia Martinez",
     role: "Community Manager",
     bio: "Social media expert and community builder. Specializes in creating engaging content and fostering active gaming communities.",
-    image: "/placeholder-t16z6.png",
+    image: "/placeholder-zaid9.png",
     social: {
       twitter: "https://twitter.com/oliviamartinez",
       linkedin: "https://linkedin.com/in/oliviamartinez",
@@ -74,7 +74,7 @@ const advisors = [
     name: "Dr. James Wilson",
     role: "Gaming Industry Advisor",
     bio: "Former executive at Nintendo with 20+ years of experience in the gaming industry. Advisor to multiple successful gaming startups.",
-    image: "/placeholder-ee350.png",
+    image: "/placeholder-fpycp.png",
     social: {
       linkedin: "https://linkedin.com/in/jameswilson",
     },
@@ -83,7 +83,7 @@ const advisors = [
     name: "Lisa Chang",
     role: "Blockchain Strategist",
     bio: "Blockchain expert and investor. Founder of multiple successful crypto projects and advisor to Web3 gaming platforms.",
-    image: "/placeholder-3a00l.png",
+    image: "/placeholder.svg?height=128&width=128&query=female%20blockchain%20expert%20profile",
     social: {
       twitter: "https://twitter.com/lisachang",
       linkedin: "https://linkedin.com/in/lisachang",
