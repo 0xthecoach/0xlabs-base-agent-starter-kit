@@ -19,10 +19,10 @@ importers:
         version: 3.810.0
       '@coinbase/agentkit':
         specifier: latest
-        version: 0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)
+        version: 0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)
       '@coinbase/agentkit-vercel-ai-sdk':
         specifier: latest
-        version: 0.1.0(@coinbase/agentkit@0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10))(ai@4.3.15(react@19.0.0)(zod@3.24.4))
+        version: 0.1.0(@coinbase/agentkit@0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10))(ai@4.3.15(react@19.0.0)(zod@3.24.4))
       '@coinbase/wallet-mobile-sdk':
         specifier: latest
         version: 1.1.2(expo@53.0.9(@babel/core@7.27.1)(bufferutil@4.0.9)(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.0)(bufferutil@4.0.9)(react@19.0.0)(utf-8-validate@5.0.10))(react@19.0.0)(utf-8-validate@5.0.10))(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.0)(bufferutil@4.0.9)(react@19.0.0)(utf-8-validate@5.0.10))(react@19.0.0)
@@ -223,7 +223,7 @@ importers:
         version: 1.1.2(@types/react-dom@19.0.0)(@types/react@19.0.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       viem:
         specifier: latest
-        version: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+        version: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
       zod:
         specifier: latest
         version: 3.24.4
@@ -6591,8 +6591,8 @@ packages:
       typescript:
         optional: true
 
-  viem@2.29.2:
-    resolution: {integrity: sha512-cukRxab90jvQ+TDD84sU3qB3UmejYqgCw4cX8SfWzvh7JPfZXI3kAMUaT5OSR2As1Mgvx1EJawccwPjGqkSSwA==}
+  viem@2.29.3:
+    resolution: {integrity: sha512-9D/nO+4S3Kk0P8vh6yXUA8OJ0mli9nzoY22qyh8iYHf1Q0GIejUnyq0QGjoDbkTcVzCVD5iA9KBkSxw9Tp3vUg==}
     peerDependencies:
       typescript: '>=5.0.4'
     peerDependenciesMeta:
@@ -6823,9 +6823,9 @@ snapshots:
 
   '@0no-co/graphql.web@1.1.2': {}
 
-  '@across-protocol/app-sdk@0.2.2(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))':
+  '@across-protocol/app-sdk@0.2.2(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))':
     dependencies:
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
 
   '@adraffy/ens-normalize@1.10.1': {}
 
@@ -7895,26 +7895,26 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.27.1
 
-  '@coinbase/agentkit-vercel-ai-sdk@0.1.0(@coinbase/agentkit@0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10))(ai@4.3.15(react@19.0.0)(zod@3.24.4))':
+  '@coinbase/agentkit-vercel-ai-sdk@0.1.0(@coinbase/agentkit@0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10))(ai@4.3.15(react@19.0.0)(zod@3.24.4))':
     dependencies:
-      '@coinbase/agentkit': 0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)
+      '@coinbase/agentkit': 0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)
       ai: 4.3.15(react@19.0.0)(zod@3.24.4)
       zod: 3.24.4
 
-  '@coinbase/agentkit@0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)':
+  '@coinbase/agentkit@0.7.2(@zerodev/webauthn-key@5.4.4(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)':
     dependencies:
-      '@across-protocol/app-sdk': 0.2.2(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
+      '@across-protocol/app-sdk': 0.2.2(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
       '@alloralabs/allora-sdk': 0.1.1
       '@coinbase/cdp-sdk': 1.9.0(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)
       '@coinbase/coinbase-sdk': 0.20.0(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
       '@jup-ag/api': 6.0.41
       '@privy-io/public-api': 2.25.0(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)
-      '@privy-io/server-auth': 1.22.0(bufferutil@4.0.9)(ethers@6.14.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(typescript@5.0.2)(utf-8-validate@5.0.10)(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
+      '@privy-io/server-auth': 1.22.0(bufferutil@4.0.9)(ethers@6.14.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(typescript@5.0.2)(utf-8-validate@5.0.10)(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
       '@solana/spl-token': 0.4.13(@solana/web3.js@1.98.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.0.2)(utf-8-validate@5.0.10)
       '@solana/web3.js': 1.98.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)
-      '@zerodev/ecdsa-validator': 5.4.9(@zerodev/sdk@5.4.34(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
-      '@zerodev/intent': 0.0.24(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
-      '@zerodev/sdk': 5.4.34(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
+      '@zerodev/ecdsa-validator': 5.4.9(@zerodev/sdk@5.4.34(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
+      '@zerodev/intent': 0.0.24(@zerodev/webauthn-key@5.4.4(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
+      '@zerodev/sdk': 5.4.34(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
       bs58: 4.0.1
       canonicalize: 2.1.0
       decimal.js: 10.5.0
@@ -7923,7 +7923,7 @@ snapshots:
       opensea-js: 7.1.18(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       reflect-metadata: 0.2.2
       twitter-api-v2: 1.23.2
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
       zod: 3.24.4
     transitivePeerDependencies:
       - '@zerodev/webauthn-key'
@@ -7942,7 +7942,7 @@ snapshots:
       axios: 1.9.0
       jose: 6.0.11
       md5: 2.3.0
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
       zod: 3.24.4
     transitivePeerDependencies:
       - bufferutil
@@ -7967,7 +7967,7 @@ snapshots:
       ethers: 6.14.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       jose: 5.10.0
       secp256k1: 5.0.1
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -8689,14 +8689,14 @@ snapshots:
       '@privy-io/api-base': 1.5.1
       bs58: 5.0.0
       libphonenumber-js: 1.12.8
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
       zod: 3.24.4
     transitivePeerDependencies:
       - bufferutil
       - typescript
       - utf-8-validate
 
-  '@privy-io/server-auth@1.22.0(bufferutil@4.0.9)(ethers@6.14.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(typescript@5.0.2)(utf-8-validate@5.0.10)(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))':
+  '@privy-io/server-auth@1.22.0(bufferutil@4.0.9)(ethers@6.14.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(typescript@5.0.2)(utf-8-validate@5.0.10)(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))':
     dependencies:
       '@noble/curves': 1.9.1
       '@noble/hashes': 1.8.0
@@ -8712,7 +8712,7 @@ snapshots:
       type-fest: 3.13.1
     optionalDependencies:
       ethers: 6.14.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
     transitivePeerDependencies:
       - bufferutil
       - encoding
@@ -9662,7 +9662,7 @@ snapshots:
     dependencies:
       big.js: 6.2.2
       dayjs: 1.11.13
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.22.4)
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.22.4)
     transitivePeerDependencies:
       - bufferutil
       - typescript
@@ -9673,7 +9673,7 @@ snapshots:
     dependencies:
       big.js: 6.2.2
       dayjs: 1.11.13
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
     transitivePeerDependencies:
       - bufferutil
       - typescript
@@ -9686,7 +9686,7 @@ snapshots:
       '@reown/appkit-wallet': 1.7.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)
       '@walletconnect/universal-provider': 2.19.2(@react-native-async-storage/async-storage@2.1.2(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.0)(bufferutil@4.0.9)(react@19.0.0)(utf-8-validate@5.0.10)))(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
       valtio: 1.13.2(@types/react@19.0.0)(react@19.0.0)
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -9797,7 +9797,7 @@ snapshots:
       '@walletconnect/logger': 2.1.2
       '@walletconnect/universal-provider': 2.19.2(@react-native-async-storage/async-storage@2.1.2(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.0)(bufferutil@4.0.9)(react@19.0.0)(utf-8-validate@5.0.10)))(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
       valtio: 1.13.2(@types/react@19.0.0)(react@19.0.0)
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -9849,7 +9849,7 @@ snapshots:
       '@walletconnect/universal-provider': 2.19.2(@react-native-async-storage/async-storage@2.1.2(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.0)(bufferutil@4.0.9)(react@19.0.0)(utf-8-validate@5.0.10)))(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
       bs58: 6.0.0
       valtio: 1.13.2(@types/react@19.0.0)(react@19.0.0)
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -11097,40 +11097,40 @@ snapshots:
 
   '@xmldom/xmldom@0.8.10': {}
 
-  '@zerodev/ecdsa-validator@5.4.9(@zerodev/sdk@5.4.34(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))':
+  '@zerodev/ecdsa-validator@5.4.9(@zerodev/sdk@5.4.34(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))':
     dependencies:
-      '@zerodev/sdk': 5.4.34(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      '@zerodev/sdk': 5.4.34(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
 
-  '@zerodev/intent@0.0.24(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))':
+  '@zerodev/intent@0.0.24(@zerodev/webauthn-key@5.4.4(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))':
     dependencies:
-      '@zerodev/ecdsa-validator': 5.4.9(@zerodev/sdk@5.4.34(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
-      '@zerodev/multi-chain-ecdsa-validator': 5.4.5(@zerodev/sdk@5.4.34(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
-      '@zerodev/sdk': 5.4.34(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      '@zerodev/ecdsa-validator': 5.4.9(@zerodev/sdk@5.4.34(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
+      '@zerodev/multi-chain-ecdsa-validator': 5.4.5(@zerodev/sdk@5.4.34(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(@zerodev/webauthn-key@5.4.4(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
+      '@zerodev/sdk': 5.4.34(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
     transitivePeerDependencies:
       - '@zerodev/webauthn-key'
 
-  '@zerodev/multi-chain-ecdsa-validator@5.4.5(@zerodev/sdk@5.4.34(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))':
+  '@zerodev/multi-chain-ecdsa-validator@5.4.5(@zerodev/sdk@5.4.34(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(@zerodev/webauthn-key@5.4.4(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)))(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))':
     dependencies:
       '@simplewebauthn/browser': 9.0.1
       '@simplewebauthn/typescript-types': 8.3.4
-      '@zerodev/sdk': 5.4.34(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
-      '@zerodev/webauthn-key': 5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
+      '@zerodev/sdk': 5.4.34(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
+      '@zerodev/webauthn-key': 5.4.4(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))
       merkletreejs: 0.3.11
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
 
-  '@zerodev/sdk@5.4.34(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))':
+  '@zerodev/sdk@5.4.34(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))':
     dependencies:
       semver: 7.7.2
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
 
-  '@zerodev/webauthn-key@5.4.4(viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))':
+  '@zerodev/webauthn-key@5.4.4(viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4))':
     dependencies:
       '@noble/curves': 1.9.1
       '@simplewebauthn/browser': 8.3.7
       '@simplewebauthn/types': 12.0.0
-      viem: 2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
+      viem: 2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4)
 
   abitype@1.0.6(typescript@5.0.2)(zod@3.24.4):
     optionalDependencies:
@@ -15181,7 +15181,7 @@ snapshots:
       - utf-8-validate
       - zod
 
-  viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.22.4):
+  viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.22.4):
     dependencies:
       '@noble/curves': 1.8.2
       '@noble/hashes': 1.7.2
@@ -15198,7 +15198,7 @@ snapshots:
       - utf-8-validate
       - zod
 
-  viem@2.29.2(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4):
+  viem@2.29.3(bufferutil@4.0.9)(typescript@5.0.2)(utf-8-validate@5.0.10)(zod@3.24.4):
     dependencies:
       '@noble/curves': 1.8.2
       '@noble/hashes': 1.7.2
