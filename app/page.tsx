@@ -1,12 +1,19 @@
 import Link from "next/link"
-import Image from "next/image"
 
 export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="py-20 px-4 text-center relative overflow-hidden">
-        <div className="absolute inset-0 z-0 retro-grid opacity-20"></div>
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center"
+          style={{
+            backgroundImage: 'url("/images/banner-website-mw3.png")',
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: 0.9,
+          }}
+        ></div>
         <div className="container mx-auto relative z-10">
           <h1 className="text-5xl md:text-6xl font-pixel mb-6 neon-text">MEMEWARS</h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-gray-200">
@@ -17,17 +24,6 @@ export default function Home() {
             <Link href="/features" className="arcade-btn bg-purple-700 text-white">
               Learn More
             </Link>
-          </div>
-
-          <div className="relative h-[300px] md:h-[400px] max-w-5xl mx-auto">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-05-13%20at%2004.08.43-b5RnljweiVpLaIx65MnAq1jqq2tiTO.png"
-              alt="MemeWars Characters"
-              fill
-              style={{ objectFit: "contain" }}
-              className="float"
-              priority
-            />
           </div>
         </div>
       </section>

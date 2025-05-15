@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { Analytics } from "@/components/analytics"
 import { Suspense } from "react"
+import { Providers } from "./providers"
 
 const pressStart = Press_Start_2P({
   weight: "400",
@@ -35,14 +36,16 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${pressStart.variable} ${poppins.variable} font-sans antialiased`}>
-        <div className="min-h-screen flex flex-col bg-purple-900">
-          <Navbar />
-          <Suspense>
-            <main className="flex-grow">{children}</main>
-          </Suspense>
-          <Footer />
-        </div>
-        <Analytics />
+        <Providers>
+          <div className="min-h-screen flex flex-col bg-purple-900">
+            <Navbar />
+            <Suspense>
+              <main className="flex-grow">{children}</main>
+            </Suspense>
+            <Footer />
+          </div>
+          <Analytics />
+        </Providers>
       </body>
     </html>
   )

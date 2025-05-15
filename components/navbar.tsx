@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { ConnectWalletButton } from "./connect-wallet-button"
 
 export default function Navbar() {
   return (
@@ -36,7 +37,7 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center space-x-4">
-          <button className="arcade-btn text-white text-sm">Play Now</button>
+          <ConnectWalletButton />
         </div>
       </div>
     </header>
