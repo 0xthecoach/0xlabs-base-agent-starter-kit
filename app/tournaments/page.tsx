@@ -241,13 +241,15 @@ export default function TournamentsPage() {
           <div className="arcade-card overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-3">
               {/* Tournament Image */}
-              <div className="md:col-span-1 bg-gradient-to-br from-purple-900/50 to-pink-900/50 p-6 flex items-center justify-center">
+              <div className="md:col-span-1 bg-gradient-to-br from-purple-900/50 to-pink-900/50 flex items-center justify-center overflow-hidden">
                 <Image
-                  src={activeTournament.image || "/placeholder.svg"}
-                  alt={activeTournament.name}
-                  width={300}
-                  height={300}
-                  className="object-contain"
+                  src="https://xsjm-zu7p-vaky.n7.xano.io/vault/lu0MXA_0/FCp_0sTmGzBU6jAJq0sNMazp8Us/mbSFRg../FLORA-GIF-0dc84a35.gif"
+                  alt="Tournament Banner"
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover"
+                  unoptimized={true}
+                  priority={true}
                 />
               </div>
 

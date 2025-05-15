@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import Image from "next/image"
 import Link from "next/link"
 import { memeWarriors } from "@/lib/data"
 
@@ -40,12 +39,13 @@ export default function FeaturedWarriors() {
             <div className="relative mx-auto w-24 h-24 mb-4">
               <div className="absolute inset-0 rounded-full border-2 border-gray-300 animate-pulse-slow"></div>
               <div className="w-full h-full rounded-full overflow-hidden border-2 border-white">
-                <Image
-                  src={`/abstract-geometric-shapes.png?height=96&width=96&query=${featuredWarriors[1].name} meme character`}
-                  alt={featuredWarriors[1].name}
-                  width={96}
-                  height={96}
-                  className="object-cover"
+                <video
+                  src="https://xsjm-zu7p-vaky.n7.xano.io/vault/lu0MXA_0/42YZVvFAPPBYv9obQhQvmcMaBQ4/KHRS4A../20250513_0536_Futuristic_Feline_Warrior_simple_compose_01jv3a8b.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="absolute -bottom-2 -right-2 bg-gray-400 rounded-full w-8 h-8 flex items-center justify-center border-2 border-black">
@@ -89,12 +89,13 @@ export default function FeaturedWarriors() {
               <div className="absolute inset-0 rounded-full border-4 border-yellow-500 animate-pulse-slow"></div>
               <div className="absolute inset-2 rounded-full border-2 border-yellow-300 animate-pulse-slow animation-delay-500"></div>
               <div className="w-full h-full rounded-full overflow-hidden border-2 border-white">
-                <Image
-                  src={`/abstract-geometric-shapes.png?height=128&width=128&query=${featuredWarriors[0].name} meme character`}
-                  alt={featuredWarriors[0].name}
-                  width={128}
-                  height={128}
-                  className="object-cover"
+                <video
+                  src="https://xsjm-zu7p-vaky.n7.xano.io/vault/lu0MXA_0/LKeGBzheNX8RLw5cHgFW4_DGqyA/aX0TEQ../20250513_1528_Armored_Frog_Adventure_simple_compose_01jv4c4x38ezgb78vt1jf4zh6a.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="absolute -bottom-2 -right-2 bg-yellow-500 rounded-full w-10 h-10 flex items-center justify-center border-2 border-black">
@@ -137,12 +138,13 @@ export default function FeaturedWarriors() {
             <div className="relative mx-auto w-24 h-24 mb-4">
               <div className="absolute inset-0 rounded-full border-2 border-amber-700 animate-pulse-slow"></div>
               <div className="w-full h-full rounded-full overflow-hidden border-2 border-white">
-                <Image
-                  src={`/abstract-geometric-shapes.png?height=96&width=96&query=${featuredWarriors[2].name} meme character`}
-                  alt={featuredWarriors[2].name}
-                  width={96}
-                  height={96}
-                  className="object-cover"
+                <video
+                  src="https://xsjm-zu7p-vaky.n7.xano.io/vault/lu0MXA_0/cTWevwRwJclHIiLLPoRz7kAcLMs/c-bg9Q../20250513_0550_Angry_Armored_Bear_simple_compose_01jv3b2yc4f75afgyyr4s3pzwk.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="absolute -bottom-2 -right-2 bg-amber-700 rounded-full w-8 h-8 flex items-center justify-center border-2 border-black">
