@@ -137,13 +137,14 @@ export default function MemeWarriorDetailPageClient({ params }: Props) {
         {/* Avatar */}
         <div className="relative">
           <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-purple-600 glow-effect">
+            {/* Use a reliable placeholder for the warrior image */}
             <Image
-              src={warrior.image || "/placeholder.svg?height=160&width=160&query=meme character avatar"}
+              src={"/placeholder.svg?height=160&width=160&query=meme character avatar"}
               alt={warrior.name}
               width={160}
               height={160}
               className="object-cover"
-              unoptimized
+              priority
             />
           </div>
           <div className="absolute bottom-0 right-0 bg-yellow-500 text-xs font-pixel px-2 py-1 rounded">
@@ -272,13 +273,13 @@ export default function MemeWarriorDetailPageClient({ params }: Props) {
                 {[1, 2, 3, 4, 5, 6].map((item) => (
                   <div key={item} className="arcade-card overflow-hidden">
                     <div className="aspect-square bg-purple-900/30">
+                      {/* Use placeholder.svg with unique keys for each gallery image */}
                       <Image
-                        src={`/abstract-geometric-shapes.png?key=tgzib&height=300&width=300&query=${warrior.name} meme ${item}`}
+                        src={`/abstract-geometric-shapes.png?height=300&width=300&query=${warrior.name} meme ${item}`}
                         alt={`${warrior.name} gallery image ${item}`}
                         width={300}
                         height={300}
                         className="object-cover w-full h-full"
-                        unoptimized
                       />
                     </div>
                   </div>

@@ -40,13 +40,12 @@ export default function Hero() {
               memeverse!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link href="/play" className="arcade-btn text-white text-lg">
+              <Link href="/play" className="arcade-btn text-white">
                 PLAY NOW
               </Link>
               <Link
                 href="/memewarriors"
-                className="font-pixel px-6 py-3 rounded-md border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/20 transition-colors text-lg"
-              >
+                className="font-pixel px-6 py-3 rounded-md border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/20 transition-colors text-lg">
                 MEET THE WARRIORS
               </Link>
             </div>

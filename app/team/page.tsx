@@ -1,17 +1,16 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
 import Image from "next/image"
 import { Twitter, Linkedin, Github } from "lucide-react"
-import { useRef } from "react"
+import { useRef, useEffect, useState } from "react"
 
 const teamMembers = [
   {
     name: "Alex Johnson",
     role: "Founder & CEO",
     bio: "Former game developer at Epic Games with 10+ years of experience in the gaming industry. Meme enthusiast and blockchain advocate.",
-    image: "/images/team/team1.png",
+    image: "/team-member-one.png",
     social: {
       twitter: "https://twitter.com/alexjohnson",
       linkedin: "https://linkedin.com/in/alexjohnson",
@@ -22,7 +21,7 @@ const teamMembers = [
     name: "Sarah Chen",
     role: "Chief Creative Officer",
     bio: "Award-winning digital artist with a background in character design. Previously worked at Pixar and Blizzard Entertainment.",
-    image: "/images/team/team2.png",
+    image: "/team-member-2.png",
     social: {
       twitter: "https://twitter.com/sarahchen",
       linkedin: "https://linkedin.com/in/sarahchen",
@@ -32,7 +31,7 @@ const teamMembers = [
     name: "Michael Rodriguez",
     role: "CTO",
     bio: "Full-stack developer with expertise in game engines and blockchain technology. Led development teams at Ubisoft and EA.",
-    image: "/images/team/team3.png",
+    image: "/placeholder-3lomi.png",
     social: {
       twitter: "https://twitter.com/michaelrodriguez",
       github: "https://github.com/michaelrodriguez",
@@ -42,7 +41,7 @@ const teamMembers = [
     name: "Emma Wilson",
     role: "Head of Marketing",
     bio: "Digital marketing specialist with experience in gaming and entertainment. Previously led marketing campaigns for major game launches.",
-    image: "/images/team/team4.png",
+    image: "/placeholder-yfr28.png",
     social: {
       twitter: "https://twitter.com/emmawilson",
       linkedin: "https://linkedin.com/in/emmawilson",
@@ -52,7 +51,7 @@ const teamMembers = [
     name: "David Kim",
     role: "Lead Game Designer",
     bio: "Game design veteran with a passion for competitive gameplay. Worked on several top-grossing mobile and PC games.",
-    image: "/images/team/team5.png",
+    image: "/placeholder-zro0j.png",
     social: {
       twitter: "https://twitter.com/davidkim",
       github: "https://github.com/davidkim",
@@ -62,7 +61,7 @@ const teamMembers = [
     name: "Olivia Martinez",
     role: "Community Manager",
     bio: "Social media expert and community builder. Specializes in creating engaging content and fostering active gaming communities.",
-    image: "/images/team/team6.png",
+    image: "/placeholder-t16z6.png",
     social: {
       twitter: "https://twitter.com/oliviamartinez",
       linkedin: "https://linkedin.com/in/oliviamartinez",
@@ -75,7 +74,7 @@ const advisors = [
     name: "Dr. James Wilson",
     role: "Gaming Industry Advisor",
     bio: "Former executive at Nintendo with 20+ years of experience in the gaming industry. Advisor to multiple successful gaming startups.",
-    image: "/images/team/advisor1.png",
+    image: "/placeholder-ee350.png",
     social: {
       linkedin: "https://linkedin.com/in/jameswilson",
     },
@@ -84,7 +83,7 @@ const advisors = [
     name: "Lisa Chang",
     role: "Blockchain Strategist",
     bio: "Blockchain expert and investor. Founder of multiple successful crypto projects and advisor to Web3 gaming platforms.",
-    image: "/images/team/advisor2.png",
+    image: "/placeholder-3a00l.png",
     social: {
       twitter: "https://twitter.com/lisachang",
       linkedin: "https://linkedin.com/in/lisachang",
@@ -96,23 +95,65 @@ export default function Team() {
   const teamRefs = useRef<(HTMLElement | null)[]>([...teamMembers.map(() => null)])
   const advisorRefs = useRef<(HTMLElement | null)[]>([...advisors.map(() => null)])
 
-  const teamInView = teamRefs.current.map((ref) => {
-    const [inView] = useInView({
-      ref,
-      triggerOnce: true,
-      threshold: 0.1,
-    })
-    return inView
-  })
+  const [teamInView, setTeamInView] = useState<boolean[]>(teamMembers.map(() => false))
+  const [advisorInView, setAdvisorInView] = useState<boolean[]>(advisors.map(() => false))
 
-  const advisorInView = advisorRefs.current.map((ref) => {
-    const [inView] = useInView({
-      ref,
-      triggerOnce: true,
-      threshold: 0.1,
+  useEffect(() => {
+    const teamObservers = teamRefs.current.map((ref, index) => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setTeamInView((prev) => {
+                const newState = [...prev]
+                newState[index] = true
+                return newState
+              })
+              observer.unobserve(entry.target)
+            }
+          })
+        },
+        {
+          threshold: 0.1,
+        },
+      )
+
+      if (ref) {
+        observer.observe(ref)
+      }
+      return observer
     })
-    return inView
-  })
+
+    const advisorObservers = advisorRefs.current.map((ref, index) => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setAdvisorInView((prev) => {
+                const newState = [...prev]
+                newState[index] = true
+                return newState
+              })
+              observer.unobserve(entry.target)
+            }
+          })
+        },
+        {
+          threshold: 0.1,
+        },
+      )
+
+      if (ref) {
+        observer.observe(ref)
+      }
+      return observer
+    })
+
+    return () => {
+      teamObservers.forEach((observer) => observer.disconnect())
+      advisorObservers.forEach((observer) => observer.disconnect())
+    }
+  }, [])
 
   return (
     <div className="pt-20">
@@ -154,7 +195,13 @@ export default function Team() {
                   <div className="h-2 bg-gradient-to-r from-pink-500 to-purple-500"></div>
                   <div className="p-6">
                     <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-2 border-pink-500">
-                      <Image src={member.image || "/placeholder.svg"} alt={member.name} fill className="object-cover" />
+                      <Image
+                        src={member.image || "/placeholder.svg"}
+                        alt={member.name}
+                        width={128}
+                        height={128}
+                        className="object-cover"
+                      />
                     </div>
 
                     <h3 className="font-pixel text-white text-xl text-center mb-1">{member.name}</h3>
@@ -231,7 +278,8 @@ export default function Team() {
                       <Image
                         src={advisor.image || "/placeholder.svg"}
                         alt={advisor.name}
-                        fill
+                        width={128}
+                        height={128}
                         className="object-cover"
                       />
                     </div>

@@ -3,7 +3,6 @@
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 
 export default function CTA() {
   const [ref, inView] = useInView({
@@ -27,10 +26,13 @@ export default function CTA() {
             Ready to enter the arena? Join thousands of players in the ultimate meme battle experience!
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button size="lg" className="arcade-btn">
+            <Link href="/play" className="arcade-btn text-white">
               PLAY NOW
-            </Button>
-            <Link href="/memewarriors" className="arcade-btn-outline">
+            </Link>
+            <Link
+              href="/memewarriors"
+              className="font-pixel px-6 py-3 rounded-md border-2 border-white text-white hover:bg-white/10 transition-colors"
+            >
               EXPLORE WARRIORS
             </Link>
           </div>

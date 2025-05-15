@@ -15,6 +15,8 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        cta: "bg-pink-600 text-white hover:bg-pink-700 font-pixel shadow-[0_0_10px_rgba(236,72,153,0.7)] border border-pink-500",
+        ctaOutline: "border-2 border-white text-white bg-transparent hover:bg-white/10 font-pixel",
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -39,7 +41,12 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
-    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+    // Apply pink solid CTA button styles by default
+    const buttonClasses =
+      variant === "default"
+        ? cn(buttonVariants({ variant: "cta", size, className }))
+        : cn(buttonVariants({ variant, size, className }))
+    return <Comp className={buttonClasses} ref={ref} {...props} />
   },
 )
 Button.displayName = "Button"
