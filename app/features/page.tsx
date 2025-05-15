@@ -1,196 +1,95 @@
-"use client"
-
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
+import type { Metadata } from "next"
 import Image from "next/image"
-import { useRef } from "react"
+import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Features | MemeWars",
+  description: "Explore all the features of the MemeWars game",
+}
 
 const features = [
   {
-    title: "COLLECT WARRIORS",
-    description:
-      "Build your collection of meme warriors, each with unique abilities and stats. Upgrade them to increase their power and unlock special abilities.",
-    image: "/images/features/collect-full.png",
-    color: "from-pink-500 to-purple-500",
-    details: [
-      "Over 100 unique warriors to collect",
-      "Rarity system with Common, Rare, Epic, and Legendary warriors",
-      "Fusion system to combine warriors for upgrades",
-      "Limited edition seasonal warriors",
-    ],
-  },
-  {
+    id: "battle",
     title: "BATTLE ARENA",
     description:
-      "Enter the arena and battle against other players in real-time. Use strategy and your warriors' abilities to defeat your opponents and climb the ranks.",
-    image: "/images/features/battle-full.png",
-    color: "from-cyan-500 to-blue-500",
-    details: [
-      "Real-time PvP battles",
-      "Strategic turn-based combat",
-      "Special abilities and combo attacks",
-      "Different arena environments with unique effects",
-    ],
+      "Enter the Battle Arena and fight against other players in real-time. Use your MemeWarriors' unique abilities to outsmart and defeat your opponents. Climb the ranks and become the ultimate Meme Champion!",
+    image: "/placeholder-574wk.png",
+    color: "from-blue-600 to-cyan-400",
   },
   {
+    id: "rewards",
     title: "EARN REWARDS",
     description:
-      "Complete quests, win battles, and participate in events to earn rewards. Use your earnings to expand your collection and upgrade your warriors.",
-    image: "/images/features/rewards-full.png",
+      "Complete daily quests, win battles, and participate in events to earn tokens and rare collectibles. The more you play, the more you earn. Use your rewards to upgrade your warriors or trade them with other players.",
+    image: "/placeholder-15rvz.png",
     color: "from-yellow-500 to-orange-500",
-    details: [
-      "Daily and weekly quests with escalating rewards",
-      "Battle pass with premium rewards",
-      "Achievement system with milestone bonuses",
-      "Special event rewards and limited-time offers",
-    ],
   },
   {
-    title: "JOIN TOURNAMENTS",
+    id: "tournaments",
+    title: "TOURNAMENTS",
     description:
-      "Compete in weekly tournaments with players from around the world. Prove your skills and win exclusive rewards and recognition.",
-    image: "/images/features/tournament-full.png",
+      "Join weekly tournaments with massive prize pools. Compete against the best players and showcase your skills. Each tournament has unique rules and restrictions, keeping the competition fresh and exciting.",
+    image: "/placeholder-virgk.png",
     color: "from-green-500 to-emerald-500",
-    details: [
-      "Weekly tournaments with different formats",
-      "Monthly championship with major prizes",
-      "Clan tournaments for team competition",
-      "Spectator mode to watch top players compete",
-    ],
   },
   {
-    title: "SOCIAL INTEGRATION",
+    id: "social",
+    title: "SOCIAL FEATURES",
     description:
-      "Connect with friends, join clans, and share your achievements on social media. Build a community and collaborate with other players.",
-    image: "/images/features/social-full.png",
-    color: "from-red-500 to-pink-500",
-    details: [
-      "Friend system with battle invitations",
-      "Clan creation and management",
-      "In-game chat and messaging",
-      "Social media sharing for achievements",
-    ],
+      "Join guilds, make friends, and chat with other players. Collaborate with your guild members to complete guild quests and earn exclusive rewards. The stronger your guild, the greater the rewards!",
+    image: "/placeholder-a7kj9.png",
+    color: "from-purple-600 to-pink-500",
   },
   {
+    id: "marketplace",
     title: "MARKETPLACE",
     description:
-      "Trade warriors with other players in the marketplace. Find rare warriors to complete your collection or sell your extras for profit.",
-    image: "/images/features/marketplace-full.png",
-    color: "from-indigo-500 to-purple-500",
-    details: [
-      "Peer-to-peer trading system",
-      "Auction house for rare warriors",
-      "Limited edition sales events",
-      "Warrior valuation system",
-    ],
+      "Buy, sell, and trade your MemeWarriors and items in the Marketplace. Find rare warriors to complete your collection or sell your duplicates for profit. The marketplace is player-driven, with prices determined by supply and demand.",
+    image: "/placeholder-jh0dj.png",
+    color: "from-red-600 to-pink-500",
   },
 ]
 
-export default function Features() {
-  const refs = features.map(() => useRef(null))
-  const inViewStates = features.map((_, index) => {
-    const [ref, inView] = useInView({
-      triggerOnce: true,
-      threshold: 0.1,
-    })
-    refs[index].current = ref
-    return inView
-  })
-
+export default function FeaturesPage() {
   return (
-    <div className="pt-20">
-      {/* Hero section */}
-      <section className="py-20 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-900 to-purple-800 z-0"></div>
-        <div className="absolute inset-0 retro-grid opacity-20 z-0"></div>
+    <div className="container mx-auto px-4 py-16">
+      <div className="text-center mb-16">
+        <h1 className="text-4xl md:text-5xl font-pixel mb-4 neon-text">GAME FEATURES</h1>
+        <p className="text-lg max-w-3xl mx-auto">
+          Explore all the exciting features that make MemeWars the ultimate meme gaming experience
+        </p>
+      </div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
-            <h1 className="font-pixel text-4xl md:text-5xl text-white mb-6 neon-text">GAME FEATURES</h1>
-            <p className="text-gray-300 max-w-2xl mx-auto text-lg">
-              Explore all the exciting features that make MemeWars the ultimate meme battle arena experience.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Features sections */}
-      {features.map((feature, index) => {
-        const inView = inViewStates[index]
-        const ref = refs[index]
-
-        return (
-          <section
-            key={index}
-            ref={ref}
-            className={`py-20 relative ${index % 2 === 0 ? "bg-purple-900/50" : "bg-purple-800/50"}`}
+      <div className="space-y-24">
+        {features.map((feature, index) => (
+          <div
+            key={feature.id}
+            className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-8 items-center`}
           >
-            <div className="container mx-auto px-4 relative z-10">
-              <div
-                className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-12`}
-              >
-                <motion.div
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5 }}
-                  className="md:w-1/2"
-                >
-                  <div className="relative h-64 md:h-96 w-full">
-                    <Image
-                      src={feature.image || "/placeholder.svg"}
-                      alt={feature.title}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5 }}
-                  className="md:w-1/2"
-                >
-                  <div className={`h-2 w-32 bg-gradient-to-r ${feature.color} mb-6`}></div>
-                  <h2 className="font-pixel text-3xl text-white mb-4">{feature.title}</h2>
-                  <p className="text-gray-300 mb-6">{feature.description}</p>
-
-                  <div className="arcade-card p-6">
-                    <h3 className="font-pixel text-white text-lg mb-4">Key Features</h3>
-                    <ul className="space-y-2">
-                      {feature.details.map((detail, i) => (
-                        <li key={i} className="flex items-start">
-                          <span className="text-pink-500 mr-2">•</span>
-                          <span className="text-gray-300">{detail}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
+            <div className="w-full md:w-1/2">
+              <div className="arcade-card overflow-hidden">
+                <div className={`h-2 bg-gradient-to-r ${feature.color}`}></div>
+                <div className="p-4">
+                  <Image
+                    src={feature.image || "/placeholder.svg"}
+                    alt={feature.title}
+                    width={800}
+                    height={450}
+                    className="rounded-lg"
+                  />
+                </div>
               </div>
             </div>
-          </section>
-        )
-      })}
-
-      {/* CTA section */}
-      <section className="py-20 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-900 to-purple-950 z-0"></div>
-        <div className="absolute inset-0 retro-grid opacity-20 z-0"></div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-pixel text-3xl md:text-4xl text-white mb-6 neon-text">READY TO EXPERIENCE MEMEWARS?</h2>
-            <p className="text-gray-300 mb-8">
-              Join thousands of players already battling in the arena. Create your account now and get a free starter
-              pack!
-            </p>
-            <a href="/play" className="arcade-btn text-white text-lg inline-block">
-              PLAY NOW
-            </a>
+            <div className="w-full md:w-1/2">
+              <h2 className="text-3xl font-pixel mb-4 neon-text">{feature.title}</h2>
+              <p className="text-gray-300 mb-6">{feature.description}</p>
+              <Link href={`/${feature.id}`} className="arcade-btn inline-block text-white">
+                EXPLORE {feature.title}
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
     </div>
   )
 }

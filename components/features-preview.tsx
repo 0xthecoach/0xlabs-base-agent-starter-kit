@@ -10,25 +10,25 @@ const features = [
   {
     title: "COLLECT WARRIORS",
     description: "Collect and upgrade your favorite meme characters",
-    icon: "/images/features/collect.png",
+    icon: "/placeholder-dwcha.png",
     color: "from-pink-500 to-purple-500",
   },
   {
     title: "BATTLE ARENA",
     description: "Compete in real-time battles against other players",
-    icon: "/images/features/battle.png",
+    icon: "/placeholder-pdh3p.png",
     color: "from-cyan-500 to-blue-500",
   },
   {
     title: "EARN REWARDS",
     description: "Complete quests and climb the leaderboard for prizes",
-    icon: "/images/features/rewards.png",
+    icon: "/placeholder.svg?height=64&width=64&query=rewards icon",
     color: "from-yellow-500 to-orange-500",
   },
   {
     title: "JOIN TOURNAMENTS",
     description: "Participate in weekly tournaments with massive prizes",
-    icon: "/images/features/tournament.png",
+    icon: "/placeholder.svg?height=64&width=64&query=tournament icon",
     color: "from-green-500 to-emerald-500",
   },
 ]
