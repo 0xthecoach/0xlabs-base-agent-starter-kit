@@ -225,6 +225,7 @@ export const questsData = [
     icon: "/placeholder-rgunh.png",
     progress: 60,
     timeLeft: "14 hours",
+    completions: 1250,
   },
   {
     id: "win-streak",
@@ -235,6 +236,7 @@ export const questsData = [
     icon: "/placeholder-80j8m.png",
     progress: 40,
     timeLeft: "Ongoing",
+    completions: 850,
   },
   {
     id: "legendary-hunt",
@@ -245,6 +247,7 @@ export const questsData = [
     icon: "/placeholder-lym2g.png",
     progress: 0,
     timeLeft: "Ongoing",
+    completions: 320,
   },
   {
     id: "token-collector",
@@ -252,9 +255,10 @@ export const questsData = [
     description: "Collect 5,000 $MEME tokens",
     reward: "Exclusive Warrior Skin",
     difficulty: "Medium",
-    icon: "/placeholder.svg?height=50&width=50&query=token collector icon",
+    icon: "/placeholder-78bjx.png",
     progress: 75,
     timeLeft: "Ongoing",
+    completions: 430,
   },
   {
     id: "social-butterfly",
@@ -262,9 +266,10 @@ export const questsData = [
     description: "Refer 3 friends to join MemeWars",
     reward: "1,500 $MEME + Exclusive Title",
     difficulty: "Easy",
-    icon: "/placeholder.svg?height=50&width=50&query=social butterfly icon",
+    icon: "/placeholder-afbzd.png",
     progress: 33,
     timeLeft: "Ongoing",
+    completions: 2100,
   },
   {
     id: "tournament-champion",
@@ -272,9 +277,10 @@ export const questsData = [
     description: "Reach the finals in a weekly tournament",
     reward: "5,000 $MEME + Legendary Item",
     difficulty: "Hard",
-    icon: "/placeholder.svg?height=50&width=50&query=tournament champion icon",
+    icon: "/placeholder-sacyq.png",
     progress: 10,
     timeLeft: "5 days",
+    completions: 75,
   },
 ]
 

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
 }
 
 export default function QuestsPage() {
+  // Create a safe version of questsData with fallbacks
+  const safeQuestsData = questsData || []
+
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="text-center mb-12">
@@ -74,14 +77,14 @@ export default function QuestsPage() {
 
       {/* Quests Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {questsData.map((quest) => (
+        {safeQuestsData.map((quest) => (
           <div key={quest.id} className="arcade-card overflow-hidden">
             <div className="flex flex-col sm:flex-row">
               {/* Quest Icon */}
               <div className="w-full sm:w-1/4 bg-gradient-to-br from-purple-900/50 to-pink-900/50 p-4 flex items-center justify-center">
                 <Image
                   src={quest.icon || "/placeholder.svg?height=80&width=80&query=quest icon"}
-                  alt={quest.title}
+                  alt={quest.title || "Quest"}
                   width={80}
                   height={80}
                   className="object-contain"
@@ -91,7 +94,7 @@ export default function QuestsPage() {
               {/* Quest Details */}
               <div className="w-full sm:w-3/4 p-4">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-pixel text-lg text-white">{quest.title}</h3>
+                  <h3 className="font-pixel text-lg text-white">{quest.title || "Quest Title"}</h3>
                   <span
                     className={`font-pixel text-xs px-2 py-1 rounded ${
                       quest.difficulty === "Easy"
@@ -103,39 +106,54 @@ export default function QuestsPage() {
                             : "bg-red-500/80"
                     }`}
                   >
-                    {quest.difficulty}
+                    {quest.difficulty || "Unknown"}
                   </span>
                 </div>
-                <p className="text-gray-300 text-sm mb-3">{quest.description}</p>
+                <p className="text-gray-300 text-sm mb-3">{quest.description || "No description available"}</p>
 
                 <div className="grid grid-cols-2 gap-2 text-xs mb-3">
                   <div className="bg-black/30 p-2 rounded">
                     <span className="text-pink-300">TIME LIMIT</span>
-                    <span className="text-white block">{quest.timeLimit}</span>
+                    <span className="text-white block">{quest.timeLeft || "N/A"}</span>
                   </div>
                   <div className="bg-black/30 p-2 rounded">
                     <span className="text-pink-300">COMPLETIONS</span>
-                    <span className="text-white block">{quest.completions.toLocaleString()} players</span>
+                    <span className="text-white block">
+                      {typeof quest.completions === "number" ? quest.completions.toLocaleString() : "0"} players
+                    </span>
                   </div>
                 </div>
 
                 <div className="mb-3">
                   <h4 className="font-pixel text-sm mb-1 text-pink-300">REWARDS</h4>
                   <div className="flex flex-wrap gap-2">
-                    <div className="bg-black/30 px-2 py-1 rounded text-xs flex items-center">
-                      <span className="text-cyan-400 mr-1">XP</span>
-                      <span className="text-white">{quest.reward.xp}</span>
-                    </div>
-                    <div className="bg-black/30 px-2 py-1 rounded text-xs flex items-center">
-                      <span className="text-yellow-400 mr-1">Coins</span>
-                      <span className="text-white">{quest.reward.coins}</span>
-                    </div>
-                    {quest.reward.items.map((item, index) => (
-                      <div key={index} className="bg-black/30 px-2 py-1 rounded text-xs flex items-center">
-                        <span className="text-purple-400 mr-1">Item</span>
-                        <span className="text-white">{item}</span>
+                    {quest.reward && typeof quest.reward === "object" && quest.reward.xp && (
+                      <div className="bg-black/30 px-2 py-1 rounded text-xs flex items-center">
+                        <span className="text-cyan-400 mr-1">XP</span>
+                        <span className="text-white">{quest.reward.xp}</span>
                       </div>
-                    ))}
+                    )}
+                    {quest.reward && typeof quest.reward === "object" && quest.reward.coins && (
+                      <div className="bg-black/30 px-2 py-1 rounded text-xs flex items-center">
+                        <span className="text-yellow-400 mr-1">Coins</span>
+                        <span className="text-white">{quest.reward.coins}</span>
+                      </div>
+                    )}
+                    {quest.reward &&
+                      typeof quest.reward === "object" &&
+                      quest.reward.items &&
+                      Array.isArray(quest.reward.items) &&
+                      quest.reward.items.map((item, index) => (
+                        <div key={index} className="bg-black/30 px-2 py-1 rounded text-xs flex items-center">
+                          <span className="text-purple-400 mr-1">Item</span>
+                          <span className="text-white">{item}</span>
+                        </div>
+                      ))}
+                    {quest.reward && typeof quest.reward === "string" && (
+                      <div className="bg-black/30 px-2 py-1 rounded text-xs flex items-center">
+                        <span className="text-white">{quest.reward}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
 
