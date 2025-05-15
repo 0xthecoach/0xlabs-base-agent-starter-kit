@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ConnectWalletButton } from "./connect-wallet-button"
+import { ConnectWalletButton } from "./thirdweb/connect-wallet-button"
 
 export default function Navbar() {
   return (
