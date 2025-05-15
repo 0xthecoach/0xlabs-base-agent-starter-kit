@@ -4,6 +4,7 @@ import LeaderboardPreview from "@/components/leaderboard-preview"
 import QuestsPreview from "@/components/quests-preview"
 import FeaturesPreview from "@/components/features-preview"
 import CTA from "@/components/cta"
+import LogoCloud from "@/components/logo-cloud"
 
 export default function Home() {
   return (
@@ -53,6 +54,9 @@ export default function Home() {
 
       {/* Quests Preview */}
       <QuestsPreview />
+
+      {/* Logo Cloud - Added before CTA */}
+      <LogoCloud />
 
       {/* CTA Section */}
       <CTA />

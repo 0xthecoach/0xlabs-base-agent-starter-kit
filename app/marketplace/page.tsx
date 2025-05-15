@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Image from "next/image"
+import { PageHeader } from "@/components/page-header"
 
 export const metadata: Metadata = {
   title: "Marketplace | MemeWars",
@@ -104,171 +105,175 @@ const marketplaceItems = [
 
 export default function MarketplacePage() {
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-pixel mb-4 neon-text">MARKETPLACE</h1>
-        <p className="text-lg max-w-3xl mx-auto">
-          Buy, sell, and trade MemeWarriors and items to build your ultimate collection and dominate the battlefield!
-        </p>
-      </div>
+    <div>
+      <PageHeader
+        title="MARKETPLACE"
+        description="Buy, sell, and trade MemeWarriors and items to build your ultimate collection and dominate the battlefield!"
+        backgroundImage="/images/header-background-marketplace.png"
+      />
 
-      {/* Marketplace Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-        <div className="arcade-card p-6 text-center">
-          <h3 className="font-pixel text-xl mb-2 text-pink-400">ACTIVE LISTINGS</h3>
-          <p className="font-pixel text-3xl text-white">1,248</p>
-        </div>
-        <div className="arcade-card p-6 text-center">
-          <h3 className="font-pixel text-xl mb-2 text-pink-400">WARRIORS TRADED</h3>
-          <p className="font-pixel text-3xl text-white">8,721</p>
-        </div>
-        <div className="arcade-card p-6 text-center">
-          <h3 className="font-pixel text-xl mb-2 text-pink-400">ITEMS TRADED</h3>
-          <p className="font-pixel text-3xl text-white">15,432</p>
-        </div>
-        <div className="arcade-card p-6 text-center">
-          <h3 className="font-pixel text-xl mb-2 text-pink-400">YOUR BALANCE</h3>
-          <p className="font-pixel text-3xl text-white">25,000</p>
-        </div>
-      </div>
-
-      {/* Marketplace Actions */}
-      <div className="flex flex-wrap gap-4 mb-8">
-        <button className="arcade-btn text-white">MY LISTINGS</button>
-        <button className="arcade-btn text-white">SELL WARRIOR</button>
-        <button className="arcade-btn text-white">SELL ITEM</button>
-        <button className="arcade-btn text-white">TRANSACTION HISTORY</button>
-      </div>
-
-      {/* Filters */}
-      <div className="arcade-card p-4 mb-8">
-        <div className="flex flex-wrap gap-4 justify-between">
-          <div className="flex items-center">
-            <span className="text-white mr-2 font-pixel">TYPE:</span>
-            <select className="bg-black/50 text-white border border-pink-500 rounded px-3 py-2">
-              <option value="all">All</option>
-              <option value="warriors">Warriors</option>
-              <option value="items">Items</option>
-            </select>
+      <div className="container mx-auto px-4 py-16">
+        {/* Marketplace Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+          <div className="arcade-card p-6 text-center">
+            <h3 className="font-pixel text-xl mb-2 text-pink-400">ACTIVE LISTINGS</h3>
+            <p className="font-pixel text-3xl text-white">1,248</p>
           </div>
-          <div className="flex items-center">
-            <span className="text-white mr-2 font-pixel">RARITY:</span>
-            <select className="bg-black/50 text-white border border-pink-500 rounded px-3 py-2">
-              <option value="all">All</option>
-              <option value="legendary">Legendary</option>
-              <option value="epic">Epic</option>
-              <option value="rare">Rare</option>
-              <option value="common">Common</option>
-            </select>
+          <div className="arcade-card p-6 text-center">
+            <h3 className="font-pixel text-xl mb-2 text-pink-400">WARRIORS TRADED</h3>
+            <p className="font-pixel text-3xl text-white">8,721</p>
           </div>
-          <div className="flex items-center">
-            <span className="text-white mr-2 font-pixel">SORT BY:</span>
-            <select className="bg-black/50 text-white border border-pink-500 rounded px-3 py-2">
-              <option value="newest">Newest</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="rarity">Rarity</option>
-              <option value="power">Power (Warriors)</option>
-            </select>
+          <div className="arcade-card p-6 text-center">
+            <h3 className="font-pixel text-xl mb-2 text-pink-400">ITEMS TRADED</h3>
+            <p className="font-pixel text-3xl text-white">15,432</p>
           </div>
-          <div className="flex items-center">
-            <input
-              type="text"
-              placeholder="Search marketplace..."
-              className="bg-black/50 text-white border border-pink-500 rounded px-3 py-2 w-full"
-            />
+          <div className="arcade-card p-6 text-center">
+            <h3 className="font-pixel text-xl mb-2 text-pink-400">YOUR BALANCE</h3>
+            <p className="font-pixel text-3xl text-white">25,000</p>
           </div>
         </div>
-      </div>
 
-      {/* Marketplace Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {marketplaceItems.map((item) => (
-          <div key={item.id} className="arcade-card hover:scale-105 transition-transform duration-300 overflow-hidden">
-            <div className="relative h-64 bg-gradient-to-b from-purple-900/50 to-pink-900/50">
-              <div className="absolute top-2 right-2 z-10">
-                <span
-                  className={`font-pixel text-xs px-2 py-1 rounded ${
-                    item.rarity === "Legendary"
-                      ? "bg-yellow-500/80"
-                      : item.rarity === "Epic"
-                        ? "bg-purple-500/80"
-                        : "bg-blue-500/80"
-                  }`}
-                >
-                  {item.rarity}
-                </span>
-              </div>
-              <div className="absolute top-2 left-2 z-10">
-                <span className="font-pixel text-xs px-2 py-1 rounded bg-pink-500/80">
-                  {item.type === "warrior" ? "WARRIOR" : "ITEM"}
-                </span>
-              </div>
-              <Image
-                src={item.image || "/placeholder.svg"}
-                alt={item.name}
-                width={300}
-                height={300}
-                className="object-contain h-full w-full p-4"
+        {/* Marketplace Actions */}
+        <div className="flex flex-wrap gap-4 mb-8">
+          <button className="arcade-btn text-white">MY LISTINGS</button>
+          <button className="arcade-btn text-white">SELL WARRIOR</button>
+          <button className="arcade-btn text-white">SELL ITEM</button>
+          <button className="arcade-btn text-white">TRANSACTION HISTORY</button>
+        </div>
+
+        {/* Filters */}
+        <div className="arcade-card p-4 mb-8">
+          <div className="flex flex-wrap gap-4 justify-between">
+            <div className="flex items-center">
+              <span className="text-white mr-2 font-pixel">TYPE:</span>
+              <select className="bg-black/50 text-white border border-pink-500 rounded px-3 py-2">
+                <option value="all">All</option>
+                <option value="warriors">Warriors</option>
+                <option value="items">Items</option>
+              </select>
+            </div>
+            <div className="flex items-center">
+              <span className="text-white mr-2 font-pixel">RARITY:</span>
+              <select className="bg-black/50 text-white border border-pink-500 rounded px-3 py-2">
+                <option value="all">All</option>
+                <option value="legendary">Legendary</option>
+                <option value="epic">Epic</option>
+                <option value="rare">Rare</option>
+                <option value="common">Common</option>
+              </select>
+            </div>
+            <div className="flex items-center">
+              <span className="text-white mr-2 font-pixel">SORT BY:</span>
+              <select className="bg-black/50 text-white border border-pink-500 rounded px-3 py-2">
+                <option value="newest">Newest</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rarity">Rarity</option>
+                <option value="power">Power (Warriors)</option>
+              </select>
+            </div>
+            <div className="flex items-center">
+              <input
+                type="text"
+                placeholder="Search marketplace..."
+                className="bg-black/50 text-white border border-pink-500 rounded px-3 py-2 w-full"
               />
             </div>
-            <div className="p-4 border-t-2 border-pink-500/50">
-              <h3 className="font-pixel text-xl mb-2 text-center">{item.name}</h3>
+          </div>
+        </div>
 
-              {item.type === "warrior" ? (
-                <div className="grid grid-cols-2 gap-2 text-sm mb-4">
-                  <div className="flex flex-col items-center bg-black/30 p-2 rounded">
-                    <span className="text-pink-300">LEVEL</span>
-                    <span className="font-pixel text-white">{item.level}</span>
-                  </div>
-                  <div className="flex flex-col items-center bg-black/30 p-2 rounded">
-                    <span className="text-pink-300">POWER</span>
-                    <span className="font-pixel text-white">{item.power}</span>
-                  </div>
+        {/* Marketplace Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {marketplaceItems.map((item) => (
+            <div
+              key={item.id}
+              className="arcade-card hover:scale-105 transition-transform duration-300 overflow-hidden"
+            >
+              <div className="relative h-64 bg-gradient-to-b from-purple-900/50 to-pink-900/50">
+                <div className="absolute top-2 right-2 z-10">
+                  <span
+                    className={`font-pixel text-xs px-2 py-1 rounded ${
+                      item.rarity === "Legendary"
+                        ? "bg-yellow-500/80"
+                        : item.rarity === "Epic"
+                          ? "bg-purple-500/80"
+                          : "bg-blue-500/80"
+                    }`}
+                  >
+                    {item.rarity}
+                  </span>
                 </div>
-              ) : (
-                <div className="bg-black/30 p-2 rounded mb-4 text-center">
-                  <span className="text-pink-300">BOOST</span>
-                  <span className="font-pixel text-white block">{item.boost}</span>
+                <div className="absolute top-2 left-2 z-10">
+                  <span className="font-pixel text-xs px-2 py-1 rounded bg-pink-500/80">
+                    {item.type === "warrior" ? "WARRIOR" : "ITEM"}
+                  </span>
                 </div>
-              )}
-
-              <div className="flex justify-between items-center mb-4">
-                <div>
-                  <span className="text-gray-400 text-xs">Seller:</span>
-                  <span className="text-white text-xs ml-1">{item.seller}</span>
-                </div>
-                <div>
-                  <span className="text-gray-400 text-xs">Listed:</span>
-                  <span className="text-white text-xs ml-1">{item.listed}</span>
-                </div>
+                <Image
+                  src={item.image || "/placeholder.svg"}
+                  alt={item.name}
+                  width={300}
+                  height={300}
+                  className="object-contain h-full w-full p-4"
+                />
               </div>
+              <div className="p-4 border-t-2 border-pink-500/50">
+                <h3 className="font-pixel text-xl mb-2 text-center">{item.name}</h3>
 
-              <div className="flex justify-between items-center">
-                <div className="font-pixel text-xl text-yellow-400">{item.price}</div>
-                <button className="arcade-btn text-white text-sm">BUY NOW</button>
+                {item.type === "warrior" ? (
+                  <div className="grid grid-cols-2 gap-2 text-sm mb-4">
+                    <div className="flex flex-col items-center bg-black/30 p-2 rounded">
+                      <span className="text-pink-300">LEVEL</span>
+                      <span className="font-pixel text-white">{item.level}</span>
+                    </div>
+                    <div className="flex flex-col items-center bg-black/30 p-2 rounded">
+                      <span className="text-pink-300">POWER</span>
+                      <span className="font-pixel text-white">{item.power}</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-black/30 p-2 rounded mb-4 text-center">
+                    <span className="text-pink-300">BOOST</span>
+                    <span className="font-pixel text-white block">{item.boost}</span>
+                  </div>
+                )}
+
+                <div className="flex justify-between items-center mb-4">
+                  <div>
+                    <span className="text-gray-400 text-xs">Seller:</span>
+                    <span className="text-white text-xs ml-1">{item.seller}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-400 text-xs">Listed:</span>
+                    <span className="text-white text-xs ml-1">{item.listed}</span>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <div className="font-pixel text-xl text-yellow-400">{item.price}</div>
+                  <button className="arcade-btn text-white text-sm">BUY NOW</button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      {/* Pagination */}
-      <div className="flex justify-center mt-8">
-        <div className="flex space-x-2">
-          <button className="w-8 h-8 flex items-center justify-center font-pixel text-white bg-pink-600 rounded">
-            1
-          </button>
-          <button className="w-8 h-8 flex items-center justify-center font-pixel text-white bg-black/30 rounded border border-pink-500/30 hover:bg-pink-900/30">
-            2
-          </button>
-          <button className="w-8 h-8 flex items-center justify-center font-pixel text-white bg-black/30 rounded border border-pink-500/30 hover:bg-pink-900/30">
-            3
-          </button>
-          <span className="w-8 h-8 flex items-center justify-center font-pixel text-white">...</span>
-          <button className="w-8 h-8 flex items-center justify-center font-pixel text-white bg-black/30 rounded border border-pink-500/30 hover:bg-pink-900/30">
-            10
-          </button>
+        {/* Pagination */}
+        <div className="flex justify-center mt-8">
+          <div className="flex space-x-2">
+            <button className="w-8 h-8 flex items-center justify-center font-pixel text-white bg-pink-600 rounded">
+              1
+            </button>
+            <button className="w-8 h-8 flex items-center justify-center font-pixel text-white bg-black/30 rounded border border-pink-500/30 hover:bg-pink-900/30">
+              2
+            </button>
+            <button className="w-8 h-8 flex items-center justify-center font-pixel text-white bg-black/30 rounded border border-pink-500/30 hover:bg-pink-900/30">
+              3
+            </button>
+            <span className="w-8 h-8 flex items-center justify-center font-pixel text-white">...</span>
+            <button className="w-8 h-8 flex items-center justify-center font-pixel text-white bg-black/30 rounded border border-pink-500/30 hover:bg-pink-900/30">
+              10
+            </button>
+          </div>
         </div>
       </div>
     </div>

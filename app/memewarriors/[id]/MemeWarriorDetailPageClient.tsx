@@ -238,7 +238,7 @@ export default function MemeWarriorDetailPageClient({ params }: Props) {
                 >
                   {step.completed && <CheckCircle2 className="w-4 h-4 text-white" />}
                 </div>
-                <div className="text-xs text-center mt-2 max-w-[80px]">{step.name}</div>
+                <div className="text-xs text-center mt-2 max-w-[80px] text-white">{step.name}</div>
               </div>
             ))}
           </div>

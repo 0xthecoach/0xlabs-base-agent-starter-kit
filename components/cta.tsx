@@ -12,9 +12,19 @@ export default function CTA() {
 
   return (
     <section className="py-20 relative" ref={ref}>
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900 to-purple-800 z-0"></div>
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/80 to-purple-800/80 z-10"></div>
+        <div
+          className="absolute inset-0 bg-cover bg-center z-0"
+          style={{
+            backgroundImage: "url('/images/cta-background.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        ></div>
+      </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
