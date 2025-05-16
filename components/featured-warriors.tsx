@@ -26,7 +26,8 @@ export default function FeaturedWarriors() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="font-pixel text-4xl text-white mb-6 neon-text">FEATURED WARRIORS</h2>
+          <h2 className="font-pixel text-4xl text-white mb-1 neon-text">LAST BATTLE RESULTS</h2>
+          <div className="font-pixel text-lg text-cyan-400 mb-6">12 MINS AGO</div>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Meet the most powerful meme warriors in the arena. Each warrior has unique abilities and stats.
           </p>

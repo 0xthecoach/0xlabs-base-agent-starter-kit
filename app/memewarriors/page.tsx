@@ -1,61 +1,185 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import Image from "next/image"
 import Link from "next/link"
-import { memeWarriors } from "@/lib/data"
-import { Search, Filter, ChevronDown } from "lucide-react"
+import { Search, Filter, ChevronDown, Twitter, Globe } from "lucide-react"
 import { PageHeader } from "@/components/page-header"
+import { Badge } from "@/components/ui/badge"
+
+// Define the type for the actual API response
+interface TwitterAccount {
+  id: number
+  created_at: number
+  project_id: number
+  memewars_profile_id: number // Added this field
+  Type_Account: string
+  Username: string
+  Account_Name: string
+  Bio: string
+  Platform: string
+  Profile_Link: string
+  Followers: number // Added this field
+  Following: number // Added this field
+  location_link: string
+  website: string
+  Joined: string
+  Last_Sync: number
+  avatar_url_: string
+  cover_image_url: string
+}
 
 export default function MemeWarriorsPage() {
+  const [accounts, setAccounts] = useState<TwitterAccount[]>([])
+  const [filteredAccounts, setFilteredAccounts] = useState<TwitterAccount[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [searchTerm, setSearchTerm] = useState("")
   const [filterOpen, setFilterOpen] = useState(false)
   const [filters, setFilters] = useState({
-    rarity: "All",
-    class: "All",
-    minLevel: 0,
-    maxLevel: 100,
+    platform: "All",
+    minFollowers: 0,
+    maxFollowers: 1000000,
   })
 
-  // Filter warriors based on search and filters
-  const filteredWarriors = memeWarriors.filter((warrior) => {
-    // Search filter
-    if (
-      searchTerm &&
-      !warrior.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !warrior.description.toLowerCase().includes(searchTerm.toLowerCase())
-    ) {
-      return false
+  // Fetch data from the API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true)
+        const response = await fetch("https://xsjm-zu7p-vaky.n7.xano.io/api:ZETcPNiq/mwars_linked_accounts")
+
+        if (!response.ok) {
+          throw new Error(`API request failed with status ${response.status}`)
+        }
+
+        const data = await response.json()
+        console.log("API response:", data)
+        setAccounts(data)
+        setFilteredAccounts(data)
+        setIsLoading(false)
+      } catch (err) {
+        console.error("Error fetching data:", err)
+        setError(err instanceof Error ? err.message : "An unknown error occurred")
+        setIsLoading(false)
+      }
     }
 
-    // Rarity filter
-    if (filters.rarity !== "All" && warrior.rarity !== filters.rarity) {
-      return false
+    fetchData()
+  }, [])
+
+  // Filter accounts based on search and filters
+  useEffect(() => {
+    if (accounts.length === 0) return
+
+    const filtered = accounts.filter((account) => {
+      // Search filter
+      if (
+        searchTerm &&
+        !account.Account_Name?.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        !account.Username?.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        !account.Bio?.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
+        return false
+      }
+
+      // Platform filter
+      if (filters.platform !== "All" && account.Platform !== filters.platform) {
+        return false
+      }
+
+      // For followers filter, use actual Followers if available, otherwise use generated value
+      const followerCount = account.Followers || getRandomFollowers(account.id)
+      if (followerCount < filters.minFollowers || followerCount > filters.maxFollowers) {
+        return false
+      }
+
+      return true
+    })
+
+    setFilteredAccounts(filtered)
+  }, [searchTerm, filters, accounts])
+
+  // Generate consistent random numbers for followers based on id
+  const getRandomFollowers = (id: number): number => {
+    // Use the id as a seed to get consistent random numbers
+    const seed = id * 1000
+    return seed + Math.floor((Math.sin(id) + 1) * 5000)
+  }
+
+  // Generate random numbers for engagement metrics
+  const getRandomMetrics = (account: TwitterAccount) => {
+    const followers = account.Followers || getRandomFollowers(account.id)
+    const following = account.Following || Math.floor(followers * 0.3 + account.id * 10)
+
+    return {
+      followers,
+      following,
+      tweets: Math.floor(followers * 0.2 + account.id * 5),
+      replies: Math.floor(followers * 0.05 + account.id),
+      retweets: Math.floor(followers * 0.1 + account.id * 2),
+      likes: Math.floor(followers * 0.15 + account.id * 3),
+      views: followers * 5 + account.id * 100,
     }
+  }
 
-    // Class filter
-    if (filters.class !== "All" && warrior.class !== filters.class) {
-      return false
+  // Format number with k, M suffix
+  const formatNumber = (num: number): string => {
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + "M"
     }
-
-    // Level filter
-    if (warrior.level < filters.minLevel || warrior.level > filters.maxLevel) {
-      return false
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + "K"
     }
+    return num.toString()
+  }
 
-    return true
-  })
+  // Format date to relative time
+  const formatDate = (timestamp: number): string => {
+    try {
+      const date = new Date(timestamp)
+      if (isNaN(date.getTime())) {
+        return "Invalid date"
+      }
 
-  // Get unique rarities and classes for filter options
-  const rarities = ["All", ...new Set(memeWarriors.map((warrior) => warrior.rarity))]
-  const classes = ["All", ...new Set(memeWarriors.map((warrior) => warrior.class))]
+      const now = new Date()
+      const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000)
+
+      if (diffInSeconds < 60) {
+        return `${diffInSeconds}s`
+      }
+
+      const diffInMinutes = Math.floor(diffInSeconds / 60)
+      if (diffInMinutes < 60) {
+        return `${diffInMinutes}m`
+      }
+
+      const diffInHours = Math.floor(diffInMinutes / 60)
+      if (diffInHours < 24) {
+        return `${diffInHours}h`
+      }
+
+      const diffInDays = Math.floor(diffInHours / 24)
+      if (diffInDays < 30) {
+        return `${diffInDays}d`
+      }
+
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+      return `${months[date.getMonth()]} ${date.getDate()}`
+    } catch (error) {
+      console.error("Error formatting date:", error)
+      return "Unknown"
+    }
+  }
+
+  // Get unique platforms for filter options
+  const platforms = ["All", ...new Set(accounts.map((account) => account.Platform).filter(Boolean))]
 
   return (
     <div>
       <PageHeader
         title="MEME WARRIORS"
-        description="Discover and collect the most powerful meme warriors in the metaverse. Each warrior has unique abilities, stats, and a backstory."
+        description="Discover and connect with the most powerful meme warriors in the metaverse. Each warrior has a unique social presence and influence."
       />
 
       <div className="container mx-auto px-4 py-16">
@@ -69,7 +193,7 @@ export default function MemeWarriorsPage() {
               <input
                 type="text"
                 className="block w-full pl-10 pr-3 py-2 border border-gray-600 rounded-md bg-purple-900/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                placeholder="Search warriors..."
+                placeholder="Search accounts..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -87,46 +211,32 @@ export default function MemeWarriorsPage() {
               {filterOpen && (
                 <div className="absolute right-0 mt-2 w-64 bg-purple-900 border border-gray-700 rounded-md shadow-lg z-10 p-4">
                   <div className="mb-4">
-                    <label className="block text-white text-sm font-medium mb-2">Rarity</label>
+                    <label className="block text-white text-sm font-medium mb-2">Platform</label>
                     <select
                       className="w-full bg-purple-800 border border-gray-700 rounded px-3 py-2 text-white"
-                      value={filters.rarity}
-                      onChange={(e) => setFilters({ ...filters, rarity: e.target.value })}
+                      value={filters.platform}
+                      onChange={(e) => setFilters({ ...filters, platform: e.target.value })}
                     >
-                      {rarities.map((rarity) => (
-                        <option key={rarity} value={rarity}>
-                          {rarity}
+                      {platforms.map((platform) => (
+                        <option key={platform} value={platform}>
+                          {platform || "Unknown"}
                         </option>
                       ))}
                     </select>
                   </div>
                   <div className="mb-4">
-                    <label className="block text-white text-sm font-medium mb-2">Class</label>
-                    <select
-                      className="w-full bg-purple-800 border border-gray-700 rounded px-3 py-2 text-white"
-                      value={filters.class}
-                      onChange={(e) => setFilters({ ...filters, class: e.target.value })}
-                    >
-                      {classes.map((cls) => (
-                        <option key={cls} value={cls}>
-                          {cls}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="mb-4">
-                    <label className="block text-white text-sm font-medium mb-2">Level Range</label>
+                    <label className="block text-white text-sm font-medium mb-2">Followers Range</label>
                     <div className="flex items-center gap-2">
                       <input
                         type="number"
                         min="0"
-                        max="100"
-                        className="w-20 bg-purple-800 border border-gray-700 rounded px-3 py-2 text-white"
-                        value={filters.minLevel}
+                        max="1000000"
+                        className="w-24 bg-purple-800 border border-gray-700 rounded px-3 py-2 text-white"
+                        value={filters.minFollowers}
                         onChange={(e) =>
                           setFilters({
                             ...filters,
-                            minLevel: Math.min(Number.parseInt(e.target.value), filters.maxLevel),
+                            minFollowers: Math.min(Number.parseInt(e.target.value) || 0, filters.maxFollowers),
                           })
                         }
                       />
@@ -134,13 +244,13 @@ export default function MemeWarriorsPage() {
                       <input
                         type="number"
                         min="0"
-                        max="100"
-                        className="w-20 bg-purple-800 border border-gray-700 rounded px-3 py-2 text-white"
-                        value={filters.maxLevel}
+                        max="1000000"
+                        className="w-24 bg-purple-800 border border-gray-700 rounded px-3 py-2 text-white"
+                        value={filters.maxFollowers}
                         onChange={(e) =>
                           setFilters({
                             ...filters,
-                            maxLevel: Math.max(Number.parseInt(e.target.value), filters.minLevel),
+                            maxFollowers: Math.max(Number.parseInt(e.target.value) || 0, filters.minFollowers),
                           })
                         }
                       />
@@ -148,7 +258,7 @@ export default function MemeWarriorsPage() {
                   </div>
                   <button
                     className="w-full bg-pink-600 hover:bg-pink-700 text-white font-medium py-2 px-4 rounded transition-colors"
-                    onClick={() => setFilters({ rarity: "All", class: "All", minLevel: 0, maxLevel: 100 })}
+                    onClick={() => setFilters({ platform: "All", minFollowers: 0, maxFollowers: 1000000 })}
                   >
                     Reset Filters
                   </button>
@@ -158,85 +268,155 @@ export default function MemeWarriorsPage() {
           </div>
         </div>
 
-        {/* Warriors grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {filteredWarriors.length > 0 ? (
-            filteredWarriors.map((warrior, index) => (
-              <motion.div
-                key={warrior.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="arcade-card overflow-hidden h-full flex flex-col"
-              >
-                <div className="h-2 bg-gradient-to-r from-pink-500 to-purple-500"></div>
-                <div className="p-6 flex flex-col flex-1">
-                  <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-2 border-pink-500">
-                    <Image
-                      src="/abstract-geometric-shapes.png"
-                      alt={warrior.name}
-                      width={128}
-                      height={128}
-                      className="object-cover"
-                    />
-                  </div>
+        {/* Loading state */}
+        {isLoading && (
+          <div className="flex justify-center items-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-pink-500"></div>
+          </div>
+        )}
 
-                  <h3 className="font-pixel text-white text-xl text-center mb-1">{warrior.name}</h3>
-                  <p className="text-cyan-400 text-center text-sm mb-4">{warrior.class}</p>
+        {/* Error state */}
+        {error && (
+          <div className="text-center py-12">
+            <p className="text-red-400 text-xl mb-4">Error loading data: {error}</p>
+            <button className="arcade-btn text-white" onClick={() => window.location.reload()}>
+              RETRY
+            </button>
+          </div>
+        )}
 
-                  <div className="grid grid-cols-2 gap-2 mb-4">
-                    <div className="bg-purple-900/30 p-2 rounded">
-                      <p className="text-xs text-gray-400">Power</p>
-                      <p className="text-white font-bold">{warrior.power}</p>
-                    </div>
-                    <div className="bg-purple-900/30 p-2 rounded">
-                      <p className="text-xs text-gray-400">Win Rate</p>
-                      <p className="text-white font-bold">
-                        {warrior.wins + warrior.losses > 0
-                          ? ((warrior.wins / (warrior.wins + warrior.losses)) * 100).toFixed(1)
-                          : "0.0"}
-                        %
-                      </p>
-                    </div>
-                    <div className="bg-purple-900/30 p-2 rounded">
-                      <p className="text-xs text-gray-400">Rarity</p>
-                      <p className="text-white font-bold">{warrior.rarity}</p>
-                    </div>
-                    <div className="bg-purple-900/30 p-2 rounded">
-                      <p className="text-xs text-gray-400">Level</p>
-                      <p className="text-white font-bold">{warrior.level}</p>
-                    </div>
-                  </div>
+        {/* Warrior cards grid - THREE COLUMNS */}
+        {!isLoading && !error && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredAccounts.length > 0 ? (
+              filteredAccounts.map((account, index) => {
+                // Generate metrics for this account
+                const metrics = getRandomMetrics(account)
+                // Check if account is verified (for demo, we'll consider accounts with "GOD" in the name as verified)
+                const isVerified = account.Account_Name?.includes("GOD") || account.Username?.includes("GOD")
 
-                  <p className="text-gray-300 text-sm mb-4 flex-grow line-clamp-3">{warrior.description}</p>
+                // Generate a random rarity for demo purposes
+                const rarities = ["Legendary", "Epic", "Rare", "Common"]
+                const randomRarity = rarities[account.id % rarities.length]
 
-                  <div className="text-center mt-auto">
-                    <Link
-                      href={`/memewarriors/${warrior.id}`}
-                      className="arcade-btn text-white text-sm inline-block"
-                      prefetch={true}
-                    >
-                      VIEW DETAILS
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-            ))
-          ) : (
-            <div className="col-span-full text-center py-12">
-              <p className="text-gray-300 text-xl mb-4">No warriors found matching your criteria</p>
-              <button
-                className="arcade-btn text-white"
-                onClick={() => {
-                  setSearchTerm("")
-                  setFilters({ rarity: "All", class: "All", minLevel: 0, maxLevel: 100 })
-                }}
-              >
-                RESET FILTERS
-              </button>
-            </div>
-          )}
-        </div>
+                return (
+                  <motion.div
+                    key={account.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="arcade-card overflow-hidden h-full flex flex-col"
+                  >
+                    {/* Card header with cover image */}
+                    <div className="relative h-32 overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-900/50 to-pink-900/50">
+                        <img
+                          src={account.cover_image_url || "/images/header-background.png"}
+                          alt="Cover"
+                          className="w-full h-full object-cover opacity-80"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div className="absolute inset-0 retro-grid opacity-30"></div>
+                      </div>
+                    </div>
+
+                    {/* Profile section */}
+                    <div className="relative -mt-10 px-6 pt-0 pb-6 flex flex-col flex-1">
+                      {/* Avatar */}
+                      <div className="relative mx-auto">
+                        <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-purple-600 glow-effect">
+                          <img
+                            src={account.avatar_url_ || "/abstract-profile.png"}
+                            alt={account.Account_Name || "User"}
+                            width={80}
+                            height={80}
+                            className="w-full h-full object-cover"
+                            style={{ imageRendering: "crisp-edges" }}
+                            onError={(e) => {
+                              e.currentTarget.src = "/abstract-profile.png"
+                            }}
+                          />
+                        </div>
+                        <div className="absolute bottom-0 right-0 bg-yellow-500 text-xs font-pixel px-2 py-1 rounded">
+                          {randomRarity}
+                        </div>
+                      </div>
+
+                      {/* Profile info */}
+                      <div className="text-center mt-3">
+                        <div className="flex items-center justify-center gap-2 mb-1">
+                          <h3 className="font-pixel text-white text-xl">{account.Account_Name || "Unknown User"}</h3>
+                          {isVerified && <Badge className="bg-blue-600 hover:bg-blue-700">Verified</Badge>}
+                        </div>
+                        <p className="text-cyan-400 text-sm mb-3">@{account.Username || "username"}</p>
+
+                        {/* Bio */}
+                        <p className="text-gray-300 text-sm mb-4 line-clamp-2">{account.Bio || "No bio available."}</p>
+                      </div>
+
+                      {/* Stats */}
+                      <div className="flex justify-center gap-6 mb-4">
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-white">{formatNumber(metrics.followers)}</div>
+                          <div className="text-xs text-gray-400">Followers</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-white">{formatNumber(metrics.following)}</div>
+                          <div className="text-xs text-gray-400">Following</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-white">
+                            {formatNumber(metrics.likes || metrics.tweets * 5)}
+                          </div>
+                          <div className="text-xs text-gray-400">Likes</div>
+                        </div>
+                      </div>
+
+                      {/* Social Links */}
+                      <div className="flex justify-center gap-4 mb-4">
+                        <div className="flex items-center text-cyan-400">
+                          <Twitter className="w-4 h-4 mr-1" />
+                          <span className="text-sm">@{account.Username || "username"}</span>
+                        </div>
+                        {account.website && (
+                          <div className="flex items-center text-cyan-400">
+                            <Globe className="w-4 h-4 mr-1" />
+                            <span className="text-sm">{account.website.replace(/^https?:\/\//, "")}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* View details button */}
+                      <div className="text-center mt-auto">
+                        <Link
+                          href={`/memewarriors/${account.memewars_profile_id}`}
+                          className="arcade-btn text-white text-sm inline-block"
+                          prefetch={true}
+                          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                        >
+                          VIEW DETAILS
+                        </Link>
+                      </div>
+                    </div>
+                  </motion.div>
+                )
+              })
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <p className="text-gray-300 text-xl mb-4">No accounts found matching your criteria</p>
+                <button
+                  className="arcade-btn text-white"
+                  onClick={() => {
+                    setSearchTerm("")
+                    setFilters({ platform: "All", minFollowers: 0, maxFollowers: 1000000 })
+                  }}
+                >
+                  RESET FILTERS
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )

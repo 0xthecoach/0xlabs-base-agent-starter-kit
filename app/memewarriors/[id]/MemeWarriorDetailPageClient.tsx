@@ -19,18 +19,54 @@ import {
   BarChart3,
   Users,
   Award,
+  X,
+  Send,
 } from "lucide-react"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
 type Props = {
   params: { id: string }
   warriorData?: any // Optional pre-fetched data
+  apiData?: any // Original API data
 }
 
-export default function MemeWarriorDetailPageClient({ params, warriorData }: Props) {
+export default function MemeWarriorDetailPageClient({ params, warriorData, apiData }: Props) {
   const [isFollowing, setIsFollowing] = useState(false)
+  const [isStoryModalOpen, setIsStoryModalOpen] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [isTryNowModalOpen, setIsTryNowModalOpen] = useState(false)
+  const [isMintModalOpen, setIsMintModalOpen] = useState(false)
+  const [mintingStep, setMintingStep] = useState(0)
+  const [mintingComplete, setMintingComplete] = useState(false)
 
   // Use pre-fetched data if available, otherwise find from the local data
   const warrior = warriorData || memeWarriors.find((w) => w.id === params.id)
+
+  // Function to simulate the minting process
+  const simulateMintingProcess = () => {
+    setMintingStep(0)
+    setMintingComplete(false)
+
+    // Simulate the minting process with timed steps
+    const steps = [
+      { step: 1, time: 1500 }, // Connecting wallet
+      { step: 2, time: 2000 }, // Preparing transaction
+      { step: 3, time: 2500 }, // Signing transaction
+      { step: 4, time: 3000 }, // Submitting to blockchain
+      { step: 5, time: 3500 }, // Confirming transaction
+      { step: 6, time: 2000 }, // Minting NFT
+      { step: 7, time: 1500 }, // Finalizing
+    ]
+
+    let totalDelay = 0
+    steps.forEach(({ step, time }) => {
+      totalDelay += time
+      setTimeout(() => setMintingStep(step), totalDelay)
+    })
+
+    // Set minting complete after all steps
+    setTimeout(() => setMintingComplete(true), totalDelay + 1000)
+  }
 
   if (!warrior) {
     return (
@@ -42,6 +78,38 @@ export default function MemeWarriorDetailPageClient({ params, warriorData }: Pro
         </Link>
       </div>
     )
+  }
+
+  // Get the origin story from the API data if available
+  const originStory = apiData?.Origin_Story || warrior.description
+
+  // Get cover image from API data
+  const coverImage = apiData?.Cover_image?.url || "/images/header-background.png"
+
+  // Function to truncate text to a specific length
+  const truncateText = (text: string, maxLength: number) => {
+    if (!text || text.length <= maxLength) return text
+    return text.slice(0, maxLength) + "..."
+  }
+
+  // Truncate the description for display
+  const truncatedDescription = truncateText(warrior.description, 120)
+
+  // Get gallery images from API data
+  const galleryImages = apiData
+    ? [apiData.gal_1?.url, apiData.gal_2?.url, apiData.gal_3?.url, apiData.gal_4?.url, apiData.gal_5?.url].filter(
+        Boolean,
+      ) // Filter out null/undefined values
+    : []
+
+  // Use profile photo as first image if available
+  if (apiData?.profile_photos?.[0]?.url) {
+    galleryImages.unshift(apiData.profile_photos[0].url)
+  }
+
+  // Add fallback images if needed
+  if (galleryImages.length === 0) {
+    galleryImages.push("/abstract-geometric-shapes.png")
   }
 
   const winRate =
@@ -145,6 +213,335 @@ export default function MemeWarriorDetailPageClient({ params, warriorData }: Pro
 
   return (
     <div className="container mx-auto px-4 py-8">
+      {/* Story Modal */}
+      <Dialog open={isStoryModalOpen} onOpenChange={setIsStoryModalOpen}>
+        <DialogContent className="sm:max-w-[600px] bg-gray-900 border border-purple-600">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-pixel text-pink-400">Origin Story</DialogTitle>
+            <button
+              onClick={() => setIsStoryModalOpen(false)}
+              className="absolute right-4 top-4 text-gray-400 hover:text-white"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </DialogHeader>
+          <div className="mt-4 text-gray-300 max-h-[70vh] overflow-y-auto">
+            {originStory.split("\n").map((paragraph: string, index: number) => (
+              <p key={index} className="mb-4">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Image Modal */}
+      <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>
+        <DialogContent className="sm:max-w-[80vw] max-h-[90vh] bg-gray-900 border border-purple-600 p-2">
+          <button
+            onClick={() => setSelectedImage(null)}
+            className="absolute right-2 top-2 text-gray-400 hover:text-white z-10"
+          >
+            <X className="h-6 w-6" />
+          </button>
+          {selectedImage && (
+            <div className="w-full h-full flex items-center justify-center">
+              <img
+                src={selectedImage || "/placeholder.svg"}
+                alt="Gallery image"
+                className="max-w-full max-h-[80vh] object-contain"
+              />
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Try Now Modal */}
+      <Dialog open={isTryNowModalOpen} onOpenChange={setIsTryNowModalOpen}>
+        <DialogContent className="sm:max-w-[900px] p-0 bg-gray-900 border border-purple-600 overflow-hidden">
+          <button
+            onClick={() => setIsTryNowModalOpen(false)}
+            className="absolute right-2 top-2 text-gray-400 hover:text-white z-10"
+          >
+            <X className="h-6 w-6" />
+          </button>
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            {/* Left Column - Image with title and subtitle */}
+            <div className="relative h-[400px] md:h-[500px]">
+              <img
+                src={apiData?.profile_photos?.[0]?.url || "/abstract-geometric-shapes.png"}
+                alt="Ability demonstration"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-900/50 to-transparent opacity-50"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+                <h3 className="text-2xl font-pixel text-white mb-2">Master Your Abilities</h3>
+                <p className="text-gray-300">Learn how to use your free abilities to gain an edge in battle</p>
+              </div>
+            </div>
+
+            {/* Right Column - Chatbot */}
+            <div className="flex flex-col h-[400px] md:h-[500px]">
+              <div className="bg-gray-800 p-4 border-b border-gray-700">
+                <h3 className="font-pixel text-white">Abilities Assistant</h3>
+              </div>
+              <div className="flex-1 p-4 overflow-y-auto bg-gray-900">
+                <div className="space-y-4">
+                  <div className="flex items-start">
+                    <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center mr-2">
+                      <span className="text-white font-bold">AI</span>
+                    </div>
+                    <div className="bg-gray-800 rounded-lg p-3 max-w-[80%]">
+                      <p className="text-white">
+                        Hello! I'm your abilities assistant. How can I help you master your free abilities today?
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start justify-end">
+                    <div className="bg-purple-600 rounded-lg p-3 max-w-[80%]">
+                      <p className="text-white">How do I use the Community Shield ability?</p>
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center ml-2">
+                      <span className="text-white font-bold">You</span>
+                    </div>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center mr-2">
+                      <span className="text-white font-bold">AI</span>
+                    </div>
+                    <div className="bg-gray-800 rounded-lg p-3 max-w-[80%]">
+                      <p className="text-white">
+                        The Community Shield ability is activated during battles when your health drops below 30%. It
+                        rallies community support, reducing incoming damage by 30% for 3 turns and boosting your team's
+                        morale, giving a 15% attack bonus.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="p-4 border-t border-gray-700 bg-gray-800">
+                <div className="flex">
+                  <input
+                    type="text"
+                    placeholder="Ask about abilities..."
+                    className="flex-1 bg-gray-700 border-none rounded-l-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  />
+                  <button className="bg-purple-600 text-white px-4 rounded-r-md hover:bg-purple-700 flex items-center justify-center">
+                    <Send className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Mint NFT Modal */}
+      <Dialog
+        open={isMintModalOpen}
+        onOpenChange={(open) => {
+          setIsMintModalOpen(open)
+          if (!open) {
+            setMintingStep(0)
+            setMintingComplete(false)
+          }
+        }}
+      >
+        <DialogContent className="sm:max-w-[650px] bg-gray-900 border border-purple-600 p-0 overflow-hidden">
+          <div className="bg-gradient-to-r from-purple-900 to-pink-900 p-4">
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-pixel text-white flex items-center">
+                <div className="mr-2 bg-purple-600 p-1 rounded">
+                  <Shield className="h-5 w-5 text-white" />
+                </div>
+                Minting Warrior NFT
+              </DialogTitle>
+              <button
+                onClick={() => setIsMintModalOpen(false)}
+                className="absolute right-4 top-4 text-gray-400 hover:text-white"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </DialogHeader>
+          </div>
+
+          <div className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* NFT Preview */}
+              <div className="flex flex-col items-center">
+                <div className="relative w-full max-w-[220px] aspect-square mx-auto mb-4 rounded-lg overflow-hidden border-2 border-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+                  <img
+                    src={apiData?.profile_photos?.[0]?.url || "/placeholder-5fxsx.png"}
+                    alt={warrior.name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+
+                  {/* Holographic overlay effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 opacity-50"></div>
+                  <div className="absolute inset-0 retro-grid opacity-20"></div>
+
+                  <div className="absolute bottom-0 left-0 right-0 p-3 text-center">
+                    <div className="text-white font-pixel text-sm">{warrior.name}</div>
+                    <div className="text-xs text-gray-300">Special Ability Card</div>
+                  </div>
+
+                  {!mintingComplete && mintingStep > 0 && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+                      <div className="relative">
+                        <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+                        <div className="absolute inset-0 flex items-center justify-center text-xs text-white font-pixel">
+                          {Math.round((mintingStep / 7) * 100)}%
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {mintingComplete && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+                      <div className="bg-green-500 rounded-full p-3 animate-pulse shadow-[0_0_20px_rgba(34,197,94,0.7)]">
+                        <CheckCircle2 className="h-10 w-10 text-white" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="text-center mb-4">
+                  <div className="text-sm text-gray-400 mb-1">Token ID</div>
+                  <div className="font-mono text-white bg-gray-800 px-3 py-1 rounded border border-gray-700 text-sm">
+                    {mintingComplete
+                      ? "#" +
+                        Math.floor(Math.random() * 10000)
+                          .toString()
+                          .padStart(4, "0")
+                      : "—"}
+                  </div>
+                </div>
+
+                {mintingComplete && (
+                  <div className="space-y-2 w-full">
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-400">Network</span>
+                      <span className="text-white">Base Mainnet</span>
+                    </div>
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-400">Contract</span>
+                      <span className="text-white font-mono">0x71C...F29b</span>
+                    </div>
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-400">Transaction</span>
+                      <span className="text-cyan-400 font-mono cursor-pointer hover:underline">0x8dF...2c7A</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Minting Steps */}
+              <div>
+                <div className="mb-4">
+                  <h3 className="text-lg font-pixel text-white mb-2">Minting Progress</h3>
+                  <p className="text-sm text-gray-400">
+                    {!mintingComplete && mintingStep === 0 && "Mint your warrior card to unlock special abilities"}
+                    {!mintingComplete && mintingStep > 0 && "Please wait while we process your transaction..."}
+                    {mintingComplete && "Your warrior card has been successfully minted!"}
+                  </p>
+                </div>
+
+                {/* Modern Stepper */}
+                <div className="relative mb-8">
+                  {/* Progress Line */}
+                  <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-700"></div>
+
+                  {/* Completed Progress Line */}
+                  <div
+                    className="absolute left-4 top-0 w-0.5 bg-gradient-to-b from-purple-500 to-pink-500 transition-all duration-500 ease-in-out"
+                    style={{
+                      height: mintingStep === 0 ? "0%" : mintingComplete ? "100%" : `${(mintingStep / 7) * 100}%`,
+                    }}
+                  ></div>
+
+                  {/* Steps */}
+                  {[
+                    { step: 1, label: "Connecting Wallet", icon: <Globe className="h-4 w-4" /> },
+                    { step: 2, label: "Preparing Transaction", icon: <Shield className="h-4 w-4" /> },
+                    { step: 3, label: "Signing Transaction", icon: <Zap className="h-4 w-4" /> },
+                    { step: 4, label: "Submitting to Blockchain", icon: <Send className="h-4 w-4" /> },
+                    { step: 5, label: "Confirming Transaction", icon: <CheckCircle2 className="h-4 w-4" /> },
+                    { step: 6, label: "Minting NFT", icon: <Award className="h-4 w-4" /> },
+                    { step: 7, label: "Finalizing", icon: <Trophy className="h-4 w-4" /> },
+                  ].map(({ step, label, icon }) => (
+                    <div key={step} className="flex items-center mb-5 relative">
+                      <div
+                        className={`z-10 w-8 h-8 rounded-full flex items-center justify-center mr-3 transition-all duration-300 ${
+                          mintingStep >= step
+                            ? mintingStep === step
+                              ? "bg-gradient-to-r from-purple-600 to-pink-600 animate-pulse shadow-[0_0_10px_rgba(168,85,247,0.5)]"
+                              : "bg-gradient-to-r from-green-500 to-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]"
+                            : "bg-gray-800 border border-gray-700"
+                        }`}
+                      >
+                        {mintingStep > step && <CheckCircle2 className="h-4 w-4 text-white" />}
+                        {mintingStep === step && icon}
+                        {mintingStep < step && <span className="text-xs text-gray-400">{step}</span>}
+                      </div>
+
+                      <div className="flex-1">
+                        <div className={`font-medium ${mintingStep >= step ? "text-white" : "text-gray-500"}`}>
+                          {label}
+                        </div>
+
+                        {mintingStep === step && (
+                          <div className="text-xs text-purple-400 animate-pulse mt-0.5">Processing...</div>
+                        )}
+
+                        {mintingStep > step && (
+                          <div className="text-xs text-green-400 mt-0.5 flex items-center">
+                            <CheckCircle2 className="h-3 w-3 mr-1" /> Completed
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex justify-end gap-3 mt-6">
+                  {mintingStep === 0 && !mintingComplete && (
+                    <>
+                      <button
+                        onClick={() => setIsMintModalOpen(false)}
+                        className="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-800 transition-colors"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={simulateMintingProcess}
+                        className="px-4 py-2 rounded-md bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 transition-colors shadow-[0_0_10px_rgba(168,85,247,0.3)]"
+                      >
+                        Start Minting
+                      </button>
+                    </>
+                  )}
+
+                  {mintingComplete && (
+                    <button
+                      onClick={() => setIsMintModalOpen(false)}
+                      className="px-6 py-2 rounded-md bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 transition-colors shadow-[0_0_10px_rgba(168,85,247,0.3)]"
+                    >
+                      View in Collection
+                    </button>
+                  )}
+
+                  {!mintingComplete && mintingStep > 0 && (
+                    <div className="text-sm text-gray-400 italic">Please don't close this window...</div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       {/* Back Button */}
       <div className="mb-6">
         <Link href="/memewarriors" className="text-pink-400 hover:text-pink-300 flex items-center">
@@ -152,18 +549,27 @@ export default function MemeWarriorDetailPageClient({ params, warriorData }: Pro
         </Link>
       </div>
 
-      {/* Hero Section */}
-      <div className="relative w-full h-48 md:h-64 bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded-lg mb-16 overflow-hidden">
-        <div className="absolute inset-0 retro-grid opacity-30"></div>
+      {/* Hero Section with Cover Image */}
+      <div className="relative w-full h-48 md:h-64 rounded-lg mb-16 overflow-hidden">
+        {/* Cover Image */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-900/50 to-pink-900/50">
+          <img
+            src={coverImage || "/placeholder.svg"}
+            alt={`${warrior.name} cover`}
+            className="w-full h-full object-cover opacity-80"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+          <div className="absolute inset-0 retro-grid opacity-30"></div>
+        </div>
       </div>
 
       {/* Profile Section */}
-      <div className="relative -mt-20 mb-8 flex flex-col md:flex-row items-center md:items-start gap-6">
+      <div className="relative -mt-[293px] mb-8 flex flex-col md:flex-row items-center md:items-start gap-6 px-[15px]">
         {/* Avatar */}
         <div className="relative">
           <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-purple-600 glow-effect">
             <Image
-              src="/placeholder-5fxsx.png"
+              src={apiData?.profile_photos?.[0]?.url || "/placeholder-5fxsx.png"}
               alt={warrior.name}
               width={160}
               height={160}
@@ -182,7 +588,15 @@ export default function MemeWarriorDetailPageClient({ params, warriorData }: Pro
             <h1 className="text-3xl md:text-4xl font-pixel text-white neon-text">{warrior.name}</h1>
             <Badge className="bg-blue-600 hover:bg-blue-700">Verified</Badge>
           </div>
-          <p className="text-gray-300 mb-4">{warrior.description}</p>
+          <div className="text-gray-300 mb-4">
+            <p>{truncatedDescription}</p>
+            <button
+              onClick={() => setIsStoryModalOpen(true)}
+              className="text-pink-400 hover:text-pink-300 text-sm mt-1 font-medium"
+            >
+              Read More
+            </button>
+          </div>
 
           {/* Stats */}
           <div className="flex justify-center md:justify-start gap-6 mb-4">
@@ -214,10 +628,10 @@ export default function MemeWarriorDetailPageClient({ params, warriorData }: Pro
         </div>
 
         {/* Follow Button */}
-        <div>
+        <div className="flex flex-col justify-end self-stretch">
           <button
             onClick={() => setIsFollowing(!isFollowing)}
-            className={`px-6 py-2 rounded-md font-pixel text-sm ${
+            className={`px-6 py-2 rounded-md font-pixel text-sm mb-[25px] ${
               isFollowing ? "bg-gray-700 text-white" : "pink-button"
             }`}
           >
@@ -230,7 +644,7 @@ export default function MemeWarriorDetailPageClient({ params, warriorData }: Pro
       <div className="arcade-card p-6 mb-8">
         <h2 className="section-title text-lg mb-6">ACTIVATION PROGRESS</h2>
         <div className="relative">
-          <div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-700 transform -translate-y-1/2"></div>
+          <div className="absolute top-[calc(50%-20px)] left-0 right-0 h-1 bg-gray-700 transform -translate-y-1/2"></div>
           <div className="flex justify-between relative">
             {profileData.activationProgress.map((step, index) => (
               <div key={index} className="flex flex-col items-center">
@@ -294,16 +708,21 @@ export default function MemeWarriorDetailPageClient({ params, warriorData }: Pro
 
             <TabsContent value="gallery">
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {[1, 2, 3, 4, 5, 6].map((item) => (
-                  <div key={item} className="arcade-card overflow-hidden">
-                    <div className="aspect-square bg-purple-900/30">
-                      <Image
-                        src={`/abstract-geometric-shapes.png`}
-                        alt={`${warrior.name} gallery image ${item}`}
-                        width={300}
-                        height={300}
-                        className="object-cover w-full h-full"
+                {galleryImages.map((imageUrl, index) => (
+                  <div
+                    key={index}
+                    className="arcade-card overflow-hidden cursor-pointer"
+                    onClick={() => setSelectedImage(imageUrl)}
+                  >
+                    <div className="aspect-square bg-purple-900/30 relative group">
+                      <img
+                        src={imageUrl || "/placeholder.svg"}
+                        alt={`${warrior.name} gallery image ${index + 1}`}
+                        className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
                       />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span className="text-white font-pixel text-sm">View</span>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -364,6 +783,27 @@ export default function MemeWarriorDetailPageClient({ params, warriorData }: Pro
             </TabsContent>
           </Tabs>
 
+          {/* Free Abilities */}
+          <div className="arcade-card p-6 mb-8 mt-[20px]">
+            <h2 className="section-title text-lg mb-6">FREE ABILITIES</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {profileData.freeAbilities.map((ability, index) => (
+                <div key={index} className="bg-black/30 p-4 rounded-lg">
+                  <div className="flex items-center mb-2">
+                    <div className="mr-2 bg-green-900/30 p-2 rounded-full">{ability.icon}</div>
+                    <h3 className="font-pixel text-green-400 text-sm">{ability.name}</h3>
+                  </div>
+                  <p className="text-sm text-gray-300">{ability.description}</p>
+                </div>
+              ))}
+            </div>
+            <div className="flex justify-center mt-6">
+              <button onClick={() => setIsTryNowModalOpen(true)} className="pink-button px-8 py-2 font-pixel">
+                Try Now
+              </button>
+            </div>
+          </div>
+
           {/* Special Abilities */}
           <div className="arcade-card p-6 mb-8">
             <h2 className="section-title text-lg mb-6">SPECIAL ABILITIES</h2>
@@ -378,21 +818,18 @@ export default function MemeWarriorDetailPageClient({ params, warriorData }: Pro
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Free Abilities */}
-          <div className="arcade-card p-6 mb-8">
-            <h2 className="section-title text-lg mb-6">FREE ABILITIES</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {profileData.freeAbilities.map((ability, index) => (
-                <div key={index} className="bg-black/30 p-4 rounded-lg">
-                  <div className="flex items-center mb-2">
-                    <div className="mr-2 bg-green-900/30 p-2 rounded-full">{ability.icon}</div>
-                    <h3 className="font-pixel text-green-400 text-sm">{ability.name}</h3>
-                  </div>
-                  <p className="text-sm text-gray-300">{ability.description}</p>
-                </div>
-              ))}
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={() => {
+                  setIsMintModalOpen(true)
+                  // Reset minting state when opening the modal
+                  setMintingStep(0)
+                  setMintingComplete(false)
+                }}
+                className="pink-button px-8 py-2 font-pixel"
+              >
+                Mint Warrior Card
+              </button>
             </div>
           </div>
         </div>

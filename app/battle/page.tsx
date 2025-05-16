@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import { memeWarriors } from "@/lib/data"
 import { PageHeader } from "@/components/page-header"
 
@@ -91,39 +90,51 @@ export default function BattlePage() {
             {availableWarriors.map((warrior) => (
               <div
                 key={warrior.id}
-                className="relative bg-black/30 p-3 rounded border border-pink-500/30 hover:border-pink-500 hover:bg-black/50 transition-all cursor-pointer"
+                className="relative overflow-hidden rounded-lg border border-pink-500/30 hover:border-pink-500 hover:bg-black/50 transition-all cursor-pointer"
               >
-                <div className="absolute top-2 right-2">
-                  <span
-                    className={`font-pixel text-xs px-2 py-1 rounded ${
-                      warrior.rarity === "Legendary"
-                        ? "bg-yellow-500/80"
-                        : warrior.rarity === "Epic"
-                          ? "bg-purple-500/80"
-                          : "bg-blue-500/80"
-                    }`}
-                  >
-                    {warrior.rarity}
-                  </span>
-                </div>
-                <div className="h-32 flex items-center justify-center mb-2">
-                  <Image
-                    src={warrior.image || "/placeholder.svg"}
-                    alt={warrior.name}
-                    width={100}
-                    height={100}
-                    className="object-contain"
-                  />
-                </div>
-                <h3 className="font-pixel text-sm text-center text-white mb-2">{warrior.name}</h3>
-                <div className="grid grid-cols-2 gap-1 text-xs">
-                  <div className="flex flex-col items-center bg-black/30 p-1 rounded">
-                    <span className="text-pink-300">LVL</span>
-                    <span className="font-pixel text-white">{warrior.level}</span>
+                {/* Card header with mini cover image */}
+                <div className="relative h-16 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-900/50 to-pink-900/50">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    <div className="absolute inset-0 retro-grid opacity-30"></div>
                   </div>
-                  <div className="flex flex-col items-center bg-black/30 p-1 rounded">
-                    <span className="text-pink-300">PWR</span>
-                    <span className="font-pixel text-white">{warrior.power}</span>
+                </div>
+
+                {/* Profile section */}
+                <div className="relative -mt-8 px-3 pt-0 pb-3 flex flex-col items-center">
+                  {/* Avatar */}
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-600 glow-effect">
+                      <img
+                        src={warrior.image || "/placeholder.svg"}
+                        alt={warrior.name}
+                        width={64}
+                        height={64}
+                        className="w-full h-full object-cover"
+                        style={{ imageRendering: "crisp-edges" }}
+                        onError={(e) => {
+                          e.currentTarget.src = "/abstract-profile.png"
+                        }}
+                      />
+                    </div>
+                    <div className="absolute bottom-0 right-0 bg-yellow-500 text-[10px] font-pixel px-1 py-0.5 rounded">
+                      {warrior.rarity}
+                    </div>
+                  </div>
+
+                  {/* Warrior info */}
+                  <h3 className="font-pixel text-sm text-center text-white mt-2 mb-1">{warrior.name}</h3>
+
+                  {/* Stats */}
+                  <div className="flex justify-center gap-4 w-full">
+                    <div className="text-center">
+                      <div className="text-sm font-bold text-white">{warrior.level}</div>
+                      <div className="text-[10px] text-pink-300">LVL</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-sm font-bold text-white">{warrior.power}</div>
+                      <div className="text-[10px] text-pink-300">PWR</div>
+                    </div>
                   </div>
                 </div>
               </div>

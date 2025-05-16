@@ -14,14 +14,12 @@ export default function CTA() {
     <section className="py-20 relative" ref={ref}>
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-purple-900/80 to-purple-800/80 z-10"></div>
-        <div
-          className="absolute inset-0 bg-cover bg-center z-0"
-          style={{
-            backgroundImage: "url('/images/cta-background.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        ></div>
+        <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover z-0">
+          <source
+            src="https://xsjm-zu7p-vaky.n7.xano.io/vault/lu0MXA_0/Bg5ON3lIUbzQXOpj_z8YpVY6lhE/mY-6KQ../FLORA-MP4+%28h264%29-fd0effd2.mp4"
+            type="video/mp4"
+          />
+        </video>
       </div>
 
       <div className="container mx-auto px-4 relative z-20">

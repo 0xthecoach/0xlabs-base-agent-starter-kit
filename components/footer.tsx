@@ -63,18 +63,16 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
-          <h4 className="text-lg font-pixel mb-4 text-white">Newsletter</h4>
-          <p className="text-gray-300 text-sm mb-2">Subscribe to get the latest updates</p>
-          <div className="flex">
-            <input
-              type="email"
-              placeholder="Your email"
-              className="bg-gray-800 text-white px-3 py-2 rounded-l-md focus:outline-none text-sm"
+        <div className="flex flex-col items-center relative mb-[-120px]">
+          <div className="relative group">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/freepik__comic-art-graphic-novel-art-comic-illustration-hig__57489%201-z5sNoKAYaLezJGhM25dNF9lZyJELVU.png"
+              alt="MemeWars Arcade Machine"
+              className="w-full max-w-[750px] rounded-md transition-transform duration-300 group-hover:scale-105 relative -top-32"
             />
-            <button className="bg-pink-600 text-white px-3 py-2 rounded-r-md hover:bg-pink-700 transition-colors text-sm">
-              Subscribe
-            </button>
+            <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 rounded-md">
+              <span className="text-white font-pixel text-sm px-3 py-1 bg-pink-600 rounded">Coming Soon</span>
+            </div>
           </div>
         </div>
       </div>

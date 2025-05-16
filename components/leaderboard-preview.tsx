@@ -12,35 +12,35 @@ const topPlayers = [
     name: "MemeKing420",
     score: 12450,
     avatar: "/images/avatars/player1.png",
-    warriors: 42,
+    holders: 42,
   },
   {
     rank: 2,
     name: "DankMaster69",
     score: 11280,
     avatar: "/images/avatars/player2.png",
-    warriors: 38,
+    holders: 38,
   },
   {
     rank: 3,
     name: "PepeCollector",
     score: 10950,
     avatar: "/images/avatars/player3.png",
-    warriors: 35,
+    holders: 35,
   },
   {
     rank: 4,
     name: "DogeToTheMoon",
     score: 9870,
     avatar: "/images/avatars/player4.png",
-    warriors: 31,
+    holders: 31,
   },
   {
     rank: 5,
     name: "WojackWarrior",
     score: 8740,
     avatar: "/images/avatars/player5.png",
-    warriors: 29,
+    holders: 29,
   },
 ]
 
@@ -110,7 +110,7 @@ export default function LeaderboardPreview() {
 
                   <div>
                     <p className="font-pixel text-white">{player.name}</p>
-                    <p className="text-xs text-gray-300">{player.warriors} Warriors</p>
+                    <p className="text-xs text-gray-300">{player.holders} Holders</p>
                   </div>
                 </div>
 

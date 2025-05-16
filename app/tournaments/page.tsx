@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import Link from "next/link"
 import { PageHeader } from "@/components/page-header"
+import { BracketModalButton } from "@/components/bracket-modal-button"
 
 export const metadata: Metadata = {
   title: "Tournaments | MemeWars",
@@ -280,90 +280,9 @@ export default function TournamentsPage() {
                   </div>
 
                   <div className="flex flex-wrap gap-4">
-                    <Link href={`/tournaments/${activeTournament.id}`} className="arcade-btn text-white">
-                      VIEW BRACKETS
-                    </Link>
+                    <BracketModalButton tournamentName={activeTournament.name} brackets={activeTournamentBrackets} />
                     <button className="arcade-btn text-white">WATCH LIVE MATCHES</button>
                   </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Tournament Brackets */}
-            <div className="mt-8">
-              <h3 className="text-2xl font-pixel mb-6 text-center text-pink-400">TOURNAMENT BRACKETS</h3>
-
-              <div className="arcade-card p-6 overflow-x-auto">
-                <div className="flex space-x-8 min-w-max">
-                  {activeTournamentBrackets.map((round, roundIndex) => (
-                    <div key={roundIndex} className="min-w-[300px]">
-                      <h4 className="font-pixel text-lg mb-4 text-center text-white">{round.round}</h4>
-                      <div className="space-y-6">
-                        {round.matches.map((match) => (
-                          <div
-                            key={match.id}
-                            className={`bg-black/30 p-4 rounded border ${
-                              match.completed ? "border-pink-500/50" : "border-yellow-500/50 border-dashed"
-                            }`}
-                          >
-                            {/* Player 1 */}
-                            <div
-                              className={`flex items-center justify-between p-2 rounded ${
-                                match.winner === "player1" ? "bg-green-900/30" : ""
-                              }`}
-                            >
-                              <div className="flex items-center">
-                                <div className="w-8 h-8 rounded-full overflow-hidden mr-2 border border-pink-500/50">
-                                  <Image
-                                    src={match.player1.avatar || "/placeholder.svg"}
-                                    alt={match.player1.name}
-                                    width={32}
-                                    height={32}
-                                    className="object-cover"
-                                  />
-                                </div>
-                                <span className="text-white text-sm">{match.player1.name}</span>
-                              </div>
-                              <span className="font-pixel text-white">{match.player1.score}</span>
-                            </div>
-
-                            {/* VS */}
-                            <div className="flex justify-center items-center my-1">
-                              <span className="text-pink-400 text-xs">VS</span>
-                            </div>
-
-                            {/* Player 2 */}
-                            <div
-                              className={`flex items-center justify-between p-2 rounded ${
-                                match.winner === "player2" ? "bg-green-900/30" : ""
-                              }`}
-                            >
-                              <div className="flex items-center">
-                                <div className="w-8 h-8 rounded-full overflow-hidden mr-2 border border-pink-500/50">
-                                  <Image
-                                    src={match.player2.avatar || "/placeholder.svg"}
-                                    alt={match.player2.name}
-                                    width={32}
-                                    height={32}
-                                    className="object-cover"
-                                  />
-                                </div>
-                                <span className="text-white text-sm">{match.player2.name}</span>
-                              </div>
-                              <span className="font-pixel text-white">{match.player2.score}</span>
-                            </div>
-
-                            {/* Match Status */}
-                            {!match.completed && (
-                              <div className="mt-2 text-center">
-                                <span className="text-yellow-400 text-xs">{match.scheduledTime}</span>
-                              </div>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
                 </div>
               </div>
             </div>

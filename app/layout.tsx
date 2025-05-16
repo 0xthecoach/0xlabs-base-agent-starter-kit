@@ -7,6 +7,7 @@ import Footer from "@/components/footer"
 import { Analytics } from "@/components/analytics"
 import { Suspense } from "react"
 import { Providers } from "./providers"
+import { ScrollToTop } from "@/components/scroll-to-top"
 
 const pressStart = Press_Start_2P({
   weight: "400",
@@ -34,9 +35,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" style={{ scrollBehavior: "smooth" }}>
       <body className={`${pressStart.variable} ${poppins.variable} font-sans antialiased`}>
         <Providers>
+          <ScrollToTop />
           <div className="min-h-screen flex flex-col bg-purple-900">
             <Navbar />
             <Suspense>

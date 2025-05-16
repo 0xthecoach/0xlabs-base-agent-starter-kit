@@ -40,7 +40,15 @@ export default function FeaturesPreview() {
 
   return (
     <section className="py-20 relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 bg-purple-900/50 retro-grid opacity-20 z-0"></div>
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <video className="absolute inset-0 w-full h-full object-cover opacity-30" autoPlay muted loop playsInline>
+          <source
+            src="https://xsjm-zu7p-vaky.n7.xano.io/vault/lu0MXA_0/_0s97C_k2F12NRiEkZhpJRwX1Gs/y_szIw../FLORA-MP4+%28h264%29-6e50202e.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div className="absolute inset-0 bg-purple-900/60 z-10"></div>
+      </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
