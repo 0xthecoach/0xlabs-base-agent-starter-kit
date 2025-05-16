@@ -1,42 +1,58 @@
 "use client"
 
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { ConnectButton } from "thirdweb/react"
-import { client, primaryChain } from "@/lib/client"
-import { inAppWallet, createWallet } from "thirdweb/wallets"
+import { thirdwebClient } from "@/lib/thirdweb-client"
+import { base } from "thirdweb/chains"
 
-// Create a styled ConnectButton that maintains the arcade style of the original button
 export function ConnectWalletButton() {
-  // Configure wallets to support - include in-app wallet for better onboarding
-  const wallets = [
-    inAppWallet({
-      smartAccount: {
-        chain: primaryChain,
-        sponsorGas: true,
-      },
-    }),
-    createWallet("io.metamask"),
-    createWallet("com.coinbase.wallet"),
-    createWallet("me.rainbow"),
-  ]
+  const [isConnected, setIsConnected] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleConnect = () => {
+    // Simulate wallet connection
+    setTimeout(() => {
+      setIsConnected(true)
+      setIsOpen(false)
+    }, 1000)
+  }
+
+  const handleDisconnect = () => {
+    setIsConnected(false)
+  }
 
   return (
-    <ConnectButton
-      client={client}
-      accountAbstraction={{
-        chain: primaryChain,
-        sponsorGas: true,
-      }}
-      className="arcade-btn text-white text-sm"
-      connectButton={{
-        label: "Play Now",
-      }}
-      modalTitle="Connect to MemeWars"
-      modalTitleIconUrl="/images/logo.png"
-      welcomeScreen={{
-        title: "Welcome to MemeWars",
-        subtitle: "Connect your wallet to join the battle!",
-      }}
-      wallets={wallets}
-    />
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <Button variant="outline" className="border-purple-500 bg-transparent text-white hover:bg-purple-950">
+          {isConnected ? "Connected" : "Connect Wallet"}
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Connect your wallet</DialogTitle>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <ConnectButton
+            client={thirdwebClient}
+            accountAbstraction={{
+              chain: base,
+              sponsorGas: true,
+            }}
+            className="arcade-btn pulse-glow"
+            connectButton={{
+              label: "CONNECT WALLET",
+            }}
+            connectedButton={{
+              label: "CONNECTED",
+            }}
+            modalTitle="CONNECT YOUR WALLET"
+            modalTitleIconUrl="/images/logo.png"
+          />
+        </div>
+      </DialogContent>
+    </Dialog>
   )
 }

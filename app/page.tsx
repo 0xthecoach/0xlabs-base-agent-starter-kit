@@ -28,10 +28,12 @@ export default function Home() {
           </video>
         </div>
         <div className="container mx-auto relative z-10 mb-0">
-          <div className="mb-6">
+          <div className="mb-6 mt-5 pl-[50px]">
             <h1 className="text-2xl md:text-3xl font-pixel neon-text">Start Play!</h1>
-            <h2 className="text-xl md:text-2xl font-bold text-pink-400 mt-2">MEMEWARS ARENA</h2>
-            <p className="text-gray-200 max-w-md mt-2">
+            <h2 className="text-sm md:text-lg font-bold mt-2" style={{ color: "#FF69B4" }}>
+              Join The Battle!
+            </h2>
+            <p className="text-gray-900 max-w-md mt-2">
               The ultimate battle arena where internet memes come to life. Collect warriors, battle opponents, and earn
               rewards.
             </p>
