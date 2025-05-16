@@ -293,46 +293,46 @@ export default function TournamentsPage() {
         <div className="mb-16">
           <h2 className="text-3xl font-pixel mb-6 text-center text-pink-400">UPCOMING TOURNAMENTS</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="flex flex-col gap-6">
             {tournamentsData
               .filter((tournament) => tournament.status === "upcoming")
               .map((tournament) => (
                 <div key={tournament.id} className="arcade-card overflow-hidden">
-                  <div className="flex flex-col sm:flex-row">
+                  <div className="grid grid-cols-1 md:grid-cols-3 md:max-h-48">
                     {/* Tournament Image */}
-                    <div className="w-full sm:w-1/3 bg-gradient-to-br from-purple-900/50 to-pink-900/50 p-4 flex items-center justify-center">
+                    <div className="md:col-span-1 bg-gradient-to-br from-purple-900/50 to-pink-900/50 flex items-center justify-center overflow-hidden">
                       <Image
                         src={tournament.image || "/placeholder.svg"}
                         alt={tournament.name}
-                        width={120}
-                        height={120}
-                        className="object-contain"
+                        width={200}
+                        height={200}
+                        className="w-full h-full object-cover"
                       />
                     </div>
 
                     {/* Tournament Details */}
-                    <div className="w-full sm:w-2/3 p-4">
-                      <h3 className="font-pixel text-lg mb-2 text-white">{tournament.name}</h3>
-                      <p className="text-gray-300 text-sm mb-3 line-clamp-2">{tournament.description}</p>
+                    <div className="md:col-span-2 p-3">
+                      <h3 className="font-pixel text-lg mb-1 text-white">{tournament.name}</h3>
+                      <p className="text-gray-300 text-xs mb-2 line-clamp-1">{tournament.description}</p>
 
-                      <div className="grid grid-cols-2 gap-2 text-xs mb-3">
-                        <div className="bg-black/30 p-2 rounded">
+                      <div className="grid grid-cols-4 gap-1 text-xs mb-2">
+                        <div className="bg-black/30 p-1 rounded">
                           <span className="text-pink-300">START</span>
                           <span className="text-white block">
                             {new Date(tournament.startDate).toLocaleDateString()}
                           </span>
                         </div>
-                        <div className="bg-black/30 p-2 rounded">
+                        <div className="bg-black/30 p-1 rounded">
                           <span className="text-pink-300">FORMAT</span>
                           <span className="text-white block">{tournament.format}</span>
                         </div>
-                        <div className="bg-black/30 p-2 rounded">
+                        <div className="bg-black/30 p-1 rounded">
                           <span className="text-pink-300">ENTRY FEE</span>
                           <span className="text-white block">
                             {tournament.entryFee > 0 ? tournament.entryFee : "FREE"}
                           </span>
                         </div>
-                        <div className="bg-black/30 p-2 rounded">
+                        <div className="bg-black/30 p-1 rounded">
                           <span className="text-pink-300">PRIZE</span>
                           <span className="text-yellow-400 block">{tournament.prizePool.toLocaleString()}</span>
                         </div>
@@ -342,7 +342,7 @@ export default function TournamentsPage() {
                         <div className="text-xs text-gray-400">
                           {tournament.participants.registered}/{tournament.participants.max} registered
                         </div>
-                        <button className="arcade-btn text-white text-sm">REGISTER</button>
+                        <button className="arcade-btn text-white text-xs px-3 py-1 h-auto min-h-0">REGISTER</button>
                       </div>
                     </div>
                   </div>

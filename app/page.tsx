@@ -1,17 +1,17 @@
-import { Button } from "@/components/ui/button"
 import FeaturedWarriors from "@/components/featured-warriors"
 import LeaderboardPreview from "@/components/leaderboard-preview"
 import QuestsPreview from "@/components/quests-preview"
 import FeaturesPreview from "@/components/features-preview"
 import CTA from "@/components/cta"
 import LogoCloud from "@/components/logo-cloud"
+import { HomeAnimatedList } from "@/components/home-animated-list"
 
 export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-32 px-4 relative overflow-hidden min-h-[80vh]">
-        <div className="absolute inset-0 z-0 min-h-[80vh] overflow-hidden">
+      <section className="pt-32 px-4 relative overflow-hidden h-[80vh] flex items-end justify-end flex-col">
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <video
             className="absolute w-full h-full object-cover"
             autoPlay
@@ -27,18 +27,20 @@ export default function Home() {
             Your browser does not support the video tag.
           </video>
         </div>
-        <div className="container mx-auto relative z-10">
-          <h1 className="text-5xl md:text-6xl font-pixel mb-6 neon-text">MEMEWARS</h1>
-          <p className="text-xl md:text-2xl max-w-3xl mb-10 text-gray-200">
-            The ultimate battle arena where internet memes come to life
-          </p>
-          <div className="flex flex-wrap gap-4 justify-start">
-            <Button size="lg" className="arcade-btn">
-              PLAY NOW
-            </Button>
-            <Button size="lg" variant="outline" className="arcade-btn-outline">
-              LEARN MORE
-            </Button>
+        <div className="container mx-auto relative z-10 mb-0">
+          <div className="mb-6">
+            <h1 className="text-2xl md:text-3xl font-pixel neon-text">Start Play!</h1>
+            <h2 className="text-xl md:text-2xl font-bold text-pink-400 mt-2">MEMEWARS ARENA</h2>
+            <p className="text-gray-200 max-w-md mt-2">
+              The ultimate battle arena where internet memes come to life. Collect warriors, battle opponents, and earn
+              rewards.
+            </p>
+          </div>
+          <div
+            className="max-w-md h-[320px] overflow-hidden"
+            style={{ transform: "scale(0.8)", transformOrigin: "bottom" }}
+          >
+            <HomeAnimatedList />
           </div>
         </div>
       </section>

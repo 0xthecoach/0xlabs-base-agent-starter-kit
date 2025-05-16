@@ -22,66 +22,72 @@ export default function QuestsPage() {
 
       <div className="container mx-auto px-4 py-16">
         {/* Quest Progress */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-pixel mb-6 text-center text-pink-400">YOUR QUEST PROGRESS</h2>
-          <div className="arcade-card p-6">
-            <div className="mb-6">
-              <h3 className="font-pixel text-xl mb-4 text-white">Season 2 Quest Completion</h3>
-              <div className="mb-2 flex justify-between text-sm">
-                <span className="text-gray-400">Progress: 12/30 Quests</span>
-                <span className="text-gray-400">40% Complete</span>
-              </div>
-              <div className="relative h-4 bg-gray-800 rounded-full overflow-hidden">
-                <div
-                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-pink-600 to-purple-600"
-                  style={{ width: "40%" }}
-                ></div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-black/30 p-4 rounded">
-                <h4 className="font-pixel text-lg mb-3 text-center text-pink-400">EASY QUESTS</h4>
+        <div className="mb-12 relative">
+          <div
+            className="absolute inset-0 bg-cover bg-bottom z-0"
+            style={{ backgroundImage: "url(/images/purple-landscape-bg.png)", opacity: 0.7 }}
+          ></div>
+          <div className="relative z-10">
+            <h2 className="text-3xl font-pixel mb-6 text-center text-pink-400">YOUR QUEST PROGRESS</h2>
+            <div className="arcade-card p-6">
+              <div className="mb-6">
+                <h3 className="font-pixel text-xl mb-4 text-white">Season 2 Quest Completion</h3>
                 <div className="mb-2 flex justify-between text-sm">
-                  <span className="text-gray-400">Progress:</span>
-                  <span className="text-gray-400">6/10</span>
+                  <span className="text-gray-400">Progress: 12/30 Quests</span>
+                  <span className="text-gray-400">40% Complete</span>
                 </div>
-                <div className="relative h-3 bg-gray-800 rounded-full overflow-hidden mb-4">
-                  <div className="absolute top-0 left-0 h-full bg-green-500" style={{ width: "60%" }}></div>
-                </div>
-                <div className="text-center">
-                  <span className="text-white text-sm">Reward at 10/10:</span>
-                  <div className="font-pixel text-green-400 mt-1">Epic Loot Box</div>
+                <div className="relative h-4 bg-gray-800 rounded-full overflow-hidden">
+                  <div
+                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-pink-600 to-purple-600"
+                    style={{ width: "40%" }}
+                  ></div>
                 </div>
               </div>
 
-              <div className="bg-black/30 p-4 rounded">
-                <h4 className="font-pixel text-lg mb-3 text-center text-pink-400">MEDIUM QUESTS</h4>
-                <div className="mb-2 flex justify-between text-sm">
-                  <span className="text-gray-400">Progress:</span>
-                  <span className="text-gray-400">4/10</span>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-black/30 p-4 rounded">
+                  <h4 className="font-pixel text-lg mb-3 text-center text-pink-400">EASY QUESTS</h4>
+                  <div className="mb-2 flex justify-between text-sm">
+                    <span className="text-gray-400">Progress:</span>
+                    <span className="text-gray-400">6/10</span>
+                  </div>
+                  <div className="relative h-3 bg-gray-800 rounded-full overflow-hidden mb-4">
+                    <div className="absolute top-0 left-0 h-full bg-green-500" style={{ width: "60%" }}></div>
+                  </div>
+                  <div className="text-center">
+                    <span className="text-white text-sm">Reward at 10/10:</span>
+                    <div className="font-pixel text-green-400 mt-1">Epic Loot Box</div>
+                  </div>
                 </div>
-                <div className="relative h-3 bg-gray-800 rounded-full overflow-hidden mb-4">
-                  <div className="absolute top-0 left-0 h-full bg-blue-500" style={{ width: "40%" }}></div>
-                </div>
-                <div className="text-center">
-                  <span className="text-white text-sm">Reward at 10/10:</span>
-                  <div className="font-pixel text-blue-400 mt-1">Rare MemeWarrior</div>
-                </div>
-              </div>
 
-              <div className="bg-black/30 p-4 rounded">
-                <h4 className="font-pixel text-lg mb-3 text-center text-pink-400">HARD QUESTS</h4>
-                <div className="mb-2 flex justify-between text-sm">
-                  <span className="text-gray-400">Progress:</span>
-                  <span className="text-gray-400">2/10</span>
+                <div className="bg-black/30 p-4 rounded">
+                  <h4 className="font-pixel text-lg mb-3 text-center text-pink-400">MEDIUM QUESTS</h4>
+                  <div className="mb-2 flex justify-between text-sm">
+                    <span className="text-gray-400">Progress:</span>
+                    <span className="text-gray-400">4/10</span>
+                  </div>
+                  <div className="relative h-3 bg-gray-800 rounded-full overflow-hidden mb-4">
+                    <div className="absolute top-0 left-0 h-full bg-blue-500" style={{ width: "40%" }}></div>
+                  </div>
+                  <div className="text-center">
+                    <span className="text-white text-sm">Reward at 10/10:</span>
+                    <div className="font-pixel text-blue-400 mt-1">Rare MemeWarrior</div>
+                  </div>
                 </div>
-                <div className="relative h-3 bg-gray-800 rounded-full overflow-hidden mb-4">
-                  <div className="absolute top-0 left-0 h-full bg-purple-500" style={{ width: "20%" }}></div>
-                </div>
-                <div className="text-center">
-                  <span className="text-white text-sm">Reward at 10/10:</span>
-                  <div className="font-pixel text-purple-400 mt-1">Epic MemeWarrior</div>
+
+                <div className="bg-black/30 p-4 rounded">
+                  <h4 className="font-pixel text-lg mb-3 text-center text-pink-400">HARD QUESTS</h4>
+                  <div className="mb-2 flex justify-between text-sm">
+                    <span className="text-gray-400">Progress:</span>
+                    <span className="text-gray-400">2/10</span>
+                  </div>
+                  <div className="relative h-3 bg-gray-800 rounded-full overflow-hidden mb-4">
+                    <div className="absolute top-0 left-0 h-full bg-purple-500" style={{ width: "20%" }}></div>
+                  </div>
+                  <div className="text-center">
+                    <span className="text-white text-sm">Reward at 10/10:</span>
+                    <div className="font-pixel text-purple-400 mt-1">Epic MemeWarrior</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -144,7 +150,7 @@ export default function QuestsPage() {
         </div>
 
         {/* Quests Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6">
           {safeQuestsData.map((quest) => (
             <div key={quest.id} className="arcade-card overflow-hidden">
               <div className="flex flex-col sm:flex-row">

@@ -4,12 +4,46 @@ import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import Link from "next/link"
 import { memeWarriors } from "@/lib/data"
+import confetti from "canvas-confetti"
+import { useEffect, useState } from "react"
 
 export default function FeaturedWarriors() {
+  const [confettiTriggered, setConfettiTriggered] = useState(false)
   const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
+    triggerOnce: false,
+    threshold: 0.5,
   })
+
+  useEffect(() => {
+    if (inView && !confettiTriggered) {
+      setConfettiTriggered(true)
+
+      // Fire confetti from left side
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { x: 0.1, y: 0.5 },
+      })
+
+      // Fire confetti from center
+      setTimeout(() => {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { x: 0.5, y: 0.5 },
+        })
+      }, 250)
+
+      // Fire confetti from right side
+      setTimeout(() => {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { x: 0.9, y: 0.5 },
+        })
+      }, 500)
+    }
+  }, [inView, confettiTriggered])
 
   // Take only the first 3 warriors
   const featuredWarriors = memeWarriors.slice(0, 3)

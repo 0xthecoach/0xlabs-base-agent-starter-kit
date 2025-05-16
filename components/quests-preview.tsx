@@ -45,6 +45,20 @@ export default function QuestsPreview() {
   return (
     <section className="py-20 relative" ref={ref}>
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900 to-purple-800 z-0"></div>
+      <div className="absolute inset-0 retro-grid opacity-20 z-0"></div>
+
+      {/* Purple landscape background - USING THE CORRECT IMAGE */}
+      <div
+        className="absolute inset-x-0 bottom-0 z-0"
+        style={{
+          backgroundImage: 'url("/images/purple-landscape-wide.png")',
+          backgroundPosition: "bottom center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100% auto",
+          height: "180px",
+          opacity: 0.95,
+        }}
+      ></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
