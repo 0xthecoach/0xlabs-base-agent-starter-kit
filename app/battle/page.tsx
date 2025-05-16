@@ -105,17 +105,17 @@ export default function BattlePage() {
                   {/* Avatar */}
                   <div className="relative">
                     <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-600 glow-effect">
-                      <img
-                        src={warrior.image || "/placeholder.svg"}
-                        alt={warrior.name}
-                        width={64}
-                        height={64}
-                        className="w-full h-full object-cover"
-                        style={{ imageRendering: "crisp-edges" }}
-                        onError={(e) => {
-                          e.currentTarget.src = "/abstract-profile.png"
-                        }}
-                      />
+                      {/* Simple image without any event handlers */}
+                      <div className="w-full h-full bg-gray-800">
+                        <img
+                          src={warrior.image || "/abstract-profile.png"}
+                          alt={warrior.name}
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-cover"
+                          style={{ imageRendering: "crisp-edges" }}
+                        />
+                      </div>
                     </div>
                     <div className="absolute bottom-0 right-0 bg-yellow-500 text-[10px] font-pixel px-1 py-0.5 rounded">
                       {warrior.rarity}
