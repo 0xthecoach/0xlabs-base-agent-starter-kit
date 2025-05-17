@@ -23,6 +23,32 @@ import {
   Send,
 } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+// Remove these imports
+// import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+
+// Add this custom CSS for tooltips
+const tooltipStyles = `
+  .fixed-tooltip {
+    position: absolute;
+    z-index: 9999;
+  }
+  
+  /* Ensure parent containers don't clip the tooltips */
+  .arcade-card {
+    overflow: visible !important;
+  }
+  
+  /* Tooltip styling */
+  .tooltip-container {
+    border: 1px solid rgba(255, 0, 255, 0.4);
+    box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
+  }
+  
+  .tooltip-title {
+    color: #00ffff;
+    font-weight: 600;
+  }
+`
 
 type Props = {
   params: { id: string }
@@ -203,16 +229,45 @@ export default function MemeWarriorDetailPageClient({ params, warriorData, apiDa
       },
     ],
     activationProgress: [
-      { name: "Social Released", completed: true },
-      { name: "Tokens Airdrop", completed: true },
-      { name: "Utility Skills", completed: true },
-      { name: "Early Access", completed: true },
-      { name: "Token Launch", completed: false },
+      {
+        name: "Social Released",
+        completed: true,
+        description:
+          "Social features have been fully deployed, allowing warriors to connect, share achievements, and build communities. This includes profile pages, follower systems, and social feeds.",
+      },
+      {
+        name: "Tokens Airdrop",
+        completed: true,
+        description:
+          "Initial token distribution to early adopters and community members. These tokens provide governance rights and access to premium features within the ecosystem.",
+      },
+      {
+        name: "Utility Skills",
+        completed: true,
+        description:
+          "Special abilities and skills have been unlocked for warriors, enabling unique advantages in battles and tournaments. These include passive buffs and active abilities.",
+      },
+      {
+        name: "Early Access",
+        completed: true,
+        description:
+          "Limited access to the platform for founding members and early supporters. This phase included beta testing of core features and gathering community feedback.",
+      },
+      {
+        name: "Token Launch",
+        completed: false,
+        description:
+          "Public launch of the token on major exchanges, enabling wider participation in the ecosystem. This will unlock the full economic potential of the platform.",
+      },
     ],
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
+      {/* Add this style tag */}
+      <style jsx global>
+        {tooltipStyles}
+      </style>
       {/* Story Modal */}
       <Dialog open={isStoryModalOpen} onOpenChange={setIsStoryModalOpen}>
         <DialogContent className="sm:max-w-[600px] bg-gray-900 border border-purple-600">
@@ -641,19 +696,30 @@ export default function MemeWarriorDetailPageClient({ params, warriorData, apiDa
       </div>
 
       {/* Activation Progress */}
-      <div className="arcade-card p-6 mb-8">
+      <div className="arcade-card p-6 mb-8 relative overflow-visible">
         <h2 className="section-title text-lg mb-6">ACTIVATION PROGRESS</h2>
-        <div className="relative">
+        <div className="relative overflow-visible">
           <div className="absolute top-[calc(50%-20px)] left-0 right-0 h-1 bg-gray-700 transform -translate-y-1/2"></div>
-          <div className="flex justify-between relative">
+          <div className="flex justify-between relative overflow-visible">
             {profileData.activationProgress.map((step, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <div
-                  className={`w-6 h-6 rounded-full z-10 ${
-                    step.completed ? "bg-green-500" : "bg-gray-700"
-                  } flex items-center justify-center`}
-                >
-                  {step.completed && <CheckCircle2 className="w-4 h-4 text-white" />}
+              <div key={index} className="flex flex-col items-center relative overflow-visible">
+                <div className="group relative overflow-visible">
+                  <div
+                    className={`w-6 h-6 rounded-full z-10 ${
+                      step.completed ? "bg-green-500" : "bg-gray-700"
+                    } flex items-center justify-center cursor-pointer`}
+                  >
+                    {step.completed && <CheckCircle2 className="w-4 h-4 text-white" />}
+                  </div>
+
+                  {/* Tooltip that appears on hover - fixed to show above container boundaries */}
+                  <div className="fixed-tooltip absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none">
+                    <div className="tooltip-container bg-gray-800 rounded-md p-3 shadow-lg">
+                      <p className="tooltip-title text-sm mb-1">{step.name}</p>
+                      <p className="text-xs text-gray-300">{step.description}</p>
+                      <div className="absolute w-3 h-3 bg-gray-800 transform rotate-45 left-1/2 -translate-x-1/2 -bottom-1.5 border-r border-b border-pink-500/40"></div>
+                    </div>
+                  </div>
                 </div>
                 <div className="text-xs text-center mt-2 max-w-[80px] text-white">{step.name}</div>
               </div>

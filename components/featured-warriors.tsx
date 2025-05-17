@@ -60,8 +60,8 @@ export default function FeaturedWarriors() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="font-pixel text-4xl text-white mb-1 neon-text">LAST BATTLE RESULTS</h2>
-          <div className="font-pixel text-lg text-cyan-400 mb-6">12 MINS AGO</div>
+          <h2 className="font-pixel text-4xl text-white mb-1 neon-text">Previous Battle Results</h2>
+          <div className="font-pixel text-lg text-cyan-400 mb-6 mt-2.5">12 MINS AGO</div>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Meet the most powerful meme warriors in the arena. Each warrior has unique abilities and stats.
           </p>
@@ -110,7 +110,7 @@ export default function FeaturedWarriors() {
             </div>
             <div className="mt-4">
               <Link
-                href={`/memewarriors/${featuredWarriors[1].id}`}
+                href={`/memewarriors/10`}
                 className="inline-block font-pixel text-sm text-pink-400 hover:text-pink-300 transition-colors"
               >
                 View Details →
@@ -160,7 +160,7 @@ export default function FeaturedWarriors() {
             </div>
             <div className="mt-4">
               <Link
-                href={`/memewarriors/${featuredWarriors[0].id}`}
+                href={`/memewarriors/9`}
                 className="inline-block font-pixel text-sm text-pink-400 hover:text-pink-300 transition-colors"
               >
                 View Details →
@@ -209,7 +209,7 @@ export default function FeaturedWarriors() {
             </div>
             <div className="mt-4">
               <Link
-                href={`/memewarriors/${featuredWarriors[2].id}`}
+                href={`/memewarriors/7`}
                 className="inline-block font-pixel text-sm text-pink-400 hover:text-pink-300 transition-colors"
               >
                 View Details →

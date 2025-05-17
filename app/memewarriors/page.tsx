@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { Search, Filter, ChevronDown, Twitter, Globe } from "lucide-react"
-import { PageHeader } from "@/components/page-header"
+import { BattleHeader } from "@/components/battle-header"
 import { Badge } from "@/components/ui/badge"
 
 // Define the type for the actual API response
@@ -177,9 +177,10 @@ export default function MemeWarriorsPage() {
 
   return (
     <div>
-      <PageHeader
+      <BattleHeader
         title="MEME WARRIORS"
         description="Discover and connect with the most powerful meme warriors in the metaverse. Each warrior has a unique social presence and influence."
+        backgroundImage="/images/memewarriors-bg.png"
       />
 
       <div className="container mx-auto px-4 py-16">
@@ -337,7 +338,7 @@ export default function MemeWarriorsPage() {
                             }}
                           />
                         </div>
-                        <div className="absolute bottom-0 right-0 bg-yellow-500 text-xs font-pixel px-2 py-1 rounded">
+                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-xs font-pixel px-2 py-1 rounded">
                           {randomRarity}
                         </div>
                       </div>

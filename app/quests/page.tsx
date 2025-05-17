@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import { questsData } from "@/lib/data"
-import { PageHeader } from "@/components/page-header"
+import { BattleHeader } from "@/components/battle-header"
 
 export const metadata: Metadata = {
   title: "Quests | MemeWars",
@@ -14,19 +14,15 @@ export default function QuestsPage() {
 
   return (
     <div>
-      <PageHeader
+      <BattleHeader
         title="QUESTS"
         description="Complete social actions and in-game challenges to earn exclusive rewards and boost your MemeWars experience!"
-        backgroundImage="/images/header-background-quests.png"
+        backgroundImage="/images/quests-bg.png"
       />
 
       <div className="container mx-auto px-4 py-16">
         {/* Quest Progress */}
         <div className="mb-12 relative">
-          <div
-            className="absolute inset-0 bg-cover bg-bottom z-0"
-            style={{ backgroundImage: "url(/images/purple-landscape-bg.png)", opacity: 0.7 }}
-          ></div>
           <div className="relative z-10">
             <h2 className="text-3xl font-pixel mb-6 text-center text-pink-400">YOUR QUEST PROGRESS</h2>
             <div className="arcade-card p-6">

@@ -94,6 +94,9 @@ const roadmapItems = [
 ]
 
 export default function RoadmapContent() {
+  const refs = roadmapItems.map(() => useRef(null))
+  const inViewStates = roadmapItems.map(() => false)
+
   // Custom scrollbar styles for webkit browsers
   const scrollbarStyles = `
   .overflow-x-auto::-webkit-scrollbar {
@@ -111,9 +114,6 @@ export default function RoadmapContent() {
     background: #9333ea;
   }
 `
-
-  const refs = roadmapItems.map(() => useRef(null))
-  const inViewStates = roadmapItems.map(() => false)
 
   return (
     <div className="pt-20">
@@ -138,14 +138,17 @@ export default function RoadmapContent() {
         <div className="absolute inset-0 bg-purple-900/30 z-0"></div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-5xl mx-auto relative">
             {/* Horizontal scrollable container */}
             <div
               className="relative overflow-x-auto pb-8"
               style={{ scrollbarWidth: "thin", scrollbarColor: "#a855f7 #2d1b69" }}
             >
               {/* Horizontal line */}
-              <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 to-purple-500"></div>
+              <div
+                className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 to-purple-500 w-full"
+                style={{ transform: "translateY(-50%)" }}
+              ></div>
 
               {/* Timeline items container */}
               <div className="flex space-x-8 py-10 px-4" style={{ minWidth: "max-content" }}>
@@ -158,14 +161,14 @@ export default function RoadmapContent() {
                   return (
                     <motion.div
                       key={index}
-                      ref={ref}
+                      ref={refs[index]}
                       initial={{ opacity: 0, y: 20 }}
                       animate={inView ? { opacity: 1, y: 0 } : {}}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                       className="relative flex flex-col items-center w-80"
                     >
                       {/* Circle on timeline */}
-                      <div className="absolute top-0 transform -translate-y-1/2 w-6 h-6 rounded-full border-2 border-pink-500 z-10">
+                      <div className="absolute top-0 transform -translate-y-1/2 w-6 h-6 rounded-full border-2 border-pink-500 z-10 bg-purple-950">
                         <div
                           className={`w-full h-full rounded-full ${
                             item.completed ? "bg-green-500" : item.current ? "bg-yellow-500" : "bg-purple-700"
@@ -173,12 +176,13 @@ export default function RoadmapContent() {
                         ></div>
                       </div>
 
-                      {/* Content - alternating above/below the line */}
-                      <div className={`mt-8 w-full`}>
+                      {/* Content - with fixed height */}
+                      <div className="mt-8 w-full h-full">
                         <div
-                          className={`arcade-card p-6 ${
+                          className={`arcade-card p-6 h-full flex flex-col ${
                             item.completed ? "border-green-500" : item.current ? "border-yellow-500" : ""
                           }`}
+                          style={{ minHeight: "420px" }}
                         >
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center">
@@ -205,7 +209,7 @@ export default function RoadmapContent() {
                           <h3 className="font-pixel text-white text-xl mb-3">{item.title}</h3>
                           <p className="text-gray-300 mb-4">{item.description}</p>
 
-                          <div className="bg-purple-900/50 p-4 rounded">
+                          <div className="bg-purple-900/50 p-4 rounded mt-auto">
                             <h4 className="font-pixel text-white text-sm mb-2">Key Deliverables:</h4>
                             <ul className="space-y-1">
                               {item.details.map((detail, i) => (

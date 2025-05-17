@@ -1,7 +1,7 @@
 "use client"
 
 import { memeWarriors } from "@/lib/data"
-import { PageHeader } from "@/components/page-header"
+import { BattleHeader } from "@/components/battle-header"
 import { useState } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
@@ -10,11 +10,11 @@ export default function BattlePageClient() {
   const availableWarriors = memeWarriors.slice(0, 8)
 
   return (
-    <div>
-      <PageHeader
-        title="BATTLE ARENA"
-        description="Choose your warriors, select your battle mode, and fight for glory in the MemeWars arena!"
-        backgroundImage="/images/header-background-battle.png"
+    <div className="min-h-screen bg-gradient-to-b from-purple-950 to-purple-900">
+      <BattleHeader
+        title="Battle Arena"
+        description="Challenge other MemeWarriors and climb the ranks"
+        backgroundImage="/images/battle-arena-bg-new.png"
       />
 
       <div className="container mx-auto px-4 py-16">

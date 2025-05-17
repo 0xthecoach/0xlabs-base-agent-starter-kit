@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import { PageHeader } from "@/components/page-header"
+import { BattleHeader } from "@/components/battle-header"
 import { BracketModalButton } from "@/components/bracket-modal-button"
 
 export const metadata: Metadata = {
@@ -225,11 +225,19 @@ export default function TournamentsPage() {
   // Find the active tournament
   const activeTournament = tournamentsData.find((tournament) => tournament.status === "active")
 
+  // Custom tournament images
+  const customImages = {
+    "Season 2 Championship": "/images/tournaments/arena-colosseum.png",
+    "Legendary Warriors Cup": "/images/tournaments/neon-courtyard.png",
+    "Community Challenge": "/images/tournaments/floating-platform.png",
+  }
+
   return (
     <div>
-      <PageHeader
+      <BattleHeader
         title="TOURNAMENTS"
         description="Compete against the best MemeWars players in organized tournaments. Win exclusive rewards and climb the ranks!"
+        backgroundImage="/images/tournaments-arena-bg.png"
       />
 
       <div className="container mx-auto px-4 py-16">
@@ -302,7 +310,7 @@ export default function TournamentsPage() {
                     {/* Tournament Image */}
                     <div className="md:col-span-1 bg-gradient-to-br from-purple-900/50 to-pink-900/50 flex items-center justify-center overflow-hidden">
                       <Image
-                        src={tournament.image || "/placeholder.svg"}
+                        src={customImages[tournament.name] || "/placeholder.svg"}
                         alt={tournament.name}
                         width={200}
                         height={200}
@@ -342,7 +350,9 @@ export default function TournamentsPage() {
                         <div className="text-xs text-gray-400">
                           {tournament.participants.registered}/{tournament.participants.max} registered
                         </div>
-                        <button className="arcade-btn text-white text-xs px-3 py-1 h-auto min-h-0">REGISTER</button>
+                        <button className="arcade-btn text-white text-xs px-3 py-1 h-auto min-h-0 mt-6">
+                          REGISTER
+                        </button>
                       </div>
                     </div>
                   </div>
