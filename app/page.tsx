@@ -10,12 +10,16 @@ import LogoCloud from "@/components/logo-cloud"
 import { HomeAnimatedList } from "@/components/home-animated-list"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { X } from "lucide-react"
+import WelcomeModal from "@/components/welcome-modal"
 
 export default function Home() {
   const [videoModalOpen, setVideoModalOpen] = useState(false)
 
   return (
     <div className="min-h-screen">
+      {/* Welcome Modal for new visitors */}
+      <WelcomeModal />
+
       {/* Video Modal */}
       <Dialog open={videoModalOpen} onOpenChange={setVideoModalOpen}>
         <DialogContent className="sm:max-w-[80vw] max-h-[90vh] p-0 bg-black border border-pink-500/40 overflow-hidden">

@@ -5,6 +5,7 @@ import { useInView } from "react-intersection-observer"
 import Image from "next/image"
 import Link from "next/link"
 import { Trophy } from "lucide-react"
+import { useState, useEffect } from "react"
 
 const topPlayers = [
   {
@@ -50,6 +51,44 @@ export default function LeaderboardPreview() {
     threshold: 0.1,
   })
 
+  // Countdown timer state and logic
+  const [countdown, setCountdown] = useState({
+    hours: 5,
+    minutes: 23,
+    seconds: 12,
+  })
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown((prev) => {
+        let { hours, minutes, seconds } = prev
+
+        if (seconds > 0) {
+          seconds -= 1
+        } else if (minutes > 0) {
+          minutes -= 1
+          seconds = 59
+        } else if (hours > 0) {
+          hours -= 1
+          minutes = 59
+          seconds = 59
+        }
+
+        // Stop at 0:00:00
+        if (hours === 0 && minutes === 0 && seconds === 0) {
+          clearInterval(timer)
+        }
+
+        return { hours, minutes, seconds }
+      })
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [])
+
+  // Format the countdown as HH:MM:SS
+  const formattedCountdown = `${countdown.hours}:${countdown.minutes.toString().padStart(2, "0")}:${countdown.seconds.toString().padStart(2, "0")}`
+
   return (
     <section className="py-20 relative" ref={ref}>
       <div className="absolute inset-0 bg-gradient-to-b from-purple-800 to-purple-900 z-0"></div>
@@ -57,7 +96,7 @@ export default function LeaderboardPreview() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="font-pixel text-3xl md:text-4xl text-white mb-4 neon-text">TOP WARRIORS</h2>
+          <h2 className="font-pixel text-3xl md:text-4xl text-white mb-4 neon-text">Current Battle Standings</h2>
           <p className="text-gray-300 max-w-2xl mx-auto">
             The most skilled players in the MemeWars arena. Do you have what it takes to join them?
           </p>
@@ -69,7 +108,9 @@ export default function LeaderboardPreview() {
               <Trophy className="h-5 w-5 mr-2" />
               <span>LEADERBOARD</span>
             </div>
-            <span>SEASON 3</span>
+            <span className="text-sm flex items-center">
+              <span className="font-mono font-bold">{formattedCountdown}</span>
+            </span>
           </div>
 
           <div className="divide-y divide-pink-500/20">

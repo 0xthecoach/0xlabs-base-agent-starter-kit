@@ -349,7 +349,17 @@ export default function MemeWarriorsPage() {
                           <h3 className="font-pixel text-white text-xl">{account.Account_Name || "Unknown User"}</h3>
                           {isVerified && <Badge className="bg-blue-600 hover:bg-blue-700">Verified</Badge>}
                         </div>
-                        <p className="text-cyan-400 text-sm mb-3">@{account.Username || "username"}</p>
+                        <p className="text-cyan-400 text-sm mb-3">
+                          <a
+                            href={`https://x.com/${account.Username || ""}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:underline transition-all"
+                            onClick={(e) => !account.Username && e.preventDefault()}
+                          >
+                            @{account.Username || "username"}
+                          </a>
+                        </p>
 
                         {/* Bio */}
                         <p className="text-gray-300 text-sm mb-4 line-clamp-2">{account.Bio || "No bio available."}</p>

@@ -11,7 +11,7 @@ const features = [
     title: "COLLECT WARRIORS",
     description:
       "Build your collection of meme warriors, each with unique abilities and stats. Upgrade them to increase their power and unlock special abilities.",
-    image: "/placeholder-ykyqg.png",
+    image: "/images/features/collect.png",
     color: "from-pink-500 to-purple-500",
     icon: <Sparkles className="w-6 h-6 text-pink-400" />,
     details: [
@@ -25,7 +25,7 @@ const features = [
     title: "BATTLE ARENA",
     description:
       "Enter the arena and battle against other players in real-time. Use strategy and your warriors' abilities to defeat your opponents and climb the ranks.",
-    image: "/placeholder-ar88l.png",
+    image: "/images/features/arena.png",
     color: "from-cyan-500 to-blue-500",
     icon: <Gamepad2 className="w-6 h-6 text-cyan-400" />,
     details: [
@@ -39,7 +39,7 @@ const features = [
     title: "EARN REWARDS",
     description:
       "Complete quests, win battles, and participate in events to earn rewards. Use your earnings to expand your collection and upgrade your warriors.",
-    image: "/placeholder-93sfn.png",
+    image: "/images/features/rewards.png",
     color: "from-yellow-500 to-orange-500",
     icon: <Zap className="w-6 h-6 text-yellow-400" />,
     details: [
@@ -53,7 +53,7 @@ const features = [
     title: "JOIN TOURNAMENTS",
     description:
       "Compete in weekly tournaments with players from around the world. Prove your skills and win exclusive rewards and recognition.",
-    image: "/placeholder-6qod6.png",
+    image: "/images/features/tournaments.png",
     color: "from-green-500 to-emerald-500",
     icon: <Trophy className="w-6 h-6 text-green-400" />,
     details: [
@@ -67,7 +67,7 @@ const features = [
     title: "SOCIAL INTEGRATION",
     description:
       "Connect with friends, join clans, and share your achievements on social media. Build a community and collaborate with other players.",
-    image: "/placeholder-bf0gz.png",
+    image: "/images/features/social.png",
     color: "from-red-500 to-pink-500",
     icon: <Users className="w-6 h-6 text-red-400" />,
     details: [
@@ -81,7 +81,7 @@ const features = [
     title: "MARKETPLACE",
     description:
       "Trade warriors with other players in the marketplace. Find rare warriors to complete your collection or sell your extras for profit.",
-    image: "/placeholder-rbf04.png",
+    image: "/images/features/market.png",
     color: "from-indigo-500 to-purple-500",
     icon: <ShoppingCart className="w-6 h-6 text-indigo-400" />,
     details: [
@@ -94,19 +94,15 @@ const features = [
 ]
 
 export default function Features() {
-  // Create an array of refs using a simpler approach
+  const sectionRefs = useRef(features.map(() => null)).current
   const [inViewStates, setInViewStates] = useState(features.map(() => false))
-
-  // Use a simpler approach without refs.forEach
-  const sectionRefs = features.map(() => useRef(null))
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // Find which section this entry corresponds to
           sectionRefs.forEach((ref, index) => {
-            if (ref.current === entry.target && entry.isIntersecting) {
+            if (ref === entry.target && entry.isIntersecting) {
               setInViewStates((prev) => {
                 const newState = [...prev]
                 newState[index] = true
@@ -122,18 +118,16 @@ export default function Features() {
       },
     )
 
-    // Observe all section refs
-    sectionRefs.forEach((ref) => {
-      if (ref.current) {
-        observer.observe(ref.current)
+    features.forEach((_, index) => {
+      if (sectionRefs[index]) {
+        observer.observe(sectionRefs[index])
       }
     })
 
     return () => {
-      // Cleanup: unobserve all sections
-      sectionRefs.forEach((ref) => {
-        if (ref.current) {
-          observer.unobserve(ref.current)
+      features.forEach((_, index) => {
+        if (sectionRefs[index]) {
+          observer.unobserve(sectionRefs[index])
         }
       })
     }
@@ -187,7 +181,9 @@ export default function Features() {
       {features.map((feature, index) => (
         <section
           key={index}
-          ref={sectionRefs[index]}
+          ref={(el) => {
+            if (sectionRefs) sectionRefs[index] = el
+          }}
           className={`py-20 relative ${index % 2 === 0 ? "bg-purple-900/30" : "bg-purple-950/30"}`}
         >
           <div className="absolute inset-0 retro-grid opacity-10 z-0"></div>

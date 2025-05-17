@@ -29,13 +29,18 @@ export default function CTA() {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto text-center"
         >
+          <div className="bg-pink-600 text-white py-3 px-4 rounded-md mb-8 flex items-center justify-center">
+            <span className="font-pixel inline-flex items-center">
+              <span className="inline-block pr-5">5:22:42 left until next burn</span>
+            </span>
+          </div>
           <h2 className="font-pixel text-3xl md:text-4xl text-white mb-6 neon-text">JOIN THE BATTLE</h2>
           <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
             Ready to enter the arena? Join thousands of players in the ultimate meme battle experience!
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link href="/play" className="arcade-btn text-white">
-              PLAY NOW
+              JOIN NOW
             </Link>
             <Link
               href="/memewarriors"

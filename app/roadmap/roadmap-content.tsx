@@ -94,10 +94,19 @@ const roadmapItems = [
 ]
 
 export default function RoadmapContent() {
-  const refs = roadmapItems.map(() => useRef(null))
-  const inViewStates = roadmapItems.map(() => false)
+  const roadmapItemsRefs = useRef(null)
+  const roadmapItemsStates = useRef(null)
+  const inViewStates = []
+  const refs = []
 
-  // Custom scrollbar styles for webkit browsers
+  if (!roadmapItemsRefs.current) {
+    roadmapItemsRefs.current = roadmapItems.map(() => useRef(null))
+  }
+
+  if (!roadmapItemsStates.current) {
+    roadmapItemsStates.current = roadmapItems.map(() => false)
+  }
+
   const scrollbarStyles = `
   .overflow-x-auto::-webkit-scrollbar {
     height: 6px;
@@ -142,12 +151,18 @@ export default function RoadmapContent() {
             {/* Horizontal scrollable container */}
             <div
               className="relative overflow-x-auto pb-8"
-              style={{ scrollbarWidth: "thin", scrollbarColor: "#a855f7 #2d1b69" }}
+              style={{
+                scrollbarWidth: "thin",
+                scrollbarColor: "#a855f7 #2d1b69",
+                position: "relative",
+                zIndex: 10,
+                overflowY: "visible",
+              }}
             >
               {/* Horizontal line */}
               <div
                 className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 to-purple-500 w-full"
-                style={{ transform: "translateY(-50%)" }}
+                style={{ transform: "translateY(-50%)", display: "none" }}
               ></div>
 
               {/* Timeline items container */}
@@ -158,14 +173,23 @@ export default function RoadmapContent() {
                     threshold: 0.1,
                   })
 
+                  if (!roadmapItemsRefs.current[index]) {
+                    roadmapItemsRefs.current[index] = ref
+                  }
+
+                  if (!roadmapItemsStates.current[index]) {
+                    roadmapItemsStates.current[index] = inView
+                  }
+
                   return (
                     <motion.div
                       key={index}
-                      ref={refs[index]}
+                      ref={roadmapItemsRefs.current[index]}
                       initial={{ opacity: 0, y: 20 }}
-                      animate={inView ? { opacity: 1, y: 0 } : {}}
+                      animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                       className="relative flex flex-col items-center w-80"
+                      style={{ zIndex: 20 }}
                     >
                       {/* Circle on timeline */}
                       <div className="absolute top-0 transform -translate-y-1/2 w-6 h-6 rounded-full border-2 border-pink-500 z-10 bg-purple-950">
@@ -177,12 +201,18 @@ export default function RoadmapContent() {
                       </div>
 
                       {/* Content - with fixed height */}
-                      <div className="mt-8 w-full h-full">
+                      <div className="mt-8 w-full h-full relative z-20">
                         <div
                           className={`arcade-card p-6 h-full flex flex-col ${
                             item.completed ? "border-green-500" : item.current ? "border-yellow-500" : ""
                           }`}
-                          style={{ minHeight: "420px" }}
+                          style={{
+                            minHeight: "420px",
+                            position: "relative",
+                            zIndex: 30,
+                            opacity: 1,
+                            visibility: "visible",
+                          }}
                         >
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center">

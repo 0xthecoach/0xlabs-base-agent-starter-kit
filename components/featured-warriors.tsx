@@ -5,7 +5,7 @@ import { useInView } from "react-intersection-observer"
 import Link from "next/link"
 import { memeWarriors } from "@/lib/data"
 import confetti from "canvas-confetti"
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function FeaturedWarriors() {
   const [confettiTriggered, setConfettiTriggered] = useState(false)
@@ -220,7 +220,7 @@ export default function FeaturedWarriors() {
 
         <div className="text-center mt-8">
           <Link href="/memewarriors" className="arcade-btn text-white">
-            VIEW ALL WARRIORS
+            See all previous results
           </Link>
         </div>
       </div>
