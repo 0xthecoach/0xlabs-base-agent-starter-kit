@@ -2,8 +2,8 @@
 
 import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
-import { ConnectWalletButton } from "./connect-wallet-button"
 import { ChevronDown } from "lucide-react"
+import { ArcadeConnectButton } from "./thirdweb/connect-button"
 
 export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -120,7 +120,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center space-x-4">
-          <ConnectWalletButton />
+          <ArcadeConnectButton />
         </div>
       </div>
     </header>

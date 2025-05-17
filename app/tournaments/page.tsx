@@ -221,16 +221,19 @@ const activeTournamentBrackets = [
   },
 ]
 
+// Custom tournament images
+const customImages = {
+  "Season 2 Championship":
+    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Frame%202147227007-UdQbyYIXNpxT4N3ICIx3xkr6WA9YdK.png",
+  "Legendary Warriors Cup":
+    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Frame%202147227008-yTYmQ00CffkNizvuudpyYf2mS1buqU.png",
+  "Community Challenge":
+    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Frame%202147227006-ViNP2SG0jW85mHGpJEVe6R8dnTeeqE.png",
+}
+
 export default function TournamentsPage() {
   // Find the active tournament
   const activeTournament = tournamentsData.find((tournament) => tournament.status === "active")
-
-  // Custom tournament images
-  const customImages = {
-    "Season 2 Championship": "/images/tournaments/arena-colosseum.png",
-    "Legendary Warriors Cup": "/images/tournaments/neon-courtyard.png",
-    "Community Challenge": "/images/tournaments/floating-platform.png",
-  }
 
   return (
     <div>
@@ -306,53 +309,51 @@ export default function TournamentsPage() {
               .filter((tournament) => tournament.status === "upcoming")
               .map((tournament) => (
                 <div key={tournament.id} className="arcade-card overflow-hidden">
-                  <div className="grid grid-cols-1 md:grid-cols-3 md:max-h-48">
+                  <div className="grid grid-cols-1 md:grid-cols-3">
                     {/* Tournament Image */}
-                    <div className="md:col-span-1 bg-gradient-to-br from-purple-900/50 to-pink-900/50 flex items-center justify-center overflow-hidden">
+                    <div className="md:col-span-1 h-48 md:h-full bg-gradient-to-br from-purple-900/50 to-pink-900/50 flex items-center justify-center overflow-hidden">
                       <Image
                         src={customImages[tournament.name] || "/placeholder.svg"}
                         alt={tournament.name}
-                        width={200}
-                        height={200}
+                        width={400}
+                        height={300}
                         className="w-full h-full object-cover"
                       />
                     </div>
 
                     {/* Tournament Details */}
-                    <div className="md:col-span-2 p-3">
+                    <div className="md:col-span-2 p-4">
                       <h3 className="font-pixel text-lg mb-1 text-white">{tournament.name}</h3>
-                      <p className="text-gray-300 text-xs mb-2 line-clamp-1">{tournament.description}</p>
+                      <p className="text-gray-300 text-sm mb-3">{tournament.description}</p>
 
-                      <div className="grid grid-cols-4 gap-1 text-xs mb-2">
-                        <div className="bg-black/30 p-1 rounded">
-                          <span className="text-pink-300">START</span>
-                          <span className="text-white block">
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+                        <div className="bg-black/30 p-2 rounded">
+                          <span className="text-pink-300 text-xs block">START</span>
+                          <span className="text-white text-sm block">
                             {new Date(tournament.startDate).toLocaleDateString()}
                           </span>
                         </div>
-                        <div className="bg-black/30 p-1 rounded">
-                          <span className="text-pink-300">FORMAT</span>
-                          <span className="text-white block">{tournament.format}</span>
+                        <div className="bg-black/30 p-2 rounded">
+                          <span className="text-pink-300 text-xs block">FORMAT</span>
+                          <span className="text-white text-sm block">{tournament.format}</span>
                         </div>
-                        <div className="bg-black/30 p-1 rounded">
-                          <span className="text-pink-300">ENTRY FEE</span>
-                          <span className="text-white block">
+                        <div className="bg-black/30 p-2 rounded">
+                          <span className="text-pink-300 text-xs block">ENTRY FEE</span>
+                          <span className="text-white text-sm block">
                             {tournament.entryFee > 0 ? tournament.entryFee : "FREE"}
                           </span>
                         </div>
-                        <div className="bg-black/30 p-1 rounded">
-                          <span className="text-pink-300">PRIZE</span>
-                          <span className="text-yellow-400 block">{tournament.prizePool.toLocaleString()}</span>
+                        <div className="bg-black/30 p-2 rounded">
+                          <span className="text-pink-300 text-xs block">PRIZE</span>
+                          <span className="text-yellow-400 text-sm block">{tournament.prizePool.toLocaleString()}</span>
                         </div>
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <div className="text-xs text-gray-400">
+                        <div className="text-sm text-gray-400">
                           {tournament.participants.registered}/{tournament.participants.max} registered
                         </div>
-                        <button className="arcade-btn text-white text-xs px-3 py-1 h-auto min-h-0 mt-6">
-                          REGISTER
-                        </button>
+                        <button className="arcade-btn text-white text-sm px-4 py-2">REGISTER</button>
                       </div>
                     </div>
                   </div>

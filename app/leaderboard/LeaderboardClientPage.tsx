@@ -323,7 +323,6 @@ export default function LeaderboardClientPage() {
                 <h3 className="font-pixel text-yellow-400">TOP 3 PLAYERS</h3>
               </div>
               <div className="p-6 text-center">
-                <img src="/legendary-meme-warrior.png" alt="Legendary Reward" className="w-24 h-24 mx-auto mb-4" />
                 <h4 className="font-pixel text-white text-lg mb-2">Legendary Meme Warrior</h4>
                 <p className="text-gray-300 mb-4">Exclusive legendary warrior with unique abilities</p>
                 <ul className="text-sm text-gray-400 space-y-2">
@@ -340,7 +339,6 @@ export default function LeaderboardClientPage() {
                 <h3 className="font-pixel text-purple-400">TOP 4-10 PLAYERS</h3>
               </div>
               <div className="p-6 text-center">
-                <img src="/epic-meme-warrior.png" alt="Epic Reward" className="w-24 h-24 mx-auto mb-4" />
                 <h4 className="font-pixel text-white text-lg mb-2">Epic Meme Warrior</h4>
                 <p className="text-gray-300 mb-4">Powerful warrior with rare abilities</p>
                 <ul className="text-sm text-gray-400 space-y-2">
@@ -357,7 +355,6 @@ export default function LeaderboardClientPage() {
                 <h3 className="font-pixel text-blue-400">TOP 11-50 PLAYERS</h3>
               </div>
               <div className="p-6 text-center">
-                <img src="/rare-meme-warrior.png" alt="Rare Reward" className="w-24 h-24 mx-auto mb-4" />
                 <h4 className="font-pixel text-white text-lg mb-2">Rare Meme Warrior</h4>
                 <p className="text-gray-300 mb-4">Unique warrior with special perks</p>
                 <ul className="text-sm text-gray-400 space-y-2">
